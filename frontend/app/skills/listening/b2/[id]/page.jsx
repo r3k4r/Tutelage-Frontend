@@ -81,16 +81,6 @@ const SingleAudioB2 = () => {
         </div>
       )}
 
-      {/* Audio Player */}
-      {audio.audioRef && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="border rounded-md overflow-hidden bg-card">
-            <div className="px-6 py-4 border-b"><h2 className="text-2xl font-bold">Audio Player</h2></div>
-            <div className="px-6 py-4"><CompactAudioPlayer src={audio.audioRef} youtubeUrl={audio.audioRef} /></div>
-          </div>
-        </div>
-      )}
-
       {/* Description */}
       {audio.description && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -119,6 +109,17 @@ const SingleAudioB2 = () => {
         </div>
       )}
 
+      {/* Audio Player */}
+      {audio.audioRef && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="border rounded-md overflow-hidden bg-card">
+            <div className="px-6 py-4 border-b"><h2 className="text-2xl font-bold">Audio Player</h2></div>
+            <div className="px-6 py-4"><CompactAudioPlayer src={audio.audioRef} youtubeUrl={audio.audioRef} /></div>
+          </div>
+        </div>
+      )}
+
+      
       {/* Transcript */}
       {audio?.transcript && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
