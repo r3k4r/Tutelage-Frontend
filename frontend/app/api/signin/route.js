@@ -42,6 +42,8 @@ export async function POST(req) {
       success: !!data.success,
       message: data.message || (data.success ? 'Login successful' : 'Login failed'),
       user: data.user || null,
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken 
     }
 
     return new Response(JSON.stringify(payload), { status: 200, headers })

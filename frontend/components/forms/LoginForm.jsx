@@ -11,6 +11,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff } from "lucide-react"
 import { useAuth } from "@/components/AuthContext"
 import Image from "next/image"
+import { toast } from "sonner"
 
 // Define form schema with Zod
 const formSchema = z.object({
@@ -56,11 +57,11 @@ const LoginForm = () => {
         setError(data.message || 'Login failed. Please check your credentials.')
         return
       }
-
-      // Handle successful login
-      console.log('Login successful:', data)
+      localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
      
       try { await refresh() } catch {}
+      toast.success('Login successful!')
       router.push('/admin-dashboard')
     }catch (error) {
       console.error("Login failed:", error)
