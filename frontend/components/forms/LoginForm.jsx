@@ -9,7 +9,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useRouter } from "next/navigation"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Eye, EyeOff } from "lucide-react"
-import BASE_URL from "@/app/config/url"
 import { useAuth } from "@/components/AuthContext"
 import Image from "next/image"
 
@@ -41,8 +40,8 @@ const LoginForm = () => {
     setError(null)
     
     try {
-      // Send login request to backend API
-      const response = await fetch(`${BASE_URL}/api/auth/login`, {
+      // Send login request to Next.js API route which proxies to the backend
+      const response = await fetch('/api/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,8 +51,6 @@ const LoginForm = () => {
       })
 
       const data = await response.json()
-      
-
       if (!data.success) {
         // Handle login failure
         setError(data.message || 'Login failed. Please check your credentials.')
@@ -62,9 +59,7 @@ const LoginForm = () => {
 
       // Handle successful login
       console.log('Login successful:', data)
-      localStorage.setItem('accessToken', data.accessToken)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      // Refresh auth context so user and role are available immediately
+     
       try { await refresh() } catch {}
       router.push('/admin-dashboard')
     }catch (error) {
