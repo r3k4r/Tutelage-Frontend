@@ -18,7 +18,6 @@ const SingleAudio = () => {
   const params = useParams()
   const router = useRouter()
   const [audio, setAudio] = useState(null)
-  console.log('audio', audio);
   
   const [loading, setLoading] = useState(true)
 

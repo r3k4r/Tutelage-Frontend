@@ -36,7 +36,6 @@ export default function Page() {
     try {
       const res = await fetch(`${BASE_URL}/api/users`, { credentials: "include" })
       const data = await res.json()
-      console.log('Fetched users data:', data.users);
       
       if (data.success) setUsers(data.users)
     } finally {

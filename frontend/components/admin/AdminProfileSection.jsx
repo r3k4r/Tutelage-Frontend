@@ -14,6 +14,8 @@ export default function AdminProfileSection({ onLogout }) {
       method: "POST",
       credentials: "include"
     })
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
     if (onLogout) onLogout()
     window.location.href = "/"
   }

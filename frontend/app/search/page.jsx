@@ -65,7 +65,6 @@ const SearchPage = () => {
 
       const response = await fetch(`${BASE_URL}/api/search?${params}`)
       const data = await response.json()
-        console.log('resuys:', data);
 
       if (response.ok) {
         setResults(data.results || [])

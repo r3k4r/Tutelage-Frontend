@@ -40,7 +40,6 @@ export function DashboardUsersTable() {
           console.log('Failed to fetch users:', data.message)
         }
       } catch (error) {
-        console.log('Error fetching users:', error)
         setError(error.message)
       } finally{
         setLoading(false);

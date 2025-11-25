@@ -12,7 +12,6 @@ import { Eye, EyeOff } from "lucide-react"
 import BASE_URL from "@/app/config/url"
 import { useAuth } from "@/components/AuthContext"
 import Image from "next/image"
-console.log('BASE_URL:', BASE_URL);
 
 // Define form schema with Zod
 const formSchema = z.object({
@@ -63,6 +62,8 @@ const LoginForm = () => {
 
       // Handle successful login
       console.log('Login successful:', data)
+      localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
       // Refresh auth context so user and role are available immediately
       try { await refresh() } catch {}
       router.push('/admin-dashboard')

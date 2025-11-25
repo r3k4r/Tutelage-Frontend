@@ -17,7 +17,6 @@ const SingleBlogPage = () => {
 	const params = useParams()
 	const router = useRouter()
 	const [blog, setBlog] = useState(null)
-	console.log('blog, ', blog);
 	
 	const [loading, setLoading] = useState(true)
 

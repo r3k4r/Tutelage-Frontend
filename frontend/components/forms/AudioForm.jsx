@@ -20,14 +20,11 @@ const LEVEL_OPTIONS = [
 
 // Helper function to get level value from label
 const getLevelValueFromLabel = (label) => {
-	console.log('getLevelValueFromLabel called with:', label);
 	const option = LEVEL_OPTIONS.find(opt => opt.label === label);
-	console.log('Found option:', option);
 	return option ? option.value : '';
 };
 
 const AudioForm = ({ mode = 'create', initialValues = null, onSuccess, onCancel }) => {
-	console.log('initialValues audio: ', initialValues);
 	
 	const [formData, setFormData] = useState({
 		title: '',
@@ -70,7 +67,6 @@ const AudioForm = ({ mode = 'create', initialValues = null, onSuccess, onCancel 
 				? initialValues.level[0] 
 				: initialValues.level;
 			const levelValue = getLevelValueFromLabel(levelLabel) || undefined;
-			console.log('Setting level value:', levelValue, 'from label:', levelLabel);
 			
 			setFormData(prev => ({
 				...prev,

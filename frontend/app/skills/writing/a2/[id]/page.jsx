@@ -37,7 +37,6 @@ const SingleArticleA2 = () => {
 					{ credentials: 'include' }
 				)
 				const data = await response.json()
-                console.log('data:', data);
                 
 				if (data.success) {
 					setArticle(data.data)
