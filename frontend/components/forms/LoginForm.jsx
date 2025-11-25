@@ -19,7 +19,7 @@ const formSchema = z.object({
   password: z.string().min(6, { message: "Password must be at least 8 characters" }),
 })
 
-const LoginForm = async() => {
+const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [showPassword, setShowPassword] = useState(false)
