@@ -1,9 +1,8 @@
- 'use client'
-
 import { User, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useAuth } from "@/components/AuthContext"
+import BASE_URL from "@/app/config/url"
 
 export default function AdminProfileSection({ onLogout }) {
   const { user, loading } = useAuth()
@@ -11,14 +10,14 @@ export default function AdminProfileSection({ onLogout }) {
   if (!user) return null
 
   const handleLogout = async () => {
-    await fetch(`/api/signout`, {
+    await fetch(`${BASE_URL}/api/auth/logout`, {
       method: "POST",
       credentials: "include"
     })
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
     if (onLogout) onLogout()
     window.location.href = "/"
+  localStorage.removeItem("accessToken")
+  localStorage.removeItem("refreshToken")
   }
 
   return (
