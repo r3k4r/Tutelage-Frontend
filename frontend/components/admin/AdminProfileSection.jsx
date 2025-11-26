@@ -1,19 +1,34 @@
+'use client'
+
 import { User, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { useAuth } from "@/components/AuthContext"
 import BASE_URL from "@/app/config/url"
+import { useState } from "react"
+import { toast } from "sonner"
 
 export default function AdminProfileSection({ onLogout }) {
   const { user, loading } = useAuth()
   if (loading) return null
   if (!user) return null
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const handleLogout = async () => {
-    await fetch(`${BASE_URL}/api/auth/logout`, {
+    setIsLoading(true)
+    const res = await fetch(`${BASE_URL}/api/auth/logout`, {
       method: "POST",
       credentials: "include"
     })
+    const data = await res.json()
+    if (!res.ok) {
+      toast.error(data.message || "Failed to logout")
+      setIsLoading(false)
+      return
+    }
+
+    toast.success(data.message || "Logged out successfully")
     if (onLogout) onLogout()
     window.location.href = "/"
   localStorage.removeItem("accessToken")
@@ -51,7 +66,7 @@ export default function AdminProfileSection({ onLogout }) {
         <div className="p-4 border-t border-gray-200">
           <Button
             variant="outline"
-            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
+            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 cursor-pointer"
             onClick={handleLogout}
           >
             <LogOut className="mr-3 h-4 w-4" />

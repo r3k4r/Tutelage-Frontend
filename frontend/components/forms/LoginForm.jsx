@@ -57,7 +57,7 @@ const LoginForm = () => {
         setError(data.message || 'Login failed. Please check your credentials.')
         return
       }
-
+      
       // Persist tokens for header-based auth in case cookies are blocked
       if (data?.accessToken) {
         try { localStorage.setItem('accessToken', data.accessToken) } catch {}
@@ -65,6 +65,7 @@ const LoginForm = () => {
       if (data?.refreshToken) {
         try { localStorage.setItem('refreshToken', data.refreshToken) } catch {}
       }
+      toast.success(data.message || 'Login successful!')
       // Refresh auth context so user and role are available immediately
       try { await refresh() } catch {}
       router.push('/admin-dashboard')
