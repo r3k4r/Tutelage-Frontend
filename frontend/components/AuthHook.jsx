@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 // app/hooks/useAuth.js
 export function useAuth() {
-  useEffect(() => {
+  useEffect(() => { 
     // ✅ 1️⃣ On first mount: refresh immediately
     const refreshNow = async () => {
       try {
