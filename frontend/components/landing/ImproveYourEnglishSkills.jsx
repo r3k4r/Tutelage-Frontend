@@ -1,114 +1,44 @@
-import Link from 'next/link'
-import { Volume2, MessageSquare, BookOpen, PenTool } from 'lucide-react'
+import GlobalTestMastery from '@/components/landing/GlobalTestMastery '
+import HeroSection from '@/components/landing/Hero'
+import ImproveYourEnglishSkills from '@/components/landing/ImproveYourEnglishSkills'
+import OnlineCourses from '@/components/landing/OnlineCourses'
+import Practice from '@/components/landing/Practice'
+import Resources from '@/components/landing/Resources '
+import Tests from '@/components/landing/Tests'
+import TutelageAi from '@/components/landing/TutelageAi'
 
-const ImproveYourEnglishSkills = () => {
-  const skills = [
-    {
-      icon: Volume2,
-      title: "Listening",
-      description: "Hear Everything. Understand Anything.",
-      href: "/skills/listening"
-    },
-    {
-      icon: MessageSquare,
-      title: "Speaking",
-      description: "Speak Powerfully. Express Your Thoughts.",
-      href: "/skills/speaking"
-    },
-    {
-      icon: BookOpen,
-      title: "Reading",
-      description: "Read Faster. Comprehend Deeper.",
-      href: "/skills/reading"
-    },
-    {
-      icon: PenTool,
-      title: "Writing",
-      description: "Write with Impact. No to Errors.",
-      href: "/skills/writing"
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
+async function getLatestLandingSection() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/landing-sections/1`, { cache: 'no-store' })
+    const data = await res.json()
+    if (data?.success && data?.landingSection) {
+      return data.landingSection
     }
-  ]
-
-  return (
-    <div className="pt-16 md:py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Improve Your English Skills
-          </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Master all four essential English language skills with our comprehensive training programs
-          </p>
-        </div>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-          {skills.map((skill, index) => {
-            const IconComponent = skill.icon
-            return (
-              <div key={skill.title} className="relative">
-                {/* Skill Item */}
-                <Link href={skill.href}>
-                  <div className="group py-12 px-6 text-center transition-all duration-300 cursor-pointer">
-                    {/* Icon */}
-                    <div className="flex justify-center mb-6">
-                      <IconComponent className="w-16 h-16 md:w-20 md:h-20 text-primary" />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 group-hover:underline transition-all duration-300">
-                      {skill.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-xs mx-auto">
-                      {skill.description}
-                    </p>
-                  </div>
-                </Link>
-
-                {/* Left border for first item (Listening) */}
-                {index === 0 && (
-                  <div className="hidden lg:block absolute top-0 left-0 w-px h-full bg-border"></div>
-                )}
-
-                {/* Vertical Separators for desktop - exclude first (left) and last (right) */}
-                {index > 0 && (
-                  <div className="hidden lg:block absolute top-0 left-0 w-px h-full bg-border"></div>
-                )}
-
-                {/* Right border for last item (Writing) */}
-                {index === skills.length - 1 && (
-                  <div className="hidden lg:block absolute top-0 right-0 w-px h-full bg-border"></div>
-                )}
-
-                {/* Vertical Separators for tablet - exclude first item in each row */}
-                {index > 0 && index % 2 !== 0 && (
-                  <div className="hidden md:block lg:hidden absolute top-0 left-0 w-px h-full bg-border"></div>
-                )}
-
-                {/* Vertical Separators for mobile - exclude first item in each row */}
-                {index % 2 !== 0 && (
-                  <div className="block md:hidden absolute top-0 left-0 w-px h-full bg-border"></div>
-                )}
-
-                {/* Horizontal Separators for mobile - exclude last row */}
-                {index < 2 && (
-                  <div className="block md:hidden absolute bottom-0 left-0 w-full h-px bg-border"></div>
-                )}
-
-                {/* Horizontal Separators for tablet - exclude last row */}
-                {index < 2 && (
-                  <div className="hidden md:block lg:hidden absolute bottom-0 left-0 w-full h-px bg-border"></div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    </div>
-  )
+    return null
+  } catch {
+    return null
+  }
 }
 
-export default ImproveYourEnglishSkills
+export default async function Home() {
+  const landing = await getLatestLandingSection()
+  return (
+    <>
+      {/* HERO SECTION */}
+      <HeroSection
+        title={landing?.title}
+        subtitle={landing?.subtitle}
+        imageUrl={landing?.imageUrl}
+      />
+      <TutelageAi />
+      <Resources />
+      <OnlineCourses />
+      <Tests />
+      <GlobalTestMastery />
+      <Practice />
+      <ImproveYourEnglishSkills />
+    </>
+  )
+}

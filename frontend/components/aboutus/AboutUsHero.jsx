@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const AboutUsHero = () => {
@@ -15,14 +16,18 @@ const AboutUsHero = () => {
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
       />
       <div className="absolute inset-0 bg-black/60 z-10" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 text-center mt-36">
+      <motion.div
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
+           className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 text-center mt-36">
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow mb-4">
           About Us
         </h1>
         <p className="text-sm sm:text-base md:text-lg text-white/80 font-normal max-w-5xl mx-auto mb-7">
           Welcome to Tutelage, your trusted partner in English language learning. We are dedicated to providing high-quality education and resources to help learners of all ages and levels achieve their language goals with experienced instructors and innovative teaching methods.
         </p>
-      </div>
+      </motion.div>
     </div>
   )
 }
