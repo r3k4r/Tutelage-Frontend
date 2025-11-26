@@ -58,8 +58,6 @@ const LoginForm = () => {
         return
       }
 
-      // Handle successful login
-      console.log('Login successful:', data)
       // Persist tokens for header-based auth in case cookies are blocked
       if (data?.accessToken) {
         try { localStorage.setItem('accessToken', data.accessToken) } catch {}
