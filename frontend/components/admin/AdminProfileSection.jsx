@@ -7,6 +7,7 @@ import { useAuth } from "@/components/AuthContext"
 import BASE_URL from "@/app/config/url"
 import { useState } from "react"
 import { toast } from "sonner"
+import { set } from "zod"
 
 export default function AdminProfileSection({ onLogout }) {
   const { user, loading } = useAuth()
@@ -27,7 +28,7 @@ export default function AdminProfileSection({ onLogout }) {
       setIsLoading(false)
       return
     }
-
+    setIsLoading(false)
     toast.success(data.message || "Logged out successfully")
     if (onLogout) onLogout()
     window.location.href = "/"
@@ -70,7 +71,7 @@ export default function AdminProfileSection({ onLogout }) {
             onClick={handleLogout}
           >
             <LogOut className="mr-3 h-4 w-4" />
-            Logout
+            {isLoading ? "Logging out..." : "Logout"}
           </Button>
         </div>
     </div>
