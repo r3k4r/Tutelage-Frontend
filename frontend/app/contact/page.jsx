@@ -16,13 +16,6 @@ import Link from 'next/link'
 import BASE_URL from '@/app/config/url'
 import { BASE_URL_PROD } from '@/app/config/url'
 import { toast } from 'sonner'
-import Image from 'next/image'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 // Contact form schema
@@ -31,16 +24,14 @@ const contactSchema = z.object({
   lastName: z.string().min(1, "Last name is required").min(2, "Last name must be at least 2 characters"),
   email: z.string().min(1, "Email is required").email("Invalid email address"),
   country: z.string().min(1, "Please select a country"),
-  topic: z.string().min(1, "Topic is required").min(5, "Topic must be at least 5 characters"),
+  topic: z.string().optional(),
   message: z.string().min(1, "Message is required").min(10, "Message must be at least 10 characters")
 })
 
 const ContactPage = () => {
   const searchParams = useSearchParams()
   const [preselectedCourse, setPreselectedCourse] = useState('')
-  const [selectKey, setSelectKey] = useState(0) 
-  const [loading, setLoading] = useState(false)
-  const [showSuccessDialog, setShowSuccessDialog] = useState(false)
+
 
   // Form setup
   const {
@@ -193,10 +184,10 @@ const ContactPage = () => {
             <div className="bg-card border border-border rounded-lg shadow-sm p-6 sm:p-8">
               <div className="mb-8">
                 <h1 className={`text-3xl sm:text-4xl font-bold text-foreground mb-2`}>
-                  Enroll Now{preselectedCourse ? ` for ${preselectedCourse}` : ''}
+                  Contact Tutelage
                 </h1>
                 <p className={`text-muted-foreground text-lg`}>
-                  Fill out the form below to get started with your English learning journey.
+                  Have questions or need assistance? We're here to help! Fill out the form below and our team will get back to you as soon as possible.
                 </p>
               </div>
 
@@ -285,7 +276,7 @@ const ContactPage = () => {
                 {/* Topic Field */}
                 <div className="space-y-2">
                   <Label htmlFor="topic">
-                    Topic *
+                    Topic (optional)
                   </Label>
                   <Input
                     id="topic"
@@ -322,7 +313,7 @@ const ContactPage = () => {
                   className="w-full text-lg py-3"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Enrollment"}
+                  {isSubmitting ? "Submitting..." : "Submit Message"}
                 </Button>
               </form>
             </div>
