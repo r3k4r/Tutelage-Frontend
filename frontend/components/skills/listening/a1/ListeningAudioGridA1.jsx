@@ -185,8 +185,10 @@ const ListeningAudioGridA1 = () => {
               disabled={!hasPrevPage}
               className="cursor-pointer disabled:cursor-not-allowed"
             >
-              <ChevronLeft className="w-5 h-5 mr-2" />
-              Previous
+              <ChevronLeft className="w-5 h-5 sm:mr-2" />
+              <p className='hidden sm:block'>
+                Previous
+              </p>
             </Button>
 
             {/* Page Numbers - Center */}
@@ -221,8 +223,10 @@ const ListeningAudioGridA1 = () => {
               disabled={!hasNextPage}
               className="cursor-pointer disabled:cursor-not-allowed"
             >
-              Next
-              <ChevronRight className="w-5 h-5 ml-2" />
+              <p className='hidden sm:block'>
+                Next
+              </p>
+              <ChevronRight className="w-5 h-5 sm:ml-2" />
             </Button>
           </div>
         )}
