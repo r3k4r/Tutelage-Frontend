@@ -10,6 +10,7 @@ import Script from "next/script";
 import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Suspense } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "Tutelage | Online English Learning Platform in Kurdistan",
@@ -58,6 +59,7 @@ export default function RootLayout({ children }) {
               <div className="relative z-10">{children}</div>
               <Footer />
               <Toaster />
+              <SpeedInsights />
             </AuthProvider>
           </RefreshTokenProvider>
         </ThemeProvider>
