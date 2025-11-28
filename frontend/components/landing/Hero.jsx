@@ -32,7 +32,7 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
 
   return (
     <>
-      <div className="relative w-full min-h-[300px] h-[100vh]">
+      <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
         <Image
           src={imageSrc}
           alt="Landing Hero"
@@ -51,13 +51,16 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-          className="text-6xl sm:text-7xl max-md:leading-20 md:text-5xl max-w-5xl font-semibold text-white drop-shadow mb-10 md:mb-4">{safeTitle}
+          className="text-2xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow mb-4">
+            {safeTitle}
           </motion.h1>
           <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
-          className="text-lg sm:text-xl md:text-lg text-white/80 font-normal max-w-4xl mx-auto mb-7">{safeSubtitle}</motion.p>
+          className="text-sm sm:text-base md:text-lg text-white/80 font-normal max-w-5xl mx-auto mb-7">
+            {safeSubtitle}
+          </motion.p>
           <motion.form
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
