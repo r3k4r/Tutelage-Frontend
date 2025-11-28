@@ -58,6 +58,13 @@ const professionOptions = [
   'Unemployed'
 ]
 
+const ProficiencyTypes = [
+  "IELTS Academic",
+  "IELTS General Training",
+  "TOEFL Preparation Course",
+  "PTE Preparation Course",
+]
+
 const EnrollPage = () => {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ku'
@@ -326,7 +333,7 @@ const EnrollPage = () => {
                 </div>
 
                 {/* Profession and Course Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {/* Profession with Tooltip */}
                   <div className="space-y-2">
                     <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
@@ -384,6 +391,34 @@ const EnrollPage = () => {
                       <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.course.message}</p>
                     )}
                   </div>
+
+                  {/* Proficiency Type Selection */}
+                  {
+                  watch('course') === 'English Proficiency Tests' && (                   
+                      <div className="space-y-2">
+                        <Label className={isRTL ? 'text-right block' : ''}>Test Preperation *</Label>
+                        <Select 
+                          key={selectKey}
+                          onValueChange={(value) => setValue('proficiencyType', value)} 
+                          defaultValue={watch('proficiencyType')}
+                        >
+                          <SelectTrigger className={`${errors.proficiencyType ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}>
+                            <SelectValue placeholder="Select a test preparation type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {ProficiencyTypes.map((type) => (
+                              <SelectItem key={type} value={type}>
+                                {type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        {errors.proficiencyType && (
+                          <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.proficiencyType.message}</p>
+                        )}
+                      </div>
+                   )
+                  }
                 </div>
 
                 {/* Submit Button */}

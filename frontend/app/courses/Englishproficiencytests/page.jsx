@@ -220,7 +220,7 @@ const EnglishProficiencyTestsPage = () => {
         const isEven = index % 2 === 0
         return (
           <div key={index} className="py-10 px-4">
-            <div className="max-w-7xl h-full mx-auto border border-border rounded-sm shadow-lg lg:rounded-tr-[4rem] lg:rounded-bl-[4rem] max-lg:rounded-tl-[2rem] max-lg:rounded-br-[2rem]">
+            <div className={`max-w-7xl h-full mx-auto border border-border shadow-lg ${isEven ? 'max-lg:rounded-tl-[2rem] max-lg:rounded-br-[2rem] lg:rounded-tr-[4rem] lg:rounded-bl-[4rem]' : 'max-lg:rounded-tr-[2rem] max-lg:rounded-bl-[2rem] lg:rounded-tl-[4rem] lg:rounded-br-[4rem]'}`}>
               <div className={`flex flex-col-reverse ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-stretch gap-0`}>
                 {/* Content */}
                 <div className={`w-full lg:w-1/2 flex items-center px-4 sm:px-6 ${isEven ? 'lg:ml-10' : 'lg:mr-10'}`}>
@@ -262,7 +262,7 @@ const EnglishProficiencyTestsPage = () => {
                       src={course.image}
                       alt={course.title}
                       fill
-                      className={`object-cover ${isEven ? 'lg:rounded-tr-[4rem]' : 'lg:rounded-tl-[4rem]'} max-lg:rounded-tl-[2rem]`}
+                      className={`object-cover ${isEven ? 'max-lg:rounded-tl-[2rem] max-lg:rounded-br-[2rem] lg:rounded-tr-[4rem] lg:rounded-bl-[4rem]' : 'max-lg:rounded-tr-[2rem] max-lg:rounded-bl-[2rem] lg:rounded-tl-[4rem] lg:rounded-br-[4rem]'}`}
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>

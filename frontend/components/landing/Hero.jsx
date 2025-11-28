@@ -44,7 +44,7 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
         />
         <div className="absolute inset-0 bg-black/60 z-10" />
         <div
-          className="absolute inset-0 flex flex-col items-start justify-center z-20 px-4 text-left md:text-center md:items-center mt-14 md:mt-40"
+          className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 text-center md:text-center md:items-center mt-14 md:mt-40"
         >
           <div className='w-full bg-transparent max-md:h-[58px]'/>
           <motion.h1 
