@@ -203,7 +203,7 @@ const AudioGrid = () => {
               disabled={!hasPrevPage}
               className="cursor-pointer disabled:cursor-not-allowed"
             >
-              <ChevronLeft className="w-5 h-5 mr-2" />
+              <ChevronLeft className="w-5 h-5 sm:mr-2" />
               <p className='hidden block-sm'>
                 Previous
               </p>
@@ -244,7 +244,7 @@ const AudioGrid = () => {
               <p className='hidden block-sm'>
                 Next
               </p>
-              <ChevronRight className="w-5 h-5 ml-2" />
+              <ChevronRight className="w-5 h-5 sm:ml-2" />
             </Button>
           </div>
         )}
