@@ -201,7 +201,9 @@ const BlogGrid = () => {
               className="cursor-pointer disabled:cursor-not-allowed"
             >
               <ChevronLeft className="w-5 h-5 mr-2" />
-              Previous
+              <p className='hidden block-sm'>
+                Previous
+              </p>
             </Button>
 
             {/* Page Numbers - Center */}
@@ -236,7 +238,9 @@ const BlogGrid = () => {
               disabled={!hasNextPage}
               className="cursor-pointer disabled:cursor-not-allowed"
             >
-              Next
+              <p className='hidden block-sm'>
+                Next
+              </p>
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
