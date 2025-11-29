@@ -72,8 +72,6 @@ const EnrollPage = () => {
   const [showSuccessDialog, setShowSuccessDialog] = useState(false)
   const [preselectedCourse, setPreselectedCourse] = useState('')
   const [selectKey, setSelectKey] = useState(0) 
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
 
   // Form setup
   const {
@@ -91,7 +89,8 @@ const EnrollPage = () => {
       phone: '',
       age: '',
       profession: '',
-      course: ''
+      course: '',
+      proficiencyType: ''
     }
   })
 
@@ -110,7 +109,8 @@ const EnrollPage = () => {
           phone: '',
           age: '',
           profession: '',
-          course: decodedCourse
+          course: decodedCourse,
+          proficiencyType: ''
         })
         setSelectKey(prev => prev + 1)
       } else {
@@ -125,7 +125,8 @@ const EnrollPage = () => {
             phone: '',
             age: '',
             profession: '',
-            course: matchedCourse
+            course: matchedCourse,
+            proficiencyType: ''
           })
           setSelectKey(prev => prev + 1)
         }
