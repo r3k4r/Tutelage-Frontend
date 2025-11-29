@@ -10,7 +10,11 @@ const CoursesCTA = () => {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ku'
   
-  const features = t('courses.CoursesCTA.features', { returnObjects: true })
+  const features = [
+    "Take the test",
+    "Get your results instantly",
+    "receive expert recommendations"
+  ]
 
   return (
     <section className="py-20 bg-muted/30">
@@ -50,7 +54,7 @@ const CoursesCTA = () => {
               size="lg" 
               className="px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              {t('courses.CoursesCTA.buttonText')}
+              Take the Test
               <ChevronRight className={`w-6 h-6 ${isRTL ? 'mr-3 rotate-180' : 'ml-3'}`} />
             </Button>
           </Link>
