@@ -16,21 +16,21 @@ const Tests = () => {
       icon: Target,
       title: "Level Check",
       description: "Take our comprehensive language placement test to determine your current English level and get personalized recommendations.",
-      href: "/tutelage-tests/languageplacement",
+      href: "/tutelage-tests/free-practice-test",
       buttonText: "Discover My Level"
     },
     {
       icon: BookOpen,
       title: "Skill Building Courses", 
       description: "Access our free practice tests designed to help you improve your English skills across all language areas.",
-      href: "/tutelage-tests/practicetests",
+      href: "/tutelage-tests/language-placement",
       buttonText: "Start Practicing"
     },
     {
       icon: Globe,
       title: "Global Test Success",
       description: "Prepare for international English proficiency exams with our comprehensive mock tests and practice materials.",
-      href: "/tutelage-tests/mockexams",
+      href: "/tutelage-tests/mock-exam",
       buttonText: "Ace My Exam"
     }
   ]
@@ -46,7 +46,7 @@ const Tests = () => {
             transition={{ duration: 0.6 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4"
           >
-            Test Your English Skills
+            Your Complete English Progress Path
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -54,7 +54,7 @@ const Tests = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto"
           >
-            Discover your English proficiency level and track your progress with our comprehensive testing platform
+            Discover where you stand, improve what you need, and reach your goals worldwide.
           </motion.p>
         </div>
 

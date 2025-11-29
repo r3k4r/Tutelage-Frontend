@@ -17,7 +17,7 @@ const GlobalTestMastery = () => {
       title: "IELTS Success",
       description: "IELTS Academic, IELTS General, IELTS for UKVI, IELTS Life Skills - comprehensive preparation for all IELTS test formats.",
       buttonText: "Find your IELTS Course",
-      href: "/courses/Englishproficiencytests",
+      href: "/courses/englishproficiencytests",
       borderStyle: "rounded-tl-3xl rounded-br-3xl"
     },
     {
@@ -25,7 +25,7 @@ const GlobalTestMastery = () => {
       title: "TOEFL",
       description: "Prove your academic English skills for study and university life with comprehensive TOEFL preparation.",
       buttonText: "Explore TOEFL Prep",
-      href: "/courses/Englishproficiencytests",
+      href: "/courses/englishproficiencytests/toeflpreparationcourse",
       borderStyle: "rounded-tl-3xl rounded-br-3xl"
     },
     {
@@ -33,7 +33,7 @@ const GlobalTestMastery = () => {
       title: "PTE",
       description: "A fast, computer-based test for study, work, or migration. Master the digital format with expert guidance.",
       buttonText: "Start PTE Training",
-      href: "/courses/Englishproficiencytests",
+      href: "/courses/englishproficiencytests/ptepreparationcourse",
       borderStyle: "rounded-tl-3xl rounded-br-3xl"
     },
     {
@@ -41,7 +41,7 @@ const GlobalTestMastery = () => {
       title: "OET",
       description: "For healthcare professionals proving English in real medical settings. Specialized preparation for medical professionals.",
       buttonText: "Master OET",
-      href: "/courses/Englishproficiencytests",
+      href: "/courses/englishproficiencytests",
       borderStyle: "rounded-tl-3xl rounded-br-3xl"
     }
   ]
@@ -90,14 +90,29 @@ const GlobalTestMastery = () => {
 
                 {/* Button */}
                 <div className="mt-auto">
-                  <Link href={card.href}>
-                    <Button 
-                      className="w-full cursor-pointer hover:shadow-md transition-all duration-300"
-                      size="sm"
-                    >
-                      {card.buttonText}
-                  </Button>
-                </Link>
+                  {
+                    card.title === 'OET' ? 
+                      (
+                        <Button 
+                          disabled
+                          className="w-full cursor-pointer hover:shadow-md transition-all duration-300"
+                          size="sm"
+                        >
+                          Available Soon
+                      </Button>
+                      )
+                    :
+                    (
+                    <Link href={card.href}>
+                        <Button 
+                          className="w-full cursor-pointer hover:shadow-md transition-all duration-300"
+                          size="sm"
+                        >
+                          {card.buttonText}
+                      </Button>
+                    </Link>
+                    )
+                  }
               </div>
             </motion.div>
             )
