@@ -15,6 +15,8 @@ const FreePracticeTest = () => {
     totalQuestions: 0,
     timeLimitMinutes: 0
   })
+  console.log('stats:', stats);
+  
 
   const fetchQuizStats = async () => {
     setLoading(true)
@@ -55,6 +57,7 @@ export default FreePracticeTest
 
 
 const FreeTestHero = ({ stats }) => {
+  console.log('stats in hero:', stats);
   const title = "Discover Your English Level Online – Free Test"
   const heroImage = "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1400"
   const description = `Our free ${stats.timeLimitMinutes}-minutes English practice test helps you identify your current level of English proficiency. It assesses grammar, vocabulary, and comprehension to provide an accurate overview of your strengths and areas for development.`

@@ -76,6 +76,7 @@ const KurdishLanguagePage = () => {
 
     const CardTypes = [ kids, teens, adults ]
 
+    //find your perfect classes card component
     const CardItem = ({ cardType }) => (
         <div className="bg-card border border-border  rounded-sm shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-6">
             <div className='text-center flex flex-col items-center '>
