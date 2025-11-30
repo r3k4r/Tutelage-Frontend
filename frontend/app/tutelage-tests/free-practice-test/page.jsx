@@ -25,9 +25,10 @@ const FreePracticeTest = () => {
         credentials: 'include'
       })
       const configData = await configRes.json()
+      console.log('configData:', configData);
       setStats({
-        totalQuestions: configData.totalQuestions,
-        timeLimitMinutes: configData.timeLimitMinutes
+        totalQuestions: configData.data.totalQuestions,
+        timeLimitMinutes: configData.data.timeLimitMinutes
       })
     }catch(err){
       console.error('Error fetching quiz stats:', err)
