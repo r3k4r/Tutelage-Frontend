@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import {  Clock, Users, Award, ChevronRight, ArrowRight } from 'lucide-react'
+import {  Clock, Users, Award, ChevronRight, ArrowRight, Baby } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import BASE_URL from '@/app/config/url'
@@ -131,12 +131,17 @@ const EnglishCourseForKidsAndTeens = () => {
   )
 
   // Why we are the best choice data
-  const whyBestItems = t('inglishForKids.whyBest.items', { returnObjects: true })
+  const whyBestItems = [
+    {title: "Tailored for Kids", description: "Research-proven, age-specific learning tailored to maximize engagement and results."},
+    {title: "Small Group Learning", description: "Small groups (3–5 students) with experienced teachers – personalized attention for every learner."},
+    {title: "Fun & Interactive", description: "Interactive and fun lessons - games, creative activities, and multimedia make learning enjoyable."},
+    {title: "Flexible Scheduling", description: "Flexible schedule in respect to the student and parents' time"}
+  ]
   const whyBestChoice = [
-    { icon: Users, ...whyBestItems[0] },
-    { icon: Clock, ...whyBestItems[1] },
+    { icon: Baby, ...whyBestItems[0] },
+    { icon: Users, ...whyBestItems[1] },
     { icon: Award, ...whyBestItems[2] },
-    { icon: ChevronRight, ...whyBestItems[3] }
+    { icon: Clock, ...whyBestItems[3] }
   ]
 
   // Reusable Enrollment Step Component

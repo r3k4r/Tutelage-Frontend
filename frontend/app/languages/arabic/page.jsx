@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ChevronRight, HelpCircle, ChevronDown } from 'lucide-react'
+import { ChevronRight, HelpCircle, ChevronDown, Baby, GraduationCap, Briefcase } from 'lucide-react'
 import { toast } from 'sonner'
 import BASE_URL from '@/app/config/url'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -64,24 +64,30 @@ const ArabicLanguageCourse = () => {
   const kids = {
     title: t('ArabicCourse.thirdCard.kids.title'),
     description: t('ArabicCourse.thirdCard.kids.desc'),
+    icon: Baby
   }
   const teens = {
     title: t('ArabicCourse.thirdCard.teens.title'),
     description: t('ArabicCourse.thirdCard.teens.desc'),
+    icon: GraduationCap
     }
     const adults = {
     title: t('ArabicCourse.thirdCard.adults.title'),
     description: t('ArabicCourse.thirdCard.adults.desc'),
+    icon: Briefcase
     }
 
     const CardTypes = [ kids, teens, adults ]
 
     //find your perfect classes card component
     const CardItem = ({ cardType }) => (
-        <div className="bg-card border border-border  rounded-sm shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-6">
-            <div className='text-center flex flex-col items-center '>
-                <h3 className='text-lg text-primary-foreground font-bold bg-primary w-fit p-2 rounded-xs'>{cardType.title}</h3>
-                <p className="text-sm text-muted-foreground mt-4">{cardType.description}</p>
+        <div className="bg-card border border-border rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 group">
+            <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <cardType.icon className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">{cardType.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{cardType.description}</p>
             </div>
         </div>
     )

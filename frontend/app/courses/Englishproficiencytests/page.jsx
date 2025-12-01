@@ -52,14 +52,14 @@ const EnglishProficiencyTestsPage = () => {
     },
     {
       title: "TOEFL Preparation Course",
-      description: "Complete TOEFL iBT preparation with proven strategies for Reading, Listening, Speaking, and Writing sections.",
+      description: "Comprehensive preparation for the TOEFL exam, covering the Reading, Listening, Speaking, and Writing sections with clear and effective strategies.",
       image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
       href: "/courses/Englishproficiencytests/toeflpreparationcourse",
       features: [
-        "Master the computer-based TOEFL format",
-        "Comprehensive training in all four sections",
-        "Proven test-taking strategies",
-        "Extensive practice with authentic materials"
+        "Understand the TOEFL exam format and all question types",
+        "Focused training in Reading, Listening, Speaking, and Writing",
+        "Proven strategies for timing, note-taking, and task performance",
+        "Extensive practice with authentic TOEFL-style materials and full practice tests"
       ]
     },
     {
@@ -262,7 +262,7 @@ const EnglishProficiencyTestsPage = () => {
                       src={course.image}
                       alt={course.title}
                       fill
-                      className={`object-cover ${isEven ? 'max-lg:rounded-tl-[2rem] max-lg:rounded-br-[2rem] lg:rounded-tr-[4rem] lg:rounded-bl-[4rem]' : 'max-lg:rounded-tr-[2rem] max-lg:rounded-bl-[2rem] lg:rounded-tl-[4rem] lg:rounded-br-[4rem]'}`}
+                      className={`object-cover ${isEven ? 'max-lg:rounded-tl-[2rem] lg:rounded-tr-[4rem]' : 'max-lg:rounded-tr-[2rem] lg:rounded-tl-[4rem]'}`}
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                   </div>

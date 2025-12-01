@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail,  } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail,  } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Separator } from './ui/separator'
@@ -59,8 +59,10 @@ export const Footer = () => {
   ]
 
   const socialLinks = [
-    { name: "Facebook", icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/share/1EXoYc3xG4/" },
-    { name: "Instagram", icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/tutelage.esl?igsh=MWhhZmhlZzJ1MTB2ZA==" },
+    { name: "Facebook", icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/Tutelage.esl" },
+    { name: "Instagram", icon:<Instagram className="w-5 h-5" />, href: "https://www.instagram.com/tutelage.esl" },
+    { name: "Linkedin", icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/tutelageinstitute/" },
+    { name: "Tiktok", icon:<div className='w-5 h-5'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 7.917v4.034A9.95 9.95 0 0 1 16 10v4.5a6.5 6.5 0 1 1-8-6.326V12.5a2.5 2.5 0 1 0 4 2V3h4.083A6.005 6.005 0 0 0 21 7.917"/></svg></div>, href: "https://www.tiktok.com/@tutelage.esl?_r=1&_t=ZS-91ngW8tmRmP" },
   ]
 
   return (
@@ -287,12 +289,12 @@ export const Footer = () => {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="bg-primary text-white p-2.5 rounded-full transition-all duration-300 shadow-sm group"
+                  className="bg-primary text-white p-2.5  rounded-full transition-all duration-300 shadow-sm group"
                   aria-label={social.name}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="text-white transition-colors">
+                  <div className={`text-white transition-colors ${social.name === 'Tiktok' && '-mt-0.5 -ml-0.5'}`}>
                     {social.icon}
                   </div>
                 </a>

@@ -139,7 +139,7 @@ const inPersonClass = {
   const FeatureItem = ({ icon: Icon, title, description }) => (
     <div className="text-center px-4 py-2 md:py-6">
       <div className="flex justify-center mb-4">
-        <div className="w-16 h-16  flex items-center justify-center">
+        <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
           <Icon className="w-8 h-8 text-primary" />
         </div>
       </div>
