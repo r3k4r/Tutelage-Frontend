@@ -18,10 +18,20 @@ const EnglishCourseForKidsAndTeens = () => {
   const { t, i18n } = useTranslation()
   const isRTL = i18n.language === 'ku'
   
+    const month = new Date().getMonth(); // 0–11
+    const summerTime = month >= 4 && month <= 8; // May to September
+    
+    const HeroData = summerTime ? 
+    {
+      description:"Summer is the perfect time to explore, play, and learn! Our Summer English Program for students aged 5–17 is packed with exciting activities, fun games, and creative projects designed to make learning English enjoyable and effective. Every lesson is tailored to students’ ages and abilities, ensuring that they stay engaged while building real-life communication skills. By the end of the program, learners not only feel more confident in using English but also develop curiosity, creativity, and a love for learning that lasts long after the summer ends.",
+      heroImage : "https://www.nacd.org/wp-content/uploads/2019/06/summer_kids.jpg"
+    } : 
+    {
+     heroImage : "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1200&q=80",
+     description : t('inglishForKids.first.description')
+    }
   // Actual course data
   const title = t('inglishForKids.first.title')
-  const heroImage = "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1200&q=80" // Happy kids learning together - bright classroom
-  const description = t('inglishForKids.first.description')
   const enrollButtonText = t('inglishForKids.first.enrollButtonText')
 
   // Get class types from translation
@@ -285,7 +295,7 @@ const EnglishCourseForKidsAndTeens = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
           <Image
-            src={heroImage}
+            src={HeroData.heroImage}
             alt={`${title} Course`}
             fill
             className="object-cover"
@@ -300,7 +310,7 @@ const EnglishCourseForKidsAndTeens = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="max-w-5xl">
           <p className={`text-lg text-muted-foreground leading-relaxed ${isRTL ? 'text-right' : ''}`}>
-            {description}
+            {HeroData.description}
           </p>
         </div>
       </div>

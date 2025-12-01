@@ -62,7 +62,7 @@ export const Footer = () => {
     { name: "Facebook", icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/Tutelage.esl" },
     { name: "Instagram", icon:<Instagram className="w-5 h-5" />, href: "https://www.instagram.com/tutelage.esl" },
     { name: "Linkedin", icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/tutelageinstitute/" },
-    { name: "Tiktok", icon:<div className='w-5 h-5'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 7.917v4.034A9.95 9.95 0 0 1 16 10v4.5a6.5 6.5 0 1 1-8-6.326V12.5a2.5 2.5 0 1 0 4 2V3h4.083A6.005 6.005 0 0 0 21 7.917"/></svg></div>, href: "https://www.tiktok.com/@tutelage.esl?_r=1&_t=ZS-91ngW8tmRmP" },
+    { name: "Tiktok", icon:<div className='w-5 h-5'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 7.917v4.034A9.95 9.95 0 0 1 16 10v4.5a6.5 6.5 0 1 1-8-6.326V12.5a2.5 2.5 0 1 0 4 2V3h4.083A6.005 6.005 0 0 0 21 7.917"/></svg></div>, href: "https://www.tiktok.com/@tutelage.esl?_r=1&_t=ZS-91ngW8tmRmP" },
   ]
 
   return (

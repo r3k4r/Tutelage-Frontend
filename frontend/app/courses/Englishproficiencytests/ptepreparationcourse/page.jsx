@@ -23,7 +23,7 @@ export default function PTEPreparationPage() {
       ]}
       secondSectionImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
       
-      showThirdSection={true}
+      showThirdSection={false}
       thirdSectionTitle="PTE Course Futures"
       thirdSectionBulletPoints={[
         {
@@ -55,9 +55,17 @@ export default function PTEPreparationPage() {
           description: ""
         }
       ]}
-      thirdSectionImage="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
       
-      showFourthSection={false}
+      showFourthSection={true}
+      fourthSectionFeatures={[
+        " Online course: 15 lessons over 5 weeks (30 hours total)",
+        " Choose group of 3 to 5 students or individual private lessons",
+        "Comprehensive skill coverage: Speaking, writing, reading, and listening",
+        " Effective study strategies and test-taking techniques",
+        "Continuous feedback to track progress and improve performance",
+        "Real PTE-style practice tests and materials",
+        "Expert guidance from qualified instructors"
+      ]}
     />
   )
 }
