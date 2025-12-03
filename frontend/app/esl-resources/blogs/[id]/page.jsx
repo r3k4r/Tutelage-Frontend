@@ -17,6 +17,7 @@ const SingleBlogPage = () => {
 	const params = useParams()
 	const router = useRouter()
 	const [blog, setBlog] = useState(null)
+	console.log('blog, ', blog);
 	
 	const [loading, setLoading] = useState(true)
 
@@ -199,10 +200,10 @@ const SingleBlogPage = () => {
 												<div className="text-sm text-foreground leading-relaxed">
 													{task.content || 'Task details will be added here.'}
 												</div>
-												{blog?.pdf && (
+												{blog?.taskPdf && (
 													<div className="mt-3">
 														<PdfButton 
-															pdfUrl={blog.pdf} 
+															pdfUrl={blog.taskPdf} 
 															onOpen={openPdf}
 															label="Task PDF"
 														/>
@@ -221,18 +222,20 @@ const SingleBlogPage = () => {
 								<span className="font-medium text-foreground">Task 1</span>
 								<span className="text-muted-foreground">{openTasks[0] ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}</span>
 							</button>
-							<AnimatePresence initial={false}>
-								{openTasks[0] && (
-									<motion.div key="task-0" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: ANIM_DURATION, ease: 'easeInOut' }} className="overflow-hidden border-t bg-background">
-										<div className="px-4 py-3">
-											{blog?.pdf && (
-												<PdfButton 
-													pdfUrl={blog.pdf} 
-													onOpen={openPdf}
-													label="Task PDF"
-												/>
-											)}
-										</div>
+								<AnimatePresence initial={false}>
+									{openTasks[0] && (
+										<motion.div key="task-0" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: ANIM_DURATION, ease: 'easeInOut' }} className="overflow-hidden border-t bg-background">
+											<div className="px-4 py-3">
+												{blog?.taskPdf ? (
+													<PdfButton 
+														pdfUrl={blog.taskPdf} 
+														onOpen={openPdf}
+														label="Task PDF"
+													/>
+												) : (
+													<p className="text-sm text-muted-foreground">No task PDF available.</p>
+												)}
+											</div>
 									</motion.div>
 								)}
 							</AnimatePresence>
@@ -243,7 +246,7 @@ const SingleBlogPage = () => {
 
 			{/* Tags Section - styled like language level but with dark background */}
 			{Array.isArray(blog?.tags) && blog.tags.length > 0 && (
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0 pb-6">
 					<h3 className="text-3xl font-bold text-foreground mb-6">Tags</h3>
 					<div className="p-6 rounded-md">
 						<div className="flex flex-wrap gap-3">
