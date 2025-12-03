@@ -28,45 +28,20 @@ const AudioGrid = () => {
   const fetchAudios = async (page) => {
     setLoading(true)
     try {
-      const offset = (page - 1) * itemsPerPage
       const response = await fetch(
-        `${BASE_URL}/api/esl-audios?limit=${itemsPerPage}&offset=${offset}`,
+        `${BASE_URL}/api/esl-audios?page=${page}&limit=${itemsPerPage}`,
         { credentials: 'include' }
       )
       const data = await response.json()
 
       if (data.success) {
-        if (Array.isArray(data.data)) {
-          setAudios(data.data)
-          const hasNext = data.data.length === itemsPerPage
-          setHasNextPage(hasNext)
-          setHasPrevPage(page > 1)
-          setTotalPages(hasNext ? page + 10 : page)
-        } else {
-          // If API returns an object shape, try to find array
-          const list = data.data && (data.data.audios || data.data.items || data.data)
-          if (Array.isArray(list)) {
-            setAudios(list)
-            const hasNext = list.length === itemsPerPage
-            setHasNextPage(hasNext)
-            setHasPrevPage(page > 1)
-            setTotalPages(hasNext ? page + 10 : page)
-          } else {
-            setAudios([])
-            setHasNextPage(false)
-            setHasPrevPage(false)
-            setTotalPages(1)
-          }
-        }
-      } else {
-        setAudios([])
-        setHasNextPage(false)
-        setHasPrevPage(false)
-        setTotalPages(1)
+        setAudios(data.data)
+        setTotalPages(data.pagination.totalPages)
+        setHasNextPage(data.pagination.hasNextPage)
+        setHasPrevPage(data.pagination.hasPrevPage)
       }
     } catch (error) {
       console.error('Error fetching audios:', error)
-      setAudios([])
     } finally {
       setLoading(false)
     }
@@ -203,10 +178,8 @@ const AudioGrid = () => {
               disabled={!hasPrevPage}
               className="cursor-pointer disabled:cursor-not-allowed"
             >
-              <ChevronLeft className="w-5 h-5 sm:mr-2" />
-              <p className='hidden sm:block'>
-                Previous
-              </p>
+              <ChevronLeft className="w-5 h-5 mr-2" />
+              Previous
             </Button>
 
             {/* Page Numbers - Center */}
@@ -241,10 +214,8 @@ const AudioGrid = () => {
               disabled={!hasNextPage}
               className="cursor-pointer disabled:cursor-not-allowed"
             >
-              <p className='hidden sm:block'>
-                Next
-              </p>
-              <ChevronRight className="w-5 h-5 sm:ml-2" />
+              Next
+              <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
         )}
