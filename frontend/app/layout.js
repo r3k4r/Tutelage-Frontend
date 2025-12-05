@@ -4,13 +4,12 @@ import { AuthProvider } from "@/components/AuthContext";
 import RefreshTokenProvider from "@/components/AuthHook";
 import Navbar from "@/components/Navbar";
 import NavbarWrapper from "@/components/NavbarWrapper";
+import FooterWrapper from "@/components/FooterWrapper";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Footer } from "@/components/Footer";
 import Script from "next/script";
 import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import { Suspense } from "react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   title: "Tutelage | Online English Learning Platform in Kurdistan",
@@ -48,22 +47,21 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-      <Suspense fallback={null}>
         <ThemeProvider>
           <RefreshTokenProvider>
             <AuthProvider>
-                <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
+              <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
               <NavbarWrapper>
                   <Navbar />
               </NavbarWrapper>
               <div className="relative z-10">{children}</div>
-              <Footer />
+              <FooterWrapper>
+                <Footer />
+              </FooterWrapper>
               <Toaster />
-              <SpeedInsights />
             </AuthProvider>
           </RefreshTokenProvider>
         </ThemeProvider>
-      </Suspense>
       </body>
     </html>
   );
