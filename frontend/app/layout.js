@@ -55,10 +55,12 @@ export default function RootLayout({ children }) {
                 <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
               </Suspense>
               <NavbarWrapper>
+                <Suspense fallback={null}>
                   <Navbar />
+                </Suspense>
               </NavbarWrapper>
               <Suspense fallback={null}>
-              <div className="relative z-10">{children}</div>
+                <div className="relative z-10">{children}</div>
               </Suspense>
               <FooterWrapper>
                 <Footer />
