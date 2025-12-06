@@ -43,7 +43,7 @@ const KurdishLanguagePage = () => {
   const title = t('KurdishCourse.title')
   const heroImage = "https://localization.saudisoft.com/wp-content/uploads/2022/11/Kurdish-blog.webp" 
   const description = t('KurdishCourse.description')
-  const enrollButtonText = t('inglishForAdults.first.enrollButtonText')
+  const enrollButtonText = t('KurdishCourse.enrollButtonText')
 
   // Get class types from translation
   const publicClass = {

@@ -43,7 +43,7 @@ const ArabicLanguageCourse = () => {
   const title = t('ArabicCourse.title')
   const heroImage = "https://qantara.de/sites/default/files/import/2014-08/54884-arabic-calligraphy_picture-alliance-tone-koene.jpg" 
   const description = t('ArabicCourse.description')
-  const enrollButtonText = t('inglishForAdults.first.enrollButtonText')
+  const enrollButtonText = t('ArabicCourse.enrollButtonText')
 
   // Get class types from translation
   const publicClass = {

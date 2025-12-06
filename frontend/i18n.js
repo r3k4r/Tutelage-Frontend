@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import en from 'zod/v4/locales/en.cjs';
 
 const resources = {
   en: {
@@ -348,6 +349,7 @@ const resources = {
       ArabicCourse: {
         title: "Arabic Language Classes",
         description: "Why enroll in Tutelage Arabic classes? Experience interactive and engaging Arabic classes that fully immerse you in the language. With a skilled teacher and a well-designed curriculum, you’ll quickly boost your confidence and improve your everyday Arabic skills. This course is ideal for anyone who wants to learn or enhance their Arabic proficiency.",
+        enrollButtonText: "Enroll Now",
         secondTitle: "Discover your ideal class!",
         classTypes: {
           online: {
@@ -450,6 +452,7 @@ const resources = {
       KurdishCourse: {
         title: "Kurdish Language Classes",
         description: "Why enroll in Tutelage Kurdish classes? Our Kurdish classes are interactive and engaging, designed to fully immerse students in the language. With a qualified teacher and a well-structured curriculum, you’ll build confidence and improve your everyday Kurdish skills quickly and effectively. Whether you are a member of the Kurdish diaspora or a passionate individual seeking to learn or improve the Kurdish language, this course is specifically designed for you.",
+        enrollButtonText: "Enroll Now",
         secondTitle: "Find your perfect class",
         classTypes: {
           online: {
@@ -897,6 +900,7 @@ const resources = {
        ArabicCourse: {
         title: "کۆرسی زمانی عەرەبی",
         description: "بۆچی بەشداری لە کۆرسی زمانی عەرەبی توتڵج بکەم ؟ئەزموونی باشترین و بەچێژترین کۆرسی زمانی عەرەبی بکەن کە بە تەواوی دەتکاتە کەشی فێربوونی زمانەکەوە. بە کەمترین ماوە متمانە بەخۆبوون و کارامەییە پێویستەکانی زمانەکەت بەرەوپێش ببە. ئەم کۆرسە بۆهەر کەسێک گونجاوە کە بیەوێت توانای زمان پاراویی بەرەو پێش ببات لە زمانی عەرەبیدا",
+        enrollButtonText: "خۆت تۆمار بکە",
         secondTitle: "دەربارەی کۆرسە نمونەییەکەت بزانە",
         classTypes: {
           online: {
@@ -997,6 +1001,7 @@ const resources = {
        KurdishCourse: {
         title: "دروس اللغة الكردية — تعليم احترافي لجميع المستويات",
         description: "تعل اللغة الكردية بثقة... أينما كنت!  نقّدم درو ًسا خصوصية في اللغة الكردية حضورًيا وعبر اإلنترنت، بإشراف معلم مؤهل ومنهج متكامل مص ّمم ف ّعا وممت ًعا منذ الدرس األول. اًل بعناية ليالئم احتياجاتك، ويضمن لك تعل ًما،لماذا تختار دراسة اللغة الكردية مع Tutelage؟ تتميز دوراتنا بأنها: تفاعلية ابة وجذّ تعتمد على الممارسة والشرح الواضح تساعدك على اكتساب الطالقة والثقة بالنفس بسرعة مناسبة لجميع األعمار والمستويات سواء كنت من أبناء الجالية الكردية أو مهت ًما بتعلم اللغة ألسباب شخصية أو مهنية، فهذه الدورة مصممة خصي ًصا لك",
+        enrollButtonText: "س ّجل اآلن",
         secondTitle: "اختر نوع الصف المناسب لك",
         classTypes: {
           online: {
