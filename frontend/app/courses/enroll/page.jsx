@@ -245,17 +245,17 @@ const EnrollPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8" dir="ltr">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content - Left Side */}
           <div className="lg:col-span-2">
             <div className="bg-card border border-border rounded-lg shadow-sm p-6 sm:p-8">
               <div className="mb-8">
-                <h1 className={`text-3xl sm:text-4xl font-bold text-foreground mb-2 ${isRTL ? 'text-right' : ''}`}>
+                <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
                   {t('enroll.title')} {preselectedCourse ? `${t('enroll.titleWithCourse')} ${preselectedCourse}` : ''}
                 </h1>
-                <p className={`text-muted-foreground text-lg ${isRTL ? 'text-right' : ''}`}>
+                <p className="text-muted-foreground text-lg">
                   {t('enroll.subtitle')}
                 </p>
               </div>
@@ -264,7 +264,7 @@ const EnrollPage = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 {/* Name Field */}
                 <div className="space-y-2">
-                  <Label htmlFor="name" className={isRTL ? 'text-right block' : ''}>
+                  <Label htmlFor="name">
                     {t('enroll.form.fullName')} {t('enroll.form.required')}
                   </Label>
                   <Input
@@ -272,16 +272,16 @@ const EnrollPage = () => {
                     type="text"
                     placeholder={t('enroll.form.fullNamePlaceholder')}
                     {...register('name')}
-                    className={`${errors.name ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}
+                    className={errors.name ? 'border-destructive focus:ring-destructive' : ''}
                   />
                   {errors.name && (
-                    <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.name.message}</p>
+                    <p className="text-sm text-destructive">{errors.name.message}</p>
                   )}
                 </div>
 
                 {/* Email Field - Full Width */}
                 <div className="space-y-2">
-                  <Label htmlFor="email" className={isRTL ? 'text-right block' : ''}>
+                  <Label htmlFor="email">
                     {t('enroll.form.email')} {t('enroll.form.required')}
                   </Label>
                   <Input
@@ -289,17 +289,17 @@ const EnrollPage = () => {
                     type="email"
                     placeholder={t('enroll.form.emailPlaceholder')}
                     {...register('email')}
-                    className={`${errors.email ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}
+                    className={errors.email ? 'border-destructive focus:ring-destructive' : ''}
                   />
                   {errors.email && (
-                    <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.email.message}</p>
+                    <p className="text-sm text-destructive">{errors.email.message}</p>
                   )}
                 </div>
 
                 {/* Phone and Age Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className={isRTL ? 'text-right block' : ''}>
+                    <Label htmlFor="phone">
                       {t('enroll.form.phone')} {t('enroll.form.required')}
                     </Label>
                     <Input
@@ -307,15 +307,15 @@ const EnrollPage = () => {
                       type="tel"
                       placeholder={t('enroll.form.phonePlaceholder')}
                       {...register('phone')}
-                      className={`${errors.phone ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}
+                      className={errors.phone ? 'border-destructive focus:ring-destructive' : ''}
                     />
                     {errors.phone && (
-                      <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.phone.message}</p>
+                      <p className="text-sm text-destructive">{errors.phone.message}</p>
                     )}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="age" className={isRTL ? 'text-right block' : ''}>
+                    <Label htmlFor="age">
                       {t('enroll.form.age')} {t('enroll.form.required')}
                     </Label>
                     <Input
@@ -325,10 +325,10 @@ const EnrollPage = () => {
                       max="100"
                       placeholder={t('enroll.form.agePlaceholder')}
                       {...register('age')}
-                      className={`${errors.age ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}
+                      className={errors.age ? 'border-destructive focus:ring-destructive' : ''}
                     />
                     {errors.age && (
-                      <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.age.message}</p>
+                      <p className="text-sm text-destructive">{errors.age.message}</p>
                     )}
                   </div>
                 </div>
@@ -337,8 +337,8 @@ const EnrollPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {/* Profession with Tooltip */}
                   <div className="space-y-2">
-                    <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse justify-end' : ''}`}>
-                      <Label className={isRTL ? 'text-right' : ''}>{t('enroll.form.profession')} {t('enroll.form.required')}</Label>
+                    <div className="flex items-center gap-2">
+                      <Label>{t('enroll.form.profession')} {t('enroll.form.required')}</Label>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -353,7 +353,7 @@ const EnrollPage = () => {
                       </TooltipProvider>
                     </div>
                     <Select onValueChange={(value) => setValue('profession', value)}>
-                      <SelectTrigger className={`${errors.profession ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}>
+                      <SelectTrigger className={errors.profession ? 'border-destructive focus:ring-destructive' : ''}>
                         <SelectValue placeholder={t('enroll.form.professionPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
@@ -365,19 +365,19 @@ const EnrollPage = () => {
                       </SelectContent>
                     </Select>
                     {errors.profession && (
-                      <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.profession.message}</p>
+                      <p className="text-sm text-destructive">{errors.profession.message}</p>
                     )}
                   </div>
 
                   {/* Course Selection */}
                   <div className="space-y-2">
-                    <Label className={isRTL ? 'text-right block' : ''}>{t('enroll.form.course')} {t('enroll.form.required')}</Label>
+                    <Label>{t('enroll.form.course')} {t('enroll.form.required')}</Label>
                     <Select 
                       key={selectKey}
                       onValueChange={(value) => setValue('course', value)} 
                       defaultValue={watch('course')}
                     >
-                      <SelectTrigger className={`${errors.course ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}>
+                      <SelectTrigger className={errors.course ? 'border-destructive focus:ring-destructive' : ''}>
                         <SelectValue placeholder={t('enroll.form.coursePlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
@@ -389,7 +389,7 @@ const EnrollPage = () => {
                       </SelectContent>
                     </Select>
                     {errors.course && (
-                      <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.course.message}</p>
+                      <p className="text-sm text-destructive">{errors.course.message}</p>
                     )}
                   </div>
 
@@ -397,13 +397,13 @@ const EnrollPage = () => {
                   {
                   watch('course') === 'English Proficiency Tests' && (                   
                       <div className="space-y-2">
-                        <Label className={isRTL ? 'text-right block' : ''}>Test Preperation *</Label>
+                        <Label>Test Preperation *</Label>
                         <Select 
                           key={selectKey}
                           onValueChange={(value) => setValue('proficiencyType', value)} 
                           defaultValue={watch('proficiencyType')}
                         >
-                          <SelectTrigger className={`${errors.proficiencyType ? 'border-destructive focus:ring-destructive' : ''} ${isRTL ? 'text-right' : ''}`}>
+                          <SelectTrigger className={errors.proficiencyType ? 'border-destructive focus:ring-destructive' : ''}>
                             <SelectValue placeholder="Select a test preparation type" />
                           </SelectTrigger>
                           <SelectContent>
@@ -415,7 +415,7 @@ const EnrollPage = () => {
                           </SelectContent>
                         </Select>
                         {errors.proficiencyType && (
-                          <p className={`text-sm text-destructive ${isRTL ? 'text-right' : ''}`}>{errors.proficiencyType.message}</p>
+                          <p className="text-sm text-destructive">{errors.proficiencyType.message}</p>
                         )}
                       </div>
                    )
@@ -435,7 +435,7 @@ const EnrollPage = () => {
 
               {/* Info Message */}
               <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-                <p className={`text-sm text-muted-foreground text-center ${isRTL ? 'text-right' : ''}`}>
+                <p className="text-sm text-muted-foreground text-center">
                   {t('enroll.infoMessage')}
                 </p>
               </div>
@@ -447,18 +447,18 @@ const EnrollPage = () => {
             {/* Other Courses */}
             <Card>
               <CardHeader>
-                <CardTitle className={`flex items-center gap-2 ${isRTL ? '' : ''}`}>
+                <CardTitle className="flex items-center gap-2">
                   <GraduationCap className="h-5 w-5" />
                   {t('enroll.sidebar.exploreOtherCourses')}
                 </CardTitle>
-                <CardDescription className={isRTL ? 'text-right' : ''}>
+                <CardDescription>
                   {t('enroll.sidebar.exploreDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {courses.filter(course => course !== preselectedCourse).slice(0, 2).map((course) => (
                   <Link key={course} href={getHref(course)}>
-                    <div className={`flex items-center gap-3 p-3 bg-muted/50 mb-2 rounded-lg hover:bg-muted/70 transition-colors duration-200 cursor-pointer ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <div className="flex items-center gap-3 p-3 bg-muted/50 mb-2 rounded-lg hover:bg-muted/70 transition-colors duration-200 cursor-pointer">
                       <div className="relative w-24 h-24 flex-shrink-0 rounded-md overflow-hidden">
                         <Image
                           src={getImage(course)}
@@ -470,10 +470,10 @@ const EnrollPage = () => {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className={`font-semibold text-sm text-foreground mb-1 truncate ${isRTL ? 'text-left' : ''}`}>
+                        <h3 className="font-semibold text-sm text-foreground mb-1 truncate">
                           {course}
                         </h3>
-                        <p className={`text-xs text-muted-foreground line-clamp-2 leading-relaxed ${isRTL ? 'text-left' : ''}`}>
+                        <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
                           {getDescription(course)}
                         </p>
                       </div>
@@ -491,22 +491,22 @@ const EnrollPage = () => {
             {/* Tutelage AI CTA */}
             <Card>
               <CardHeader>
-                <CardTitle className={`flex items-center gap-2 ${isRTL ? '' : ''}`}>
+                <CardTitle className="flex items-center gap-2">
                   <ExternalLink className="h-5 w-5" />
                   {t('enroll.sidebar.tryTutelageAI')}
                 </CardTitle>
-                <CardDescription className={isRTL ? 'text-right' : ''}>
+                <CardDescription>
                   {t('enroll.sidebar.aiDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className={`text-sm text-muted-foreground mb-4 ${isRTL ? 'text-right' : ''}`}>
+                <p className="text-sm text-muted-foreground mb-4">
                   {t('enroll.sidebar.aiContent')}
                 </p>
                 <Link href={BASE_URL_PROD} target="_blank" rel="noopener noreferrer">
-                  <Button className={`w-full ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <Button className="w-full">
                     {t('enroll.sidebar.launchAI')}
-                    <ExternalLink className={`h-4 w-4 ${isRTL ? 'mr-2' : 'ml-2'}`} />
+                    <ExternalLink className="h-4 w-4 ml-2" />
                   </Button>
                 </Link>
               </CardContent>
@@ -515,16 +515,16 @@ const EnrollPage = () => {
             {/* English Level Test */}
             <Card>
               <CardHeader>
-                <CardTitle className={`flex items-center gap-2 ${isRTL ? '' : ''}`}>
+                <CardTitle className="flex items-center gap-2">
                   <Target className="h-5 w-5" />
                   {t('enroll.sidebar.findYourLevel')}
                 </CardTitle>
-                <CardDescription className={isRTL ? 'text-right' : ''}>
+                <CardDescription>
                   {t('enroll.sidebar.levelDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className={`text-sm text-muted-foreground mb-4 ${isRTL ? 'text-right' : ''}`}>
+                <p className="text-sm text-muted-foreground mb-4">
                   {t('enroll.sidebar.levelContent')}
                 </p>
                 <Link href="/tutelage-tests/free-practice-test">
@@ -538,22 +538,22 @@ const EnrollPage = () => {
             {/* Other Tests */}
             <Card>
               <CardHeader>
-                <CardTitle className={`flex items-center gap-2 ${isRTL ? '' : ''}`}>
+                <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   {t('enroll.sidebar.practiceTests')}
                 </CardTitle>
-                <CardDescription className={isRTL ? '' : ''}>
+                <CardDescription>
                   {t('enroll.sidebar.practiceDescription')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Link href="/tutelage-tests/language-placement">
-                  <Button variant="ghost" className={`w-full text-sm ${isRTL ? 'justify-start' : 'justify-start'}`}>
+                  <Button variant="ghost" className="w-full text-sm justify-start">
                     {t('enroll.sidebar.freePracticeTests')}
                   </Button>
                 </Link>
                 <Link href="/tutelage-tests/mock-exam">
-                  <Button variant="ghost" className={`w-full text-sm ${isRTL ? 'justify-start' : 'justify-start'}`}>
+                  <Button variant="ghost" className="w-full text-sm justify-start">
                     {t('enroll.sidebar.mockTests')}
                   </Button>
                 </Link>
@@ -567,10 +567,10 @@ const EnrollPage = () => {
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className={`text-center text-xl text-green-600 dark:text-green-400 ${isRTL ? 'text-right' : ''}`}>
+            <DialogTitle className="text-center text-xl text-green-600 dark:text-green-400">
               {t('enroll.successDialog.title')}
             </DialogTitle>
-            <DialogDescription className={`text-center text-base pt-4 ${isRTL ? 'text-right' : ''}`}>
+            <DialogDescription className="text-center text-base pt-4">
               {t('enroll.successDialog.description')}
               <br /><br />
               {t('enroll.successDialog.message')}

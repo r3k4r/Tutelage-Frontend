@@ -115,15 +115,15 @@ const inPersonClass = {
       </div>
 
       <div className="p-6 sm:p-8">
-        <h3 className={`text-2xl sm:text-3xl font-bold text-foreground mb-6 ${isRTL ? 'text-right' : ''}`}>
+        <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">
           {classType.title}
         </h3>
 
         <ul className="flex flex-col gap-1 mb-8" dir="ltr">
           {classType.features.map((feature, index) => (
             <li key={index} className="flex items-start w-full">
-              <div className={`w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 ${isRTL ? 'ml-3 order-2' : 'mr-3 order-1'}`}></div>
-              <span className={`text-foreground font-medium flex-1 ${isRTL ? 'text-right order-1' : 'order-2'}`}>{feature}</span>
+              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 mr-3"></div>
+              <span className="text-foreground font-medium flex-1">{feature}</span>
             </li>
           ))}
         </ul>
@@ -134,7 +134,7 @@ const inPersonClass = {
             className="w-full py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {classType.buttonText}
-            <ChevronRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
+            <ChevronRight className="w-5 h-5 ml-2" />
           </Button>
         </Link>
       </div>
@@ -208,13 +208,13 @@ const inPersonClass = {
 
   return (
     <>
-      <div className="relative min-h-screen bg-background pt-4" dir={isRTL ? 'rtl' : 'ltr'}>
+      <div className="relative min-h-screen bg-background pt-4" dir="ltr">
         {/* Header Section */}
         <div className="bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-row items-center justify-between gap-6">
               <div className="flex-1">
-                <h1 className={`text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2 text-left">
                   {title}
                 </h1>
               </div>
@@ -228,7 +228,7 @@ const inPersonClass = {
                       className="md:px-12 py-4 flex items-center justify-center md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                     >
                       {enrollButtonText}
-                      <ChevronRight className={`w-6 h-6 ${isRTL ? 'mr-3 rotate-180' : 'ml-3'}`} />
+                      <ChevronRight className="w-6 h-6 ml-3" />
                     </Button>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ const inPersonClass = {
         {/* Description Section */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <div className="max-w-5xl">
-            <p className={`text-lg text-muted-foreground leading-relaxed ${isRTL ? 'text-right' : ''}`}>
+            <p className="text-lg text-muted-foreground leading-relaxed">
               {description}
             </p>
           </div>
@@ -276,27 +276,23 @@ const inPersonClass = {
                 return (
                   <div key={index} className={`pb-32`}>
                     <div className="max-w-7xl h-full mx-auto border border-border rounded-sm shadow-lg">
-                      <div className={`flex flex-col-reverse items-stretch gap-0 ${
-                        isRTL 
-                          ? (isOdd ? 'lg:flex-row' : 'lg:flex-row-reverse')
-                          : (isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row')
-                      }`}>
+                      <div className={`flex flex-col-reverse items-stretch gap-0 ${isOdd ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
                         {/* Content */}
-                        <div className={`w-full lg:w-1/2 flex items-center px-4 sm:px-6 ${isRTL ? 'lg:mr-10' : 'lg:ml-10'}`}>
-                          <div className={`w-full py-10 lg:py-24 ${isRTL ? 'lg:pl-12' : 'lg:pr-12'}`}>
-                            <h3 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6 ${isRTL ? 'text-right' : ''}`}>
+                        <div className="w-full lg:w-1/2 flex items-center px-4 sm:px-6 lg:ml-10">
+                          <div className="w-full py-10 lg:py-24 lg:pr-12">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-6">
                               {level.title}
                             </h3>
                             
-                            <p className={`text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed mb-6 ${isRTL ? 'text-right' : ''}`}>
+                            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed mb-6">
                               {level.description}
                             </p>
 
                             <ul className="flex flex-col gap-2" dir="ltr">
                               {level.features.map((feature, featureIndex) => (
                                 <li key={featureIndex} className="flex items-start w-full">
-                                  <div className={`w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 ${isRTL ? 'ml-3 order-2' : 'mr-3 order-1'}`}></div>
-                                  <span className={`text-foreground font-medium flex-1 ${isRTL ? 'text-right order-1' : 'order-2'}`}>
+                                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 mr-3"></div>
+                                  <span className="text-foreground font-medium flex-1">
                                     {feature}
                                   </span>
                                 </li>
@@ -381,10 +377,10 @@ const inPersonClass = {
                   {/* Question Bar */}
                   <button
                     onClick={() => toggleFaq(index)}
-                    className={`${isRTL ? "flex-row-reverse" : ""} w-full flex items-center justify-between p-5 text-left transition-colors duration-200 hover:bg-muted/50`}
+                    className="w-full flex items-center justify-between p-5 text-left transition-colors duration-200 hover:bg-muted/50"
                   >
-                    <div className={`flex items-center ${isRTL ? 'flex-row-reverse justify-between' : ""} gap-4 flex-1`}>
-                      <HelpCircle className={`w-5 h-5 text-primary flex-shrink-0 ${isRTL && "transform scale-x-[-1]"}`} />
+                    <div className="flex items-center gap-4 flex-1">
+                      <HelpCircle className="w-5 h-5 text-primary flex-shrink-0" />
                       <span className={`text-base font-semibold text-foreground pr-4`}>
                         {faq.question}
                       </span>
@@ -408,7 +404,7 @@ const inPersonClass = {
                         style={{ overflow: "hidden" }}
                       >
                         <div className="px-5 pb-5 pt-2">
-                          <p className={`text-muted-foreground leading-relaxed ${isRTL ? 'text-right pr-9' : 'pl-9'}`}>
+                          <p className="text-muted-foreground leading-relaxed pl-9">
                             {faq.answer}
                           </p>
                         </div>

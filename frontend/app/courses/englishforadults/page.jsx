@@ -56,15 +56,15 @@ const EnglishForAdultsPage = () => {
       </div>
 
       <div className="p-6 sm:p-8">
-        <h3 className={`text-2xl sm:text-3xl font-bold text-foreground mb-6 ${isRTL ? 'text-right' : ''}`}>
+        <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-6">
           {classType.title}
         </h3>
 
         <ul className="flex flex-col gap-1 mb-8" dir="ltr">
           {classType.features.map((feature, index) => (
             <li key={index} className="flex items-start w-full">
-              <div className={`w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 ${isRTL ? 'ml-3 order-2' : 'mr-3 order-1'}`}></div>
-              <span className={`text-foreground font-medium flex-1 ${isRTL ? 'text-right order-1' : 'order-2'}`}>{feature}</span>
+              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 mr-3"></div>
+              <span className="text-foreground font-medium flex-1">{feature}</span>
             </li>
           ))}
         </ul>
@@ -75,7 +75,7 @@ const EnglishForAdultsPage = () => {
             className="w-full py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
           >
             {classType.buttonText}
-            <ChevronRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
+            <ChevronRight className="w-5 h-5 ml-2" />
           </Button>
         </Link>
       </div>
@@ -201,13 +201,13 @@ const EnglishForAdultsPage = () => {
   const faqs = t('inglishForAdults.faq.questions', { returnObjects: true })
 
   return (
-    <div className="relative min-h-screen bg-background pt-4" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="relative min-h-screen bg-background pt-4" dir="ltr">
       {/* Header Section */}
       <div className="bg-background ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-row items-center justify-between gap-6">
             <div className="flex-1">
-              <h1 className={`text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2 text-left">
                 {title}
               </h1>
             </div>
@@ -221,7 +221,7 @@ const EnglishForAdultsPage = () => {
                     className=" md:px-12 py-4 flex items-center justify-center md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
                   >
                     {enrollButtonText}
-                    <ChevronRight className={`w-6 h-6 ${isRTL ? 'mr-3 rotate-180' : 'ml-3'}`} />
+                    <ChevronRight className="w-6 h-6 ml-3" />
                   </Button>
                 </div>
               </div>
@@ -248,7 +248,7 @@ const EnglishForAdultsPage = () => {
       {/* Description Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="max-w-5xl">
-          <p className={`text-lg text-muted-foreground leading-relaxed ${isRTL ? 'text-right' : ''}`}>
+          <p className="text-lg text-muted-foreground leading-relaxed">
             {description}
           </p>
         </div>
@@ -284,7 +284,7 @@ const EnglishForAdultsPage = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
               {t('inglishForAdults.inPerson.title')}
             </h2>
-            <p className={`text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed ${isRTL ? 'text-right' : ''}`}>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               {t('inglishForAdults.inPerson.description')}
             </p>
           </div>
@@ -299,7 +299,7 @@ const EnglishForAdultsPage = () => {
               {/* Phone 1 */}
               <a
                 href="tel:+9647501534240"
-                className={`flex items-center justify-center bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-lg p-6 transition-all duration-300 group ${isRTL ? 'flex-row-reverse space-x-reverse space-x-3' : 'space-x-3'}`}
+                className="flex items-center justify-center bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-lg p-6 transition-all duration-300 group space-x-3"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <Phone className="w-6 h-6 text-primary" />
@@ -310,7 +310,7 @@ const EnglishForAdultsPage = () => {
               {/* Phone 2 */}
               <a
                 href="tel:+9647701946364"
-                className={`flex items-center justify-center bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-lg p-6 transition-all duration-300 group ${isRTL ? 'flex-row-reverse space-x-reverse space-x-3' : 'space-x-3'}`}
+                className="flex items-center justify-center bg-primary/5 hover:bg-primary/10 border border-primary/20 rounded-lg p-6 transition-all duration-300 group space-x-3"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <Phone className="w-6 h-6 text-primary" />
@@ -325,15 +325,15 @@ const EnglishForAdultsPage = () => {
       {/* Learn a New Language in an Interactive Way Section */}
       <div className="py-10 p-4">
         <div className="max-w-7xl h-full mx-auto border border-border rounded-sm shadow-lg">
-          <div className={`flex flex-col-reverse items-stretch gap-0 ${isRTL ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+          <div className="flex flex-col-reverse items-stretch gap-0 lg:flex-row">
             {/* Content */}
-            <div className={`w-full lg:w-1/2 flex items-center px-4 sm:px-6 ${isRTL ? 'lg:mr-10' : 'lg:ml-10'}`}>
-              <div className={`w-full py-10 ${isRTL ? 'lg:pl-12' : 'lg:pr-12'}`}>
-                <h2 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4 sm:mb-6 ${isRTL ? 'text-right' : ''}`}>
+            <div className="w-full lg:w-1/2 flex items-center px-4 sm:px-6 lg:ml-10">
+              <div className="w-full py-10 lg:pr-12">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4 sm:mb-6">
                   {t('inglishForAdults.interactiveWay.title')}
                 </h2>
                 
-                <p className={`text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed ${isRTL ? 'text-right' : ''}`}>
+                <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
                   {t('inglishForAdults.interactiveWay.description')}
                 </p>
               </div>
@@ -378,10 +378,10 @@ const EnglishForAdultsPage = () => {
                 {/* Question Bar */}
                 <button
                   onClick={() => toggleFaq(index)}
-                  className={` ${isRTL ? "flex-row-reverse" : ""} w-full flex items-center justify-between p-5 text-left transition-colors duration-200 hover:bg-muted/50`}
+                  className="w-full flex items-center justify-between p-5 text-left transition-colors duration-200 hover:bg-muted/50"
                 >
-                  <div className={`flex items-center ${isRTL ? 'flex-row-reverse justify-between' : ""} gap-4 flex-1 `}>
-                    <HelpCircle className={`w-5 h-5 text-primary flex-shrink-0 ${isRTL && "transform scale-x-[-1]" }`} />
+                  <div className="flex items-center gap-4 flex-1">
+                    <HelpCircle className="w-5 h-5 text-primary flex-shrink-0" />
                     <span className={`text-base font-semibold text-foreground pr-4 `}>
                       {faq.question}
                     </span>
@@ -405,7 +405,7 @@ const EnglishForAdultsPage = () => {
                       style={{ overflow: "hidden" }}
                     >
                       <div className="px-5 pb-5 pt-2">
-                        <p className={`text-muted-foreground leading-relaxed ${isRTL ? 'text-right pr-9' : 'pl-9'}`}>
+                        <p className="text-muted-foreground leading-relaxed pl-9">
                           {faq.answer}
                         </p>
                       </div>
@@ -460,7 +460,7 @@ const EnglishForAdultsPage = () => {
               {/* First Row: Names */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-1 items-start">
-                  <Label htmlFor="firstName" className={`text-base font-medium ${isRTL ? 'self-end' : ''}`}>
+                  <Label htmlFor="firstName" className="text-base font-medium">
                     {t('inglishForAdults.requestPricing.form.firstName')} {t('inglishForAdults.requestPricing.form.required')}
                   </Label>
                   <Input
@@ -469,11 +469,10 @@ const EnglishForAdultsPage = () => {
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
                     required
-                    className={isRTL ? 'text-right' : ''}
                   />
                 </div>
                 <div className="flex flex-col gap-1 items-start">
-                  <Label htmlFor="lastName" className={`text-base font-medium ${isRTL ? 'self-end' : ''}`}>
+                  <Label htmlFor="lastName" className="text-base font-medium">
                     {t('inglishForAdults.requestPricing.form.lastName')} {t('inglishForAdults.requestPricing.form.required')}
                   </Label>
                   <Input
@@ -482,7 +481,6 @@ const EnglishForAdultsPage = () => {
                     value={formData.lastName}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
                     required
-                    className={isRTL ? 'text-right' : ''}
                   />
                 </div>
               </div>
@@ -490,7 +488,7 @@ const EnglishForAdultsPage = () => {
               {/* Second Row: Email and Course Interest (side by side on md+) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div className="flex flex-col gap-1 items-start">
-                                <Label htmlFor="email" className={`text-base font-medium ${isRTL ? 'self-end' : ''}`}>
+                                <Label htmlFor="email" className="text-base font-medium">
                                   {t('inglishForKids.requestPricing.form.email')} {t('inglishForKids.requestPricing.form.required')}
                                 </Label>
                                 <Input
@@ -499,12 +497,11 @@ const EnglishForAdultsPage = () => {
                                   value={formData.email}
                                   onChange={(e) => handleInputChange('email', e.target.value)}
                                   required
-                                  className={isRTL ? 'text-right' : ''}
                                 />
                               </div>
               
                               <div className="flex flex-col gap-1 items-start">
-                                <Label className={`text-base font-medium ${isRTL ? 'self-end' : ''}`}>
+                                <Label className="text-base font-medium">
                                   {t('inglishForKids.requestPricing.form.interestedIn')} {t('inglishForKids.requestPricing.form.required')}
                                 </Label>
                                 <Select value={formData.interestedIn} onValueChange={(value) => handleInputChange('interestedIn', value)}>
@@ -531,7 +528,7 @@ const EnglishForAdultsPage = () => {
                   disabled={formLoading}
                 >
                   {formLoading ? t('inglishForAdults.requestPricing.form.submittingButton') : t('inglishForAdults.requestPricing.form.submitButton')}
-                  <ChevronRight className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`} />
+                  <ChevronRight className="w-5 h-5 ml-2" />
                 </Button>
               </div>
             </form>
