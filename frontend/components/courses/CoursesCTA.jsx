@@ -32,7 +32,7 @@ const CoursesCTA = () => {
             {t('courses.CoursesCTA.title')}
           </h2>
           
-          <p className={`text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto ${isRTL ? 'text-center' : ''}`}>
+          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             {t('courses.CoursesCTA.description')}
           </p>
         </div>
@@ -55,7 +55,7 @@ const CoursesCTA = () => {
               className="px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
               Take the Test
-              <ChevronRight className={`w-6 h-6 ${isRTL ? 'mr-3 rotate-180' : 'ml-3'}`} />
+              <ChevronRight className="w-6 h-6 ml-3" />
             </Button>
           </Link>
         </div>

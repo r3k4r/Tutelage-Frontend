@@ -48,11 +48,7 @@ const CoursesShowcase = () => {
             return (
               <div
                 key={index}
-                className={`flex flex-col ${
-                  isRTL 
-                    ? (isEven ? 'lg:flex-row-reverse' : 'lg:flex-row')
-                    : (isEven ? 'lg:flex-row' : 'lg:flex-row-reverse')
-                } ${index === 0 && 'pt-0'} items-center gap-8 lg:gap-20 py-6`}
+                className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} ${index === 0 && 'pt-0'} items-center gap-8 lg:gap-20 py-6`}
               >
                 {/* Image */}
                 <div className="w-full lg:w-1/2">
@@ -68,7 +64,7 @@ const CoursesShowcase = () => {
                 </div>
 
                 {/* Content */}
-                <div className={`w-full lg:w-1/2 space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+                <div className="w-full lg:w-1/2 space-y-4 text-left">
                   <h3 className="text-3xl sm:text-4xl font-bold text-foreground">
                     {course.title}
                   </h3>
@@ -85,8 +81,8 @@ const CoursesShowcase = () => {
                     <ul className="space-y-1" dir="ltr">
                       {course.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="text-sm text-muted-foreground flex items-center w-full">
-                          <div className={`w-2 h-2 bg-primary rounded-full flex-shrink-0 ${isRTL ? 'ml-3 order-2' : 'mr-3 order-1'}`}></div>
-                          <span className={`flex-1 ${isRTL ? 'text-right order-1' : 'order-2'}`}>{feature}</span>
+                          <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0 mr-3"></div>
+                          <span className="flex-1">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -99,7 +95,7 @@ const CoursesShowcase = () => {
                         className="px-10 cursor-pointer py-4 text-lg group hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
                       >
                         {course.buttonText}
-                        <ArrowRight className={`w-6 h-6 group-hover:translate-x-2 transition-transform duration-300 ${isRTL ? 'mr-3 rotate-180 group-hover:-translate-x-2' : 'ml-3'}`} />
+                        <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform duration-300 ml-3" />
                       </Button>
                     </Link>
                   </div>

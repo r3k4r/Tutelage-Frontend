@@ -20,10 +20,10 @@ export default function CoursesHero() {
       />
       <div className="absolute inset-0 bg-black/60 z-10" />
       <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 text-center mt-36">
-        <h1 className={`text-2xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow mb-4 ${isRTL ? 'text-center' : ''}`}>
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow mb-4">
           {t('courses.CoursesHero.title')}
         </h1>
-        <p className={`text-sm sm:text-base md:text-lg text-white/80 font-normal max-w-5xl mx-auto mb-7 ${isRTL ? 'text-center' : ''}`}>
+        <p className="text-sm sm:text-base md:text-lg text-white/80 font-normal max-w-5xl mx-auto mb-7">
           {t('courses.CoursesHero.description')}
         </p>
       </div>

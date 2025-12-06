@@ -10,10 +10,10 @@ export default function CoursesPage() {
   const isRTL = i18n.language === 'ku'
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'}>
+    <>
       <CoursesHero />
       <CoursesShowcase />
       <CoursesCTA />
-    </div>
+    </>
   )
 }
