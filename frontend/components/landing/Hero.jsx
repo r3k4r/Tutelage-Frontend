@@ -42,7 +42,7 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
           className="object-cover object-center w-full h-full"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
         />
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-black/70 z-10" />
         <div
           className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 text-center md:text-center md:items-center mt-14 md:mt-40"
         >
@@ -51,7 +51,7 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-          className="text-2xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow mb-4">
+          className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white/90 drop-shadow mb-4 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl">
             {safeTitle}
           </motion.h1>
           <motion.p
@@ -72,10 +72,10 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
               placeholder="Search Tutelage..."
               value={heroSearchQuery}
               onChange={(e) => setHeroSearchQuery(e.target.value)}
-              className="rounded-l-sm rounded-r-none bg-background/90 py-6 text-foreground placeholder:text-muted-foreground focus:ring-0 focus:ring-transparent focus:border-transparent focus-visible:ring-transparent focus-visible:border-transparent flex-1 min-w-0"
+              className="rounded-l-sm rounded-r-none bg-background/90 dark:bg-background/60 py-6 text-foreground placeholder:text-muted-foreground focus:ring-0 focus:ring-transparent focus:border-transparent focus-visible:ring-transparent focus-visible:border-transparent flex-1 min-w-0"
             />
             <Select value={heroSearchFilter} onValueChange={setHeroSearchFilter}>
-              <SelectTrigger className="sm:rounded-l-none rounded-sm py-6 bg-background/90 border border-border text-foreground focus:ring-0 focus:ring-transparent min-w-[40px]">
+              <SelectTrigger className="sm:rounded-l-none rounded-sm py-6 bg-background/90 dark:bg-background/60 border border-border text-foreground focus:ring-0 focus:ring-transparent min-w-[40px]">
                 <SelectValue placeholder={<SlidersHorizontal />} />
               </SelectTrigger>
               <SelectContent className="bg-background border-border text-foreground">
