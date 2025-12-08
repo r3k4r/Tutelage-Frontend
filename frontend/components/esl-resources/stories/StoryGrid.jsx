@@ -136,7 +136,7 @@ const StoryGrid = () => {
                   {/* Image */}
                   <div className="relative h-48 w-full overflow-hidden">
                     <Image
-                      src={story.imageUrl || 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80'}
+                      src={story.imageUrl}
                       alt={story.title}
                       fill
                       className="object-cover"

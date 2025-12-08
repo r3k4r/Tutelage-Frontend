@@ -212,7 +212,7 @@ const Stories = () => {
           {stories.map((story, idx) => (
             <Link key={story.id} href={`/admin-dashboard/stories/${story.id}`} ref={idx === stories.length - 1 ? lastStoryRef : null} className="relative group bg-card border border-border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 block">
               <div className="relative h-44 w-full overflow-hidden">
-                <Image src={story.imageUrl || '/placeholder-16-9.png'} alt={story.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                <Image src={story.imageUrl} alt={story.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold text-foreground mb-2 truncate">{story.title}</h3>

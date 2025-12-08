@@ -180,7 +180,7 @@ const Audio = () => {
                 <Link href={`/admin-dashboard/listenings/${audio.id}`} className="block">
                   <div className="relative h-44 w-full overflow-hidden">
                     <Image
-                      src={audio.imageUrl || '/placeholder-16-9.png'}
+                      src={audio.imageUrl}
                       alt={audio.title}
                       fill
                       className="object-cover"

@@ -213,7 +213,7 @@ const EslAudios = () => {
           {audios.map((audio, idx) => (
             <Link key={idx} href={`/admin-dashboard/eslAudios/${audio.id}`} ref={idx === audios.length - 1 ? lastAudioRef : null} className="relative group bg-card border border-border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 block">
               <div className="relative h-44 w-full overflow-hidden">
-                <Image src={audio.imageUrl || '/placeholder-16-9.png'} alt={audio.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                <Image src={audio.imageUrl} alt={audio.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold text-foreground mb-2 truncate">{audio.title}</h3>

@@ -198,7 +198,7 @@ const Writings = () => {
           {writings.map((writing, idx) => (
             <Link key={idx} href={`/admin-dashboard/writings/${writing.id}`} ref={idx === writings.length - 1 ? lastWritingRef : null} className="relative group bg-card border border-border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 block">
               <div className="relative h-44 w-full overflow-hidden">
-                <Image src={writing.imageUrl || '/placeholder-16-9.png'} alt={writing.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
+                <Image src={writing.imageUrl} alt={writing.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 33vw" />
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold text-foreground mb-2 truncate">{writing.title}</h3>
