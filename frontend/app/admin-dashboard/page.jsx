@@ -2,6 +2,7 @@ import DashboardOverview from '@/components/admin/MainPage/DashboardOverview';
 import DashboardUsersTable from '@/components/admin/MainPage/DashboardUsersTable';
 import AnalyticsChart from '@/components/admin/MainPage/AnalyticsChart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Suspense } from 'react';
 
 const Page = () => {
   return (
@@ -12,7 +13,9 @@ const Page = () => {
 
       <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
         {/* Analytics Chart */}
-        <AnalyticsChart />
+        <Suspense fallback={null}>
+          <AnalyticsChart />
+        </Suspense>
 
         {/* Right table - Users */}
         <Card className="min-h-[500px]">
