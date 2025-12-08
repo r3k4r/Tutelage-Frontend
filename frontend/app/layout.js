@@ -59,9 +59,7 @@ export default function RootLayout({ children }) {
                   <Navbar />
                 </Suspense>
               </NavbarWrapper>
-              <Suspense fallback={null}>
                 <div className="relative z-10">{children}</div>
-              </Suspense>
               <FooterWrapper>
                 <Footer />
               </FooterWrapper>
