@@ -17,14 +17,14 @@ import {
 } from "@/components/ui/tooltip"
 
 const CATEGORY_OPTIONS = [
-  { value: 'all', label: 'All Categories' },
-  { value: 'Science', label: 'Science' },
-  { value: 'Math', label: 'Math' },
-  { value: 'Conversation', label: 'Conversation' },
-  { value: 'Grammar', label: 'Grammar' },
-  { value: 'Vocabulary', label: 'Vocabulary' },
-  { value: 'Business', label: 'Business' },
-  { value: 'Culture', label: 'Culture' }
+	{ value: 'Tutelage', label: 'Tutelage' },
+	{ value: 'Education', label: 'Education' },
+	{ value: 'AudioBooks', label: 'AudioBooks' },
+	{ value: 'Science', label: 'Science' },
+	{ value: 'Technology', label: 'Technology' },
+	{ value: 'Business', label: 'Business' },
+	{ value: 'Animation', label: 'Animation' },
+	{ value: 'Kids-Learning', label: 'Kids Learning' }
 ]
 
 const getYouTubeThumbnail = (url, preferMax = false) => {

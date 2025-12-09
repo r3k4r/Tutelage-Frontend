@@ -19,13 +19,14 @@ const LEVEL_OPTIONS = [
 ]
 
 const CATEGORY_OPTIONS = [
+	{ value: 'Tutelage', label: 'Tutelage' },
+	{ value: 'Education', label: 'Education' },
+	{ value: 'AudioBooks', label: 'AudioBooks' },
 	{ value: 'Science', label: 'Science' },
-	{ value: 'Math', label: 'Math' },
-	{ value: 'Conversation', label: 'Conversation' },
-	{ value: 'Grammar', label: 'Grammar' },
-	{ value: 'Vocabulary', label: 'Vocabulary' },
+	{ value: 'Technology', label: 'Technology' },
 	{ value: 'Business', label: 'Business' },
-	{ value: 'Culture', label: 'Culture' }
+	{ value: 'Animation', label: 'Animation' },
+	{ value: 'Kids-Learning', label: 'Kids Learning' }
 ]
 
 // Helper function to get level value from label
