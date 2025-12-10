@@ -6,7 +6,7 @@ export default function IELTSAcademicPage() {
   return (
     <SingleProficiencyTest
       title="IELTS Academic"
-      heroImage="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80"
+      heroImage="/courses/proficiency/academic/academic_1.jpg"
       description="Prepare for IELTS Academic with our comprehensive training program designed for students planning to pursue higher education in English-speaking countries. Our expert instructors will guide you through all four test components with proven strategies and extensive practice materials."
       
       firstSectionTitle="About IELTS Academic"
@@ -44,7 +44,7 @@ export default function IELTSAcademicPage() {
           description: "Competitively priced programs ensuring premium quality that fits your budget."
         }
       ]}
-      thirdSectionImage="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
+      thirdSectionImage="/courses/proficiency/academic/academic_2.jpg"
       
       showFourthSection={true}
       fourthSectionFeatures={[

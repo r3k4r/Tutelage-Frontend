@@ -53,9 +53,9 @@ const LanguagesShowcase = () => {
 
   // Relevant images for each language
   const languageImages = [
-    "https://images.pexels.com/photos/7054513/pexels-photo-7054513.jpeg", // English - books/studying
-    "https://localization.saudisoft.com/wp-content/uploads/2022/11/Kurdish-blog.webp", // Kurdish - cultural/traditional
-    "https://qantara.de/sites/default/files/import/2014-08/54884-arabic-calligraphy_picture-alliance-tone-koene.jpg"  // Arabic - calligraphy/script
+    "/languages/lang_eng.jpeg", // English - books/studying
+    "/languages/lan_ku.webp", // Kurdish - cultural/traditional
+    "/languages/lang_ar.jpg"  // Arabic - calligraphy/script
   ]
 
   return (

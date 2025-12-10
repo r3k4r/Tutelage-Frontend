@@ -133,7 +133,7 @@ const OnlineCourses = () => {
             >
               <div className="relative w-full h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem]">
                 <Image
-                  src="https://online.hbs.edu/Style%20Library/api/resize.aspx?imgpath=/PublishingImages/working-adult-taking-online-course.jpg&w=1200&h=630"
+                  src="/landing/online_course.jpg"
                   alt="Online English courses"
                   fill
                   className="object-cover lg:rounded-tr-[4rem] max-lg:rounded-tl-[2rem]"

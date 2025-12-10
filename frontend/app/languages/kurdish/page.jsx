@@ -41,21 +41,21 @@ const KurdishLanguagePage = () => {
   const isRTL = i18n.language === 'ku'
   
   const title = t('KurdishCourse.title')
-  const heroImage = "https://localization.saudisoft.com/wp-content/uploads/2022/11/Kurdish-blog.webp" 
+  const heroImage = "/languages/lan_ku.webp" 
   const description = t('KurdishCourse.description')
   const enrollButtonText = t('KurdishCourse.enrollButtonText')
 
   // Get class types from translation
   const publicClass = {
     title: t('KurdishCourse.classTypes.online.title'),
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", // Group learning/classroom
+    image: "/languages/ku/private_classes.jpg", // Group learning/classroom
     features: t('KurdishCourse.classTypes.online.features', { returnObjects: true }),
     buttonText: t('KurdishCourse.classTypes.online.buttonText')
   }
 
   const privateClass = {
     title: t('KurdishCourse.classTypes.inPerson.title'),
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", // One-on-one professional tutoring
+    image: "/languages/ku/inPerson_classes.jpg", // One-on-one professional tutoring
     features: t('KurdishCourse.classTypes.inPerson.features', { returnObjects: true }),
     buttonText: t('KurdishCourse.classTypes.inPerson.buttonText')
   }

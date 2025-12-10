@@ -41,7 +41,7 @@ const Resources = () => {
             >
               <div className="relative w-full h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem]">
                 <Image
-                  src="https://img.freepik.com/free-photo/man-working-laptop-while-standing_23-2148746283.jpg?semt=ais_hybrid&w=740&q=80"
+                  src="/landing/resource.avif"
                   alt="English learning resources"
                   fill
                   className="object-cover lg:rounded-tl-[4rem] max-lg:rounded-tr-[2rem]"

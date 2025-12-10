@@ -7,7 +7,7 @@ export default function LanguagesHero() {
   return (
     <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
       <Image
-        src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80"
+        src="/languages/lang_1.jpg"
         alt="People conversing in different languages - Language learning community"
         fill
         priority

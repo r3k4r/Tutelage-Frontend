@@ -24,10 +24,10 @@ const EnglishCourseForKidsAndTeens = () => {
     const HeroData = summerTime ? 
     {
       description:"Summer is the perfect time to explore, play, and learn! Our Summer English Program for students aged 5–17 is packed with exciting activities, fun games, and creative projects designed to make learning English enjoyable and effective. Every lesson is tailored to students’ ages and abilities, ensuring that they stay engaged while building real-life communication skills. By the end of the program, learners not only feel more confident in using English but also develop curiosity, creativity, and a love for learning that lasts long after the summer ends.",
-      heroImage : "https://www.nacd.org/wp-content/uploads/2019/06/summer_kids.jpg"
+      heroImage : "/courses/online_classes.jpg"
     } : 
     {
-     heroImage : "https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=1200&q=80",
+     heroImage : "/courses/kids/kids_1.jpg",
      description : t('inglishForKids.first.description')
     }
   // Actual course data
@@ -37,14 +37,14 @@ const EnglishCourseForKidsAndTeens = () => {
   // Get class types from translation
   const publicClass = {
     title: t('inglishForKids.classTypes.public.title'),
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80", // Kids in classroom - colorful/engaging
+    image: "/courses/kids/public_classes.jpg",
     features: t('inglishForKids.classTypes.public.features', { returnObjects: true }),
     buttonText: t('inglishForKids.classTypes.public.buttonText')
   }
 
   const privateClass = {
     title: t('inglishForKids.classTypes.private.title'),
-    image: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80", // One-on-one tutoring - focused learning
+    image: "/courses/kids/private_classes.jpg", 
     features: t('inglishForKids.classTypes.private.features', { returnObjects: true }),
     buttonText: t('inglishForKids.classTypes.private.buttonText')
   }
@@ -358,7 +358,7 @@ const EnglishCourseForKidsAndTeens = () => {
             <div className="w-full lg:w-1/2">
               <div className="relative w-full h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem]">
                 <Image
-                  src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&q=80"
+                  src="/courses/kids/kids_2.jpg"
                   alt="Fun language learning for kids and teens"
                   fill
                   className="object-cover"

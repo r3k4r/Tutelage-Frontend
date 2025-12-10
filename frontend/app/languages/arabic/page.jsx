@@ -41,21 +41,21 @@ const ArabicLanguageCourse = () => {
   const isRTL = i18n.language === 'ku'
   
   const title = t('ArabicCourse.title')
-  const heroImage = "https://qantara.de/sites/default/files/import/2014-08/54884-arabic-calligraphy_picture-alliance-tone-koene.jpg" 
+  const heroImage = "/languages/lang_ar.jpg" 
   const description = t('ArabicCourse.description')
   const enrollButtonText = t('ArabicCourse.enrollButtonText')
 
   // Get class types from translation
   const publicClass = {
     title: t('ArabicCourse.classTypes.online.title'),
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", // Group learning/classroom
+    image: "/languages/ar/private_classes.jpg", // Group learning/classroom
     features: t('ArabicCourse.classTypes.online.features', { returnObjects: true }),
     buttonText: t('ArabicCourse.classTypes.online.buttonText')
   }
 
   const privateClass = {
     title: t('ArabicCourse.classTypes.inPerson.title'),
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", // One-on-one professional tutoring
+    image: "/languages/ar/inPerson_classes.jpg", // One-on-one professional tutoring
     features: t('ArabicCourse.classTypes.inPerson.features', { returnObjects: true }),
     buttonText: t('ArabicCourse.classTypes.inPerson.buttonText')
   }

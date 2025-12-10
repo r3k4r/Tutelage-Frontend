@@ -10,7 +10,7 @@ export default function CoursesHero() {
   return (
     <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
       <Image
-        src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=80"
+        src="/courses/hero.jpeg"
         alt="Courses Hero - English Learning"
         fill
         priority

@@ -6,7 +6,7 @@ export default function IELTSGeneralPage() {
   return (
     <SingleProficiencyTest
       title="IELTS General Training"
-      heroImage="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80"
+      heroImage="/courses/proficiency/general/general_1.jpg"
       description="Master IELTS General Training with our targeted preparation program designed for migration and work visa applications. Our course focuses on practical English skills needed for everyday situations in English-speaking countries."
       
       firstSectionTitle="About IELTS General Training"
@@ -20,7 +20,7 @@ export default function IELTSGeneralPage() {
         "People preparing for vocational training or community integration.",
         "Learners who want focused practice in everyday English skills (listening, reading, writing, speaking)."
       ]}
-      secondSectionImage="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+      secondSectionImage="/courses/proficiency/general/general_2.jpg"
       
       showThirdSection={true}
       thirdSectionTitle="Why Your Goals Deserve Tutelage"
@@ -46,7 +46,7 @@ export default function IELTSGeneralPage() {
           description: "Fairly-priced compared to other language institutions."
         }
       ]}
-      thirdSectionImage="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80"
+      thirdSectionImage="/courses/proficiency/general/general_3.jpg"
       
       showFourthSection={true}
       fourthSectionFeatures={[

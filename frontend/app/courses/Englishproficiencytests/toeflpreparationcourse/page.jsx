@@ -6,7 +6,7 @@ export default function TOEFLPreparationPage() {
   return (
     <SingleProficiencyTest
       title="TOEFL Preparation Course"
-      heroImage="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=80"
+      heroImage="/courses/proficiency/toefl/toefl_1.jpg"
       description="Excel in the TOEFL with our comprehensive preparation program designed for students aiming to study at American universities. Master all four sections with proven strategies and extensive practice with authentic materials."
       
       firstSectionTitle="About TOEFL preparation Course"
@@ -15,7 +15,7 @@ export default function TOEFLPreparationPage() {
       showSecondSection={true}
       secondSectionTitle="Why Choose TOEFL?"
       secondSectionContent="Our TOEFL Preparation Course helps students achieve their aimed scores through structured lessons, practice tests, and personalized feedback. The course focuses on improving language skills, test strategies, and confidence for the real exam. The TOEFL is recognized worldwide as proof of English proficiency. It is accepted by universities for undergraduate and graduate admissions and scholarships, recognized by some countries for study or work visa applications, and used for professional registration where English competency is required."
-      secondSectionImage="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
+      secondSectionImage="/courses/proficiency/toefl/toefl_2.jpg"
       
       showThirdSection={false}
       thirdSectionTitle="TOEFL Course Highlights"

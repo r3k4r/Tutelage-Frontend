@@ -21,7 +21,7 @@ const BusinessEnglishPage = () => {
   const isRTL = i18n.language === 'ku'
 
   const title = "Business English"
-  const heroImage = "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80"
+  const heroImage = "/courses/business/business_1.jpg"
   const description = "Enhance your professional communication skills with our Business English program. Learn to speak, write, and present confidently in meetings, emails, and international workplaces. Build the fluency and confidence you need to succeed in your career."
   const enrollButtonText = "Enroll Now"
 
@@ -38,7 +38,7 @@ const BusinessEnglishPage = () => {
         "Introduce yourself and your company",
         "Take part in short meetings and conversations"
       ],
-      image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80" // Office workspace/professional setting
+      image: "/courses/business/business_2.jpg" 
     },
     {
       title: "Business Vantage B2 (Intermediate Level)",
@@ -48,7 +48,7 @@ const BusinessEnglishPage = () => {
         "Give clear presentations",
         "Handle phone calls and negotiations confidently"
       ],
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" // Business meeting/presentation
+      image: "/courses/business/business_3.jpg" 
     },
     {
       title: "Business Higher C1 (Advanced Level)",
@@ -58,13 +58,13 @@ const BusinessEnglishPage = () => {
         "Negotiate and lead effectively",
         "Communicate with confidence in international settings"
       ],
-      image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80" // International business/leadership
+      image: "/courses/business/business_4.jpg"
     }
   ]
 
   const publicClass = {
   title: "Small Group Classes (3 students)",
-  image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", 
+  image: "/courses/business/public_classes.jpg", 
   features: [
     "Live online classes", 
     "Interactive learning with peers for real conversation practice.", 
@@ -78,7 +78,7 @@ const BusinessEnglishPage = () => {
 
 const privateClass = {
   title: "Private Classes",
-  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", 
+  image: "/courses/business/private_classes.jpg", 
   features: [
     "Live online classes", 
     "One-on-one attention tailored to your individual goals and learning style.", 
@@ -92,7 +92,7 @@ const privateClass = {
 
 const inPersonClass = {
   title: "in-Person Classes",
-  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", 
+  image: "/courses/business/inPerson_classes.jpg", 
   features: [
     "Face-to-face lessons", 
     "Direct interaction with instructors for immediate feedback.", 

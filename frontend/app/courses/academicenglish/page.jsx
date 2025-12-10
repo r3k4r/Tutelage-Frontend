@@ -20,7 +20,7 @@ const AcademicEnglishPage = () => {
 
 
   const title = "Academic English"
-  const heroImage = "https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=1200&q=80" 
+  const heroImage = "/courses/academic/academic_1.jpg"
   const description = "Master academic English skills essential for university success. Our comprehensive program prepares you for academic writing, research, presentations, and critical analysis in English. Perfect for students planning to study abroad or pursue higher education in English-speaking institutions."
   const enrollButtonText = "Enroll Now"
 
@@ -28,7 +28,7 @@ const AcademicEnglishPage = () => {
     // Get class types from translation
 const publicClass = {
   title: "Group Classes",
-  image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", 
+  image: "/courses/academic/group_classes.jpg", 
   features: [
     "Live online academic sessions", 
     "Small groups of 3 learners only", 
@@ -44,7 +44,7 @@ const publicClass = {
 
 const privateClass = {
   title: "Private Classes",
-  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", 
+  image: "/courses/academic/private_classes.jpg", 
   features: [
     "One-on-one academic instruction", 
     "Personalized study plan and guidance", 
@@ -59,7 +59,7 @@ const privateClass = {
 
 const inPersonClass = {
   title: "in-Person Classes",
-  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", 
+  image: "/courses/academic/inPerson_classes.jpg", 
   features: [
     "Face-to-face academic learning", 
     "Small, interactive classroom setting", 
@@ -308,7 +308,7 @@ const inPersonClass = {
                     <div className="w-full lg:w-1/2">
                       <div className="relative w-full h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem]">
                         <Image
-                          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+                          src="/courses/academic/academic_2.jpg"
                           alt="Academic English Program - University studying"
                           fill
                           className="object-cover"

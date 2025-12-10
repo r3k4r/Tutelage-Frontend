@@ -6,7 +6,7 @@ export default function PTEPreparationPage() {
   return (
     <SingleProficiencyTest
       title="PTE Preparation Course"
-      heroImage="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80"
+      heroImage="/courses/proficiency/pte/pte_1.jpg"
       description="Ace the PTE Academic with our specialized preparation program designed for the computer-based test format. Master all sections with expert strategies, automated scoring insights, and comprehensive practice materials."
       
       firstSectionTitle="PTE Test Preparation Course"
@@ -21,7 +21,7 @@ export default function PTEPreparationPage() {
         "Professional Registration: Used by organizations and employers to assess English communication skills.",
         "Language Certification: Provides an official and reliable measure of English proficiency for global recognition."
       ]}
-      secondSectionImage="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80"
+      secondSectionImage="/courses/proficiency/pte/pte_2.jpg"
       
       showThirdSection={false}
       thirdSectionTitle="PTE Course Futures"

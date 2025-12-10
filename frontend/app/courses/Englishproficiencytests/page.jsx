@@ -16,7 +16,7 @@ const EnglishProficiencyTestsPage = () => {
   const router = useRouter()
   
   const title = "English Proficiency Tests"
-  const heroImage = "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80"
+  const heroImage = "/courses/proficiency/pro_1.jpg"
   const description = "Tutelage's specialized English proficiency tests preparations are designed to secure your personal and academic future abroad. We provide strategies and expert coaching you need to achieve your target scores for university admissions outside your country, professional registration or UKVI. Our comprehensive programs ensure you're fully prepared for success."
   const enrollButtonText = "Enroll Now"
 
@@ -29,7 +29,7 @@ const EnglishProficiencyTestsPage = () => {
     {
       title: "IELTS Academic",
       description: "Comprehensive preparation for IELTS Academic test covering all four skills with expert strategies and practice materials.",
-      image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
+      image: "/courses/proficiency/academic/academic_1.jpg",
       href: "/courses/Englishproficiencytests/ieltsacademic",
       features: [
         "Comprehensive coverage of all four IELTS sections",
@@ -41,7 +41,7 @@ const EnglishProficiencyTestsPage = () => {
     {
       title: "IELTS General Training",
       description: "Targeted preparation for IELTS General Training with focus on practical English skills for work and migration.",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      image: "/courses/proficiency/general/general_1.jpg",
       href: "/courses/Englishproficiencytests/ieltsgeneral",
       features: [
         "Focus on practical English for everyday situations",
@@ -53,7 +53,7 @@ const EnglishProficiencyTestsPage = () => {
     {
       title: "TOEFL Preparation Course",
       description: "Comprehensive preparation for the TOEFL exam, covering the Reading, Listening, Speaking, and Writing sections with clear and effective strategies.",
-      image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
+      image: "/courses/proficiency/toefl/toefl_1.jpg",
       href: "/courses/Englishproficiencytests/toeflpreparationcourse",
       features: [
         "Understand the TOEFL exam format and all question types",
@@ -65,7 +65,7 @@ const EnglishProficiencyTestsPage = () => {
     {
       title: "PTE Preparation Course",
       description: "Expert coaching for PTE Academic with computer-based practice and scoring strategies for all test sections.",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80",
+      image: "/courses/proficiency/pte/pte_1.jpg",
       href: "/courses/Englishproficiencytests/ptepreparationcourse",
       features: [
         "Specialized computer-based testing preparation",

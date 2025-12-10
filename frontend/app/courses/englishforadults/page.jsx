@@ -20,21 +20,21 @@ const EnglishForAdultsPage = () => {
   const isRTL = i18n.language === 'ku'
   
   const title = t('inglishForAdults.first.title')
-  const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80" // Adults studying together
+  const heroImage = "/courses/adults/adult_3.jpg" 
   const description = t('inglishForAdults.first.description')
   const enrollButtonText = t('inglishForAdults.first.enrollButtonText')
 
   // Get class types from translation
   const publicClass = {
     title: t('inglishForAdults.classTypes.public.title'),
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", // Group learning/classroom
+    image: "/courses/adults/public_classes.jpg", 
     features: t('inglishForAdults.classTypes.public.features', { returnObjects: true }),
     buttonText: t('inglishForAdults.classTypes.public.buttonText')
   }
 
   const privateClass = {
     title: t('inglishForAdults.classTypes.private.title'),
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80", // One-on-one professional tutoring
+    image: "/courses/adults/private_classes.jpg", 
     features: t('inglishForAdults.classTypes.private.features', { returnObjects: true }),
     buttonText: t('inglishForAdults.classTypes.private.buttonText')
   }
@@ -343,7 +343,7 @@ const EnglishForAdultsPage = () => {
             <div className="w-full lg:w-1/2">
               <div className="relative w-full h-96 sm:h-[28rem] lg:h-[32rem] xl:h-[36rem]">
                 <Image
-                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80"
+                  src="/courses/adults/adult_1.jpg"
                   alt="Interactive English learning for adults"
                   fill
                   className="object-cover"
