@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail,  } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail,  } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { Separator } from './ui/separator'
@@ -59,10 +59,8 @@ export const Footer = () => {
   ]
 
   const socialLinks = [
-    { name: "Facebook", icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/Tutelage.esl" },
-    { name: "Instagram", icon:<Instagram className="w-5 h-5" />, href: "https://www.instagram.com/tutelage.esl" },
-    { name: "Linkedin", icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/company/tutelageinstitute/" },
-    { name: "Tiktok", icon:<div className='w-5 h-5'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 7.917v4.034A9.95 9.95 0 0 1 16 10v4.5a6.5 6.5 0 1 1-8-6.326V12.5a2.5 2.5 0 1 0 4 2V3h4.083A6.005 6.005 0 0 0 21 7.917"/></svg></div>, href: "https://www.tiktok.com/@tutelage.esl?_r=1&_t=ZS-91ngW8tmRmP" },
+    { name: "Facebook", icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/share/1EXoYc3xG4/" },
+    { name: "Instagram", icon: <Instagram className="w-5 h-5" />, href: "https://www.instagram.com/tutelage.esl?igsh=MWhhZmhlZzJ1MTB2ZA==" },
   ]
 
   return (
@@ -210,8 +208,8 @@ export const Footer = () => {
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                     <div className="text-left">
-                      <p className="text-white text-sm">New Chwar Chra, Sulaymaniyah</p>
-                      <p className="text-white text-sm">Kurdistan Region - Iraq</p>
+                      <p className="text-white text-sm">Suli Innovation house</p>
+                      <p className="text-white text-sm">Sulaimaniyah - Kurdistan Region</p>
                     </div>
                   </div>
                   
@@ -222,13 +220,13 @@ export const Footer = () => {
                         href="tel:+9647501534240"
                         className="text-white hover:text-primary transition-colors duration-200 text-sm"
                       >
-                        (+964) 07501534340
+                        (964+) 07501534240
                       </a>
                       <a
                         href="tel:+9647701946364"
                         className="text-white hover:text-primary transition-colors duration-200 text-sm"
                       >
-                        (+964) 07701946364
+                        (964+) 07701946364
                       </a>
                     </div>
                   </div>
@@ -248,9 +246,9 @@ export const Footer = () => {
                 <div className="space-y-2">
                   <h5 className="text-base font-bold text-white">Office Hours</h5>
                   <div className="text-white text-sm space-y-1">
-                    <p>Sunday: 1:00 PM - 5:00 PM</p>
-                    <p>Tuesday: 1:00 PM - 5:00 PM</p>
-                    <p>Thursday: 1:00 PM - 5:00 PM</p>
+                    <p>Sunday - Thursday: 9:00 AM - 5:00 PM</p>
+                    <p>Saturday: By Appointment Only</p>
+                    <p>Friday: Closed</p>
                   </div>
                 </div>
               </div>
@@ -283,18 +281,22 @@ export const Footer = () => {
               </div>
             </div>
 
+            <div>
+              Developed by <span className="text-primary font-bold">Nexa Void</span> team
+            </div>
+
             {/* Social Media Links */}
             <div className="flex space-x-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="bg-primary text-white p-2.5  rounded-full transition-all duration-300 shadow-sm group"
+                  className="bg-primary text-white p-2.5 rounded-full transition-all duration-300 shadow-sm group"
                   aria-label={social.name}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className={`text-white transition-colors ${social.name === 'Tiktok' && '-mt-0.5 -ml-0.5'}`}>
+                  <div className="text-white transition-colors">
                     {social.icon}
                   </div>
                 </a>
