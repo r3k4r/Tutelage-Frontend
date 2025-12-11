@@ -3,7 +3,7 @@ import SkillPageTemplate from '@/components/skills/SkillPageTemplate'
 export default function ListeningPage() {
   const listeningData = {
     title: "Listening Skill",
-    heroImage: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
+    heroImage: "/skills/listen.jpg",
     description: "Our listening materials help learners practice listening independently to understand spoken English step by step from simple everyday expressions to complex conversations and ideas.",
     coursesButtonText: "Explore courses",
     whyUseSection: {

@@ -101,21 +101,21 @@ const EnglishCourseForKidsAndTeens = () => {
     {
       title: "English for Adults",
       description: "Comprehensive English language program tailored for adult learners with busy schedules.",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80", // Adults studying
+      image: "/courses/adults/adult_1.jpg", // Adults studying
       href: "/courses/englishforadults",
       duration: "12-16 weeks"
     },
     {
       title: "Academic English",
       description: "Master academic English skills for university study and professional research.",
-      image: "https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=800&q=80", // Academic/Library
+      image: "/courses/academic/academic_1.jpg", // Academic/Library
       href: "/courses/academicenglish",
       duration: "16-20 weeks"
     },
     {
       title: "Business English",
       description: "Master professional English communication for the global business world.",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80", // Business meeting
+      image: "/courses/business/business_1.jpg", // Business meeting
       href: "/courses/businessenglish",
       duration: "12-16 weeks"
     }

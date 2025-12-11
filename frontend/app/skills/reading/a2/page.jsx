@@ -26,7 +26,7 @@ const A2 = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
                   <Image
-                    src={"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"}
+                    src={"/skills/reading/reading_2.jpg"}
                     alt={"A2 Reading"}
                     fill
                     className="object-cover"
