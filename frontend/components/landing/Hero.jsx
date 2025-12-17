@@ -51,14 +51,14 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-          className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white/90 drop-shadow mb-4 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl">
+          className="text-3xl leading-[120%] sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white/90 drop-shadow mb-4 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
             {safeTitle}
           </motion.h1>
           <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
-          className="text-sm sm:text-base md:text-lg text-white/80 font-normal max-w-5xl mx-auto mb-7">
+          className="text-sm sm:text-base md:text-lg text-white/80 font-normal sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto mb-7">
             {safeSubtitle}
           </motion.p>
           <motion.form
