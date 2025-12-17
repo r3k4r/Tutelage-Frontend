@@ -75,21 +75,17 @@ const Stories = () => {
       fd.append('tags', formData.tags?.join(',') ?? '')
       
       if (formData.pdf && formData.pdf instanceof File) {
-        console.log('📄 Adding PDF:', formData.pdf.name);
         fd.append('pdfFile', formData.pdf)
       }
       
       if (Array.isArray(formData.taskPdfs) && formData.taskPdfs.length > 0) {
-        console.log('📎 Adding task PDFs:', formData.taskPdfs.length);
         formData.taskPdfs.forEach((file, index) => {
           if (file instanceof File) {
-            console.log(`📎 Adding task PDF ${index + 1}:`, file.name);
             fd.append('taskPdfs', file)
           }
         })
       }
       
-      console.log('📤 Sending FormData to API...');
       const res = await fetch(`${BASE_URL}/api/stories`, {
         method: "POST",
         credentials: "include",
@@ -125,26 +121,21 @@ const Stories = () => {
       fd.append('tags', formData.tags?.join(',') ?? '')
       
       if (formData.pdf && formData.pdf instanceof File) {
-        console.log('📄 Adding PDF:', formData.pdf.name);
         fd.append('pdfFile', formData.pdf)
       }
       
       if (Array.isArray(formData.taskPdfs) && formData.taskPdfs.length > 0) {
-        console.log('📎 Adding task PDFs:', formData.taskPdfs.length);
         formData.taskPdfs.forEach((file, index) => {
           if (file instanceof File) {
-            console.log(`📎 Adding task PDF ${index + 1}:`, file.name);
             fd.append('taskPdfs', file)
           }
         })
       }
       
       if (Array.isArray(formData.deletedTaskPdfIds) && formData.deletedTaskPdfIds.length > 0) {
-        console.log('🗑️ Adding deleted IDs:', formData.deletedTaskPdfIds);
         fd.append('deletedTaskPdfIds', JSON.stringify(formData.deletedTaskPdfIds))
       }
       
-      console.log('📤 Sending FormData to API...');
       const res = await fetch(`${BASE_URL}/api/stories/${editStory.id}`, {
         method: "PUT",
         credentials: "include",
