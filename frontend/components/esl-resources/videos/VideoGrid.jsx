@@ -24,7 +24,8 @@ const CATEGORY_OPTIONS = [
 	{ value: 'Technology', label: 'Technology' },
 	{ value: 'Business', label: 'Business' },
 	{ value: 'Animation', label: 'Animation' },
-	{ value: 'Kids-Learning', label: 'Kids Learning' }
+	{ value: 'Kids-Learning', label: 'Kids Learning' },
+  {value: 'All', label: 'All Sources'}
 ]
 
 const getYouTubeThumbnail = (url, preferMax = false) => {
@@ -52,7 +53,7 @@ const VideoGrid = () => {
   const [hasPrevPage, setHasPrevPage] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [searchInput, setSearchInput] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
   const itemsPerPage = 6
 

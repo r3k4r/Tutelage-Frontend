@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const VideoLibraryHero = () => {
   const title = "Video Library"
-  const heroImage = "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80"
+  const heroImage = "/eslresource/video/video_1.jpg"
   
   return (
     <>

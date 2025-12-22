@@ -32,7 +32,7 @@ export default LanguagePlacementPage
 
 const LanguagePlacementHero = () => {
   const title = "Language Placement Test"
-  const heroImage = "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&q=80&w=1400"
+  const heroImage = "/tutelagetest/languageplacement/lang_1.avif"
   const description = "Online placement with a live instructor. A 15–30 minute speaking & comprehension session that measures practical speaking and listening skills in real time."
   
 
@@ -124,7 +124,7 @@ const MoreAboutLanguagePlacement = () => {
           <div className="w-full lg:w-1/2">
             <div className="relative w-full h-[32rem] sm:h-[36rem] md:h-[40rem] lg:h-[44rem] xl:h-[48rem]">
               <Image
-                src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+                src="/tutelagetest/languageplacement/lang_2.jpg"
                 alt="Language placement test - professional assessment"
                 fill
                 className="object-cover"

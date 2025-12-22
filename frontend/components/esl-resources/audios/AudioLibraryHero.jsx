@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const AudioLibraryHero = () => {
   const title = "Audio Library"
-  const heroImage = "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&q=80"
+  const heroImage = "/eslresource/audio/audio_1.jpg"
   
   return (
     <>

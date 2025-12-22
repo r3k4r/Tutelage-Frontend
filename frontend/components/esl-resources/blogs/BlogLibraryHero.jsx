@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const BlogLibraryHero = () => {
   const title = "Blog Library"
-  const heroImage = "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800&q=80"
+  const heroImage = "/eslresource/blog/blog_1.jpg"
   
   return (
     <>

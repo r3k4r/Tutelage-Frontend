@@ -49,7 +49,7 @@ export default function TOEFLPreparationPage() {
           description: "Learn from teachers who know the TOEFL inside out"
         }
       ]}
-      thirdSectionImage="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80"
+      thirdSectionImage="/courses/proficiency/toefl/toefl_3.jpg"
       
       showFourthSection={true}
       fourthSectionFeatures={[

@@ -17,7 +17,7 @@ export default function TestsSection() {
       ],
       ReadMoreHref: '/tutelage-tests/free-practice-test',
       TakeHref: '/tutelage-tests/free-practice-test/start',
-      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1400',
+      image: '/tutelagetest/freepractice/free_1.avif',
       btn: 'Read More',
       btn2: 'Take Free Test'
     },
@@ -32,7 +32,7 @@ export default function TestsSection() {
       ],
       ReadMoreHref: '/tutelage-tests/language-placement',
       TakeHref: '/tutelage-tests/languageplacement',
-      image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&q=80&w=1400',
+      image: '/tutelagetest/languageplacement/lang_1.avif',
       btn: 'Read More',
       btn2: 'Book Placement'
     },
@@ -47,7 +47,7 @@ export default function TestsSection() {
       ],
       ReadMoreHref: '/tutelage-tests/mock-exam',
       TakeHref: '/tutelage-tests/mockexams',
-      image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1400',
+      image: '/tutelagetest/mocktest/mock_1.avif',
       btn: 'Read More',
       btn2: 'Schedule Mock'
     }

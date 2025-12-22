@@ -6,7 +6,7 @@ export default function TutelageTestsHero() {
     <>
       <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
         <Image
-          src="https://images.unsplash.com/photo-1606326608690-4e0281b1e588?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+          src="/tutelagetest/hero.avif"
           alt="tests "
           fill
           priority

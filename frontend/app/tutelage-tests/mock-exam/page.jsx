@@ -33,7 +33,7 @@ export default MockExam
 
 const MockHero = () => {
   const title = "International / Mock Test"
-  const heroImage = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1400"
+  const heroImage = "/tutelagetest/mocktest/mock_1.avif"
   const description = "Simulated live speaking mock test to practice under exam conditions. 11–14 minutes focusing on fluency, pronunciation, grammar and vocabulary."
   return (
     <>
@@ -136,7 +136,7 @@ const MoreAboutMock = () => {
           <div className="w-full lg:w-1/2">
             <div className="relative w-full h-[32rem] sm:h-[36rem] md:h-[40rem] lg:h-[44rem] xl:h-[48rem]">
               <Image
-                src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=800&q=80"
+                src="/tutelagetest/mocktest/mock_2.jpg"
                 alt="IELTS speaking mock test - online practice with instructor"
                 fill
                 className="object-cover"

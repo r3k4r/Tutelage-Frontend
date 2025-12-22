@@ -6,7 +6,7 @@ const ESLResourcesHero = () => {
   return (
     <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
       <Image
-        src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1600&q=80"
+        src="/eslresource/hero.jpg"
         alt="ESL Resources - English Learning"
         fill
         priority

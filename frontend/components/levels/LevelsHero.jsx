@@ -6,7 +6,7 @@ const LevelsHero = () => {
   return (
     <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
       <Image
-        src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=80"
+        src="/levels/hero.jpg"
         alt="English Proficiency Levels"
         fill
         priority

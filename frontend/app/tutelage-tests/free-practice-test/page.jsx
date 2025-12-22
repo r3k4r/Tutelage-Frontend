@@ -60,7 +60,7 @@ export default FreePracticeTest
 const FreeTestHero = ({ stats }) => {
   console.log('stats in hero:', stats);
   const title = "Discover Your English Level Online – Free Test"
-  const heroImage = "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1400"
+  const heroImage = "/tutelagetest/freepractice/free_1.avif"
   const description = `Our free ${stats.timeLimitMinutes}-minutes English practice test helps you identify your current level of English proficiency. It assesses grammar, vocabulary, and comprehension to provide an accurate overview of your strengths and areas for development.`
   return (
     <>
@@ -114,9 +114,9 @@ function DiscoverSection({ stats }) {
                 improvement, and gain a clear understanding of your language level.`
 
   const images = [
-    'https://www.fsp-law.com/wp-content/uploads/2022/05/Exam.jpg',
-    'https://www.fsp-law.com/wp-content/uploads/2022/05/Exam.jpg',
-    'https://www.fsp-law.com/wp-content/uploads/2022/05/Exam.jpg'
+    '/tutelagetest/freepractice/free_2.jpg',
+    '/tutelagetest/freepractice/free_2.jpg',
+    '/tutelagetest/freepractice/free_2.jpg'
   ]
 
   return (
