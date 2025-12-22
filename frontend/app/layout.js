@@ -11,6 +11,7 @@ import Script from "next/script";
 import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Suspense } from "react";
+import SnowFallWrapper from './../components/SnowFallWrapper';
 
 export const metadata = {
   title: "Tutelage | Online English Learning Platform in Kurdistan",
@@ -48,25 +49,26 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-        <ThemeProvider>
-          <RefreshTokenProvider>
-            <AuthProvider>
-              <Suspense fallback={null}>
-                <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
-              </Suspense>
-              <NavbarWrapper>
+          <ThemeProvider>
+            <RefreshTokenProvider>
+              <AuthProvider>
                 <Suspense fallback={null}>
-                  <Navbar />
+                  <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
                 </Suspense>
-              </NavbarWrapper>
-                <div className="relative z-10">{children}</div>
-              <FooterWrapper>
-                <Footer />
-              </FooterWrapper>
-              <Toaster />
-            </AuthProvider>
-          </RefreshTokenProvider>
-        </ThemeProvider>
+                <SnowFallWrapper />
+                <NavbarWrapper>
+                  <Suspense fallback={null}>
+                    <Navbar />
+                  </Suspense>
+                </NavbarWrapper>
+                  <div className="relative z-10">{children}</div>
+                <FooterWrapper>
+                  <Footer />
+                </FooterWrapper>
+                <Toaster />
+              </AuthProvider>
+            </RefreshTokenProvider>
+          </ThemeProvider>
       </body>
     </html>
   );

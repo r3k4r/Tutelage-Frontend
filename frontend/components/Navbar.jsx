@@ -12,7 +12,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import LanguageWrapper from './LanguageWrapper'
 import Language from './Language'
 import { BASE_URL_PROD } from '../app/config/url'
-
+// import SnowFall from 'react-snowfall'
 export default function Navbar (){
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -114,6 +114,7 @@ export default function Navbar (){
 
   return (
     <nav className="top-0 z-50 bg-background md:pt-4 ">
+      {/* <SnowFall /> */}
       {/* Top Bar */}
       <div className="w-full flex items-center justify-between px-4 sm:px-6 lg:px-8 h-14 bg-background">
         <div className="max-w-7xl w-full flex items-center justify-between mx-auto">
