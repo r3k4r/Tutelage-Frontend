@@ -1,21 +1,42 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Input } from '@/components/ui/input'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { SlidersHorizontal } from 'lucide-react'
 
-export default function HeroSection({ title, subtitle, imageUrl }) {
+export default function HeroSection() {
   const [heroSearchQuery, setHeroSearchQuery] = useState('')
   const [heroSearchFilter, setHeroSearchFilter] = useState('')
+  const [landingData, setLandingData] = useState({
+    title: 'Empowering learners worldwide with virtual education',
+    subtitle: 'High-quality courses, engaging tests, and curated resources for success.',
+    imageUrl: 'https://www.selectenglish.co.uk/wp-content/uploads/2020/10/online-class-e1603379051771.jpg'
+  })
+  const { title, subtitle, imageUrl } = landingData
   const router = useRouter()
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  
 
-  const safeTitle = title || 'Empowering learners worldwide with virtual education'
-  const safeSubtitle = subtitle || 'High-quality courses, engaging tests, and curated resources for success.'
-  const imageSrc = imageUrl || 'https://www.selectenglish.co.uk/wp-content/uploads/2020/10/online-class-e1603379051771.jpg'
+  const fetchLandingData = async () => {
+   try {
+      const res = await fetch(`${BASE_URL}/api/landing-sections/1`, { cache: 'no-store' })
+      const data = await res.json()
+      if (data?.success && data?.landingSection) {
+        setLandingData(data?.landingSection)
+      }
+      return null
+    } catch {
+      return null
+    }
+  }
+
+  useEffect(()=>{
+    fetchLandingData()
+  },[])
 
   const handleHeroSearch = (e) => {
     e.preventDefault()
@@ -34,7 +55,7 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
     <>
       <div className="relative w-full aspect-[16/7] min-h-[300px] h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[100vh]">
         <Image
-          src={imageSrc}
+          src={imageUrl}
           alt="Landing Hero"
           fill
           priority
@@ -52,14 +73,14 @@ export default function HeroSection({ title, subtitle, imageUrl }) {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
           className="text-3xl leading-[120%] sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white/90 drop-shadow mb-4 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
-            {safeTitle}
+            {title}
           </motion.h1>
           <motion.p
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
           className="text-sm sm:text-base md:text-lg text-white/80 font-normal sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto mb-7">
-            {safeSubtitle}
+            {subtitle}
           </motion.p>
           <motion.form
           initial={{ y: 20, opacity: 0 }}
