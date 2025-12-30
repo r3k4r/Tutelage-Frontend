@@ -6,8 +6,8 @@ function SnowFallWrapper() {
   const currentMonth = currentDate.getMonth(); // 0-based, December is 11, January is 0
   const currentDay = currentDate.getDate();
 
-  // Show snowfall from December 21st to January 1st
-  const isHolidaySeason = (currentMonth === 11 && currentDay >= 21) || (currentMonth === 0 && currentDay === 1);
+  // Show snowfall from December 21st to January 6
+  const isHolidaySeason = (currentMonth === 11 && currentDay >= 21) || (currentMonth === 0 && currentDay === 6);
 
   if (!isHolidaySeason) {
     return null;
