@@ -1,9 +1,12 @@
+import { constructMetadata } from "@/hooks/useSeo";
 import { Suspense } from "react";
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: "Levels | Tutelage",
   description: "English proficiency levels explained",
-};
+  path: '/levels',
+  ogImage: '/levels/hero.jpg',
+});
 
 export default function LevelsLayout({ children }) {
   return (

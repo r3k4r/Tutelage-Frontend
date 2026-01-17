@@ -1,7 +1,11 @@
-export const metadata = {
+import { constructMetadata } from "@/hooks/useSeo";
+
+export const metadata = constructMetadata({
   title: "Audio Library | Tutelage ESL Resources",
   description: "Free ESL audio library with real English conversations, interviews, podcasts, short stories, and everyday dialogues. Practice listening comprehension and improve fluency on the go. Stop learning boring grammar rules and start hearing real English with practical, engaging content for all levels. Each audio includes warm-up exercises, comprehension activities, and answer keys. Enhance your English naturally with authentic conversations and contextual understanding.",
-};
+  path: '/esl-resources/audios',
+  ogImage: '/eslresource/audio/audio_1.jpg',
+});
 
 export default function AudioLibraryLayout({ children }) {
   return children;

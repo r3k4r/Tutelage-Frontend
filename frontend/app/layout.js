@@ -12,11 +12,13 @@ import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { Suspense } from "react";
 import SnowFallWrapper from './../components/SnowFallWrapper';
+import { constructMetadata } from "../hooks/useSeo";
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: "Tutelage | Online English Learning Platform in Kurdistan",
   description: "Tutelage is Kurdistan's innovative online English learning platform offering comprehensive courses for kids, teens, and adults. Master English with expert-led courses, free ESL resources (videos, audios, blogs, stories), CEFR-leveled practice (A1-C1), IELTS/TOEFL/PTE preparation, and English proficiency testing. Founded in 2022, providing structured learning, interactive exercises, and personalized support to help you achieve fluency.",
-};
+  path: '/'
+});
 
 export default function RootLayout({ children }) {
   return (
