@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
     "@type": "Organization",
     "name": "Tutelage",
     "url": "https://tutelage.krd",
-    "logo": "https://tutelage.krd/only-logo-black-border-yellow-bg.svg",
+    "logo": "https://tutelage.krd/favicon.ico",
     "description": "Kurdistan's innovative online English learning platform",
     "foundingDate": "2022",
     "sameAs": [
