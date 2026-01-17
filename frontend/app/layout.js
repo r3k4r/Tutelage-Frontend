@@ -21,6 +21,20 @@ export const metadata = constructMetadata({
 });
 
 export default function RootLayout({ children }) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Tutelage",
+    "url": "https://tutelage.krd",
+    "logo": "https://tutelage.krd/only-logo-black-border-yellow-bg.svg",
+    "description": "Kurdistan's innovative online English learning platform",
+    "foundingDate": "2022",
+    "sameAs": [
+      "https://www.facebook.com/share/1EXoYc3xG4/",
+      "https://www.instagram.com/tutelage.esl?igsh=MWhhZmhlZzJ1MTB2ZA=="
+    ]
+  };
+
   return (
     <html lang="en" className="mt-0 pt-0">
       <head>
@@ -28,6 +42,12 @@ export default function RootLayout({ children }) {
           rel="icon"
           href="/only-logo-black-border-yellow-bg.svg"
           type="image/svg+xml"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema)
+          }}
         />
       </head>
       <body className="relative">
