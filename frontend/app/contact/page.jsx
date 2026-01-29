@@ -31,7 +31,6 @@ const contactSchema = z.object({
 const ContactPage = () => {
   const searchParams = useSearchParams()
   const [preselectedCourse, setPreselectedCourse] = useState('')
-  const [ isLoading, setLoading ] = useState(false) 
 
   // Form setup
   const {
@@ -117,9 +116,7 @@ const ContactPage = () => {
 
   // Form submission handler
   const onSubmit = async (data) => {
-    try {
-      setLoading(true)
-      
+    try {     
       const response = await fetch(`${BASE_URL}/api/enrollment/contact`, {
         method: 'POST',
         headers: {
@@ -145,9 +142,7 @@ const ContactPage = () => {
         toast("Message sent Successfully", {
           description: "Check your email for confirmation details"
         });
-      }
-      
-      setShowSuccessDialog(true)
+      }enr
       
       setValue('firstName', '')
       setValue('lastName', '')
@@ -165,9 +160,7 @@ const ContactPage = () => {
         description: "Unable to submit contact form. Please check your internet connection and try again."
       });
       
-    } finally {
-      setLoading(false)
-    }
+    } 
   }
 
 

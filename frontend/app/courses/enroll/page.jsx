@@ -137,7 +137,6 @@ const EnrollPage = () => {
   // Form submission handler
   const onSubmit = async (data) => {
     try {
-      
       const response = await fetch(`${BASE_URL}/api/enrollment`, {
         method: 'POST',
         headers: {
