@@ -31,7 +31,7 @@ const contactSchema = z.object({
 const ContactPage = () => {
   const searchParams = useSearchParams()
   const [preselectedCourse, setPreselectedCourse] = useState('')
-  const { isLoading, setLoading } = useState(false) 
+  const [ isLoading, setLoading ] = useState(false) 
 
   // Form setup
   const {
