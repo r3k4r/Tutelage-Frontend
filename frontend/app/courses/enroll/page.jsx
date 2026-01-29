@@ -137,7 +137,6 @@ const EnrollPage = () => {
   // Form submission handler
   const onSubmit = async (data) => {
     try {
-      setLoading(true)
       
       const response = await fetch(`${BASE_URL}/api/enrollment`, {
         method: 'POST',
@@ -184,8 +183,6 @@ const EnrollPage = () => {
         description: "Unable to submit enrollment. Please check your internet connection and try again."
       });
       
-    } finally {
-      setLoading(false)
     }
   }
 
