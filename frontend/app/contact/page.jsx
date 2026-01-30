@@ -142,7 +142,7 @@ const ContactPage = () => {
         toast("Message sent Successfully", {
           description: "Check your email for confirmation details"
         });
-      }enr
+      }
       
       setValue('firstName', '')
       setValue('lastName', '')
