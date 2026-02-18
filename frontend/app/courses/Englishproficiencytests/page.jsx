@@ -104,7 +104,7 @@ const EnglishProficiencyTestsPage = () => {
         return
       }
 
-      const response = await fetch(`${BASE_URL}/api/enrollment/pricing`, {
+      const response = await fetch(`${BASE_URL}/api/enrollment/proficiency/pricing`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

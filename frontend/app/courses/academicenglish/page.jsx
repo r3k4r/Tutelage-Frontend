@@ -161,6 +161,10 @@ const inPersonClass = {
   })
   const [formLoading, setFormLoading] = useState(false)
 
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
     const courseOptions = [
     'English for Kids and Teens',
     'English for Adults', 

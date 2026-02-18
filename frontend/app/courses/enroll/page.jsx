@@ -35,7 +35,8 @@ const enrollmentSchema = z.object({
     return num >= 5 && num <= 100
   }, 'Age must be between 5 and 100'),
   profession: z.string().min(1, 'Please select your profession'),
-  course: z.string().min(1, 'Please select a course')
+  course: z.string().min(1, 'Please select a course'),
+  classType: z.string().min(1, 'Please select a class type')
 })
 
 // Available courses
@@ -90,7 +91,8 @@ const EnrollPage = () => {
       age: '',
       profession: '',
       course: '',
-      proficiencyType: ''
+      proficiencyType: '',
+      classType: ''
     }
   })
 
@@ -110,7 +112,8 @@ const EnrollPage = () => {
           age: '',
           profession: '',
           course: decodedCourse,
-          proficiencyType: ''
+          proficiencyType: '',
+          classType: ''
         })
         setSelectKey(prev => prev + 1)
       } else {
@@ -126,7 +129,8 @@ const EnrollPage = () => {
             age: '',
             profession: '',
             course: matchedCourse,
-            proficiencyType: ''
+            proficiencyType: '',
+            classType: ''
           })
           setSelectKey(prev => prev + 1)
         }
@@ -390,7 +394,29 @@ const EnrollPage = () => {
                   </div>
 
                   {/* Proficiency Type Selection */}
-                  {
+                  {/* Class Type Selection Row */}
+                <div className="space-y-2">
+                  <Label>Class Type</Label>
+                  <Select 
+                    onValueChange={(value) => setValue('classType', value)} 
+                    defaultValue={watch('classType')}
+                  >
+                    <SelectTrigger className={errors.classType ? 'border-destructive focus:ring-destructive' : ''}>
+                      <SelectValue placeholder='Select Class Type' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Public">Public Classes</SelectItem>
+                      <SelectItem value="Private">Private Classes</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {errors.classType && (
+                    <p className="text-sm text-destructive">{errors.classType.message}</p>
+                  )}
+                </div>
+                </div>
+
+                 {/* Proficiency Type Selection */}
+                {
                   watch('course') === 'English Proficiency Tests' && (                   
                       <div className="space-y-2">
                         <Label>Test Preperation *</Label>
@@ -416,7 +442,6 @@ const EnrollPage = () => {
                       </div>
                    )
                   }
-                </div>
 
                 {/* Submit Button */}
                 <Button 
