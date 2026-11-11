@@ -1,19 +1,9 @@
-'use client'
+import LibraryPage from '@/components/pages/esl-resources/LibraryPage'
+import { ESL_LIBRARIES } from '@/common/data/eslLibraries'
+import { constructMetadata } from '@/common/utils/seo'
 
-import StoryLibraryHero from '@/components/esl-resources/stories/StoryLibraryHero'
-import StoryLibraryDescription from '@/components/esl-resources/stories/StoryLibraryDescription'
-import StoryGrid from '@/components/esl-resources/stories/StoryGrid'
-import CallToAction from '@/components/CallToAction'
+export const metadata = constructMetadata(ESL_LIBRARIES.stories.seo)
 
-const StoryLibraryPage = () => {
-  return (
-    <div className="relative min-h-screen bg-background pt-4">
-      <StoryLibraryHero />
-      <StoryLibraryDescription />
-      <StoryGrid />
-      <CallToAction />
-    </div>
-  )
+export default function Page() {
+  return <LibraryPage slug="stories" />
 }
-
-export default StoryLibraryPage

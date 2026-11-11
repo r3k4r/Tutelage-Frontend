@@ -1,9 +1,9 @@
 'use client'
 
-import ESLResourcesHero from "@/components/esl-resources/ESLResourcesHero"
-import FourEasySteps from "@/components/esl-resources/FourEasySteps"
-import Resources from "@/components/esl-resources/Resources"
-import AICallToAction from "@/components/esl-resources/AICallToAction"
+import ESLResourcesHero from "@/components/pages/esl-resources/ESLResourcesHero"
+import FourEasySteps from "@/components/pages/esl-resources/FourEasySteps"
+import Resources from "@/components/pages/esl-resources/Resources"
+import AICallToAction from "@/components/shared/cta/AICallToAction"
 
 const ESLResourcesPage = () => {
   return (

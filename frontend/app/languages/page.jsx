@@ -1,8 +1,8 @@
 'use client'
 
-import LanguageCTA from "@/components/languages/LanguageCTA"
-import LanguagesHero from "@/components/languages/LanguagesHero"
-import LanguagesShowcase from "@/components/languages/LanguagesShowcase"
+import LanguageCTA from "@/components/pages/languages/LanguageCTA"
+import LanguagesHero from "@/components/pages/languages/LanguagesHero"
+import LanguagesShowcase from "@/components/pages/languages/LanguagesShowcase"
 
 
 

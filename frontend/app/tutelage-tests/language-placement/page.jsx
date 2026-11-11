@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { motion, AnimatePresence } from 'framer-motion'
 import { HelpCircle, ChevronDown, ClipboardList, CreditCard, Video, BarChart3 } from 'lucide-react'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -40,7 +40,7 @@ const LanguagePlacementHero = () => {
     <>
       {/* Header Section */}
       <div className="bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           <div className="flex flex-row items-center justify-between gap-6 py-6">
             <div className="flex-1">
               <h1 className="text-2xl sm:text-4xl lg:text-5xl flex items-center justify-between font-bold text-foreground mb-2">
@@ -52,7 +52,7 @@ const LanguagePlacementHero = () => {
       </div>
 
       {/* Hero Image Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div className="container-page pb-8">
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
           <Image
             src={heroImage}
@@ -67,7 +67,7 @@ const LanguagePlacementHero = () => {
       </div>
 
       {/* Description */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <div className="container-page pb-12">
         <div className="max-w-5xl">
           <p className="text-lg text-muted-foreground leading-relaxed">{description}</p>
         </div>
@@ -432,7 +432,7 @@ const BookingFormSection = () => {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch(`${BASE_URL}/api/enrollment/placement-test`, {
+      const response = await fetch(`${API_URL}/api/enrollment/placement-test`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

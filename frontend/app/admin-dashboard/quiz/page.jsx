@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Settings, FolderTree, FileQuestion, ArrowLeft, Loader2 } from 'lucide-react'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { toast } from 'sonner'
 
 export default function QuizDashboardPage() {
@@ -26,19 +27,19 @@ export default function QuizDashboardPage() {
       setLoading(true)
       
       // Fetch config (total questions allowed + time limit)
-      const configRes = await fetch(`${BASE_URL}/api/admin/quiz/config`, {
+      const configRes = await fetch(`${API_URL}/api/admin/quiz/config`, {
         credentials: 'include'
       })
       const configData = await configRes.json()
       
       // Fetch sections (count sections)
-      const sectionsRes = await fetch(`${BASE_URL}/api/admin/quiz/sections`, {
+      const sectionsRes = await fetch(`${API_URL}/api/admin/quiz/sections`, {
         credentials: 'include'
       })
       const sectionsData = await sectionsRes.json()
       
       // Fetch questions (count total questions in database)
-      const questionsRes = await fetch(`${BASE_URL}/api/admin/quiz/questions?limit=1000`, {
+      const questionsRes = await fetch(`${API_URL}/api/admin/quiz/questions?limit=1000`, {
         credentials: 'include'
       })
       const questionsData = await questionsRes.json()
@@ -94,17 +95,14 @@ export default function QuizDashboardPage() {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      {/* Header with back button */}
-      <div className="mb-8 flex items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Quiz Management</h1>
-          <p className="text-muted-foreground mt-1">Configure and manage all aspects of the placement quiz</p>
-        </div>
-      </div>
+    <div className="w-full space-y-4">
+      <ListingPageHeader
+        title="Quiz Management"
+        description="Configure and manage all aspects of the placement quiz"
+      />
 
       {/* Cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {sections.map((section) => (
           <div
             key={section.href}

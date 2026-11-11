@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
-import BASE_URL from "@/app/config/url"
-import { useAuth } from "@/components/AuthContext"
+import { API_URL } from '@/common/utils/config'
+import { useAuth } from '@/hooks/useAuth'
 import { RefreshCw } from "lucide-react"
 
 export default function LandingAdminPage() {
@@ -21,7 +22,7 @@ export default function LandingAdminPage() {
   const fetchLatest = async () => {
     setLoadingLatest(true)
     try {
-      const res = await fetch(`${BASE_URL}/api/landing-sections/1`, { credentials: "include" })
+      const res = await fetch(`${API_URL}/api/landing-sections/1`, { credentials: "include" })
       const data = await res.json()
       if (data?.success && data?.landingSection) {
         setCurrent(data.landingSection)
@@ -37,7 +38,7 @@ export default function LandingAdminPage() {
   }
 
   useEffect(() => {
-    if (BASE_URL) fetchLatest()
+    if (API_URL) fetchLatest()
     // eslint-disable-next-line
   }, [])
 
@@ -48,7 +49,7 @@ export default function LandingAdminPage() {
     }
     setSaving(true)
     try {
-      const res = await fetch(`${BASE_URL}/api/landing-sections/1`, {
+      const res = await fetch(`${API_URL}/api/landing-sections/1`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -68,13 +69,12 @@ export default function LandingAdminPage() {
   const canEdit = user?.role === "ADMIN" || user?.role === "MAIN_MANAGER"
 
   return (
-    <div className="p-6">
-      <div className="flex flex-row justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-foreground">Landing Section</h1>
-        <Button variant="outline" size="icon" onClick={fetchLatest} disabled={loadingLatest}>
-          <RefreshCw className={`h-4 w-4 ${loadingLatest ? 'animate-spin' : ''}`} />
+    <div className="w-full space-y-4">
+      <ListingPageHeader title="Landing Section">
+        <Button variant="outline" size="icon" onClick={fetchLatest} disabled={loadingLatest} aria-label="Refresh">
+          <RefreshCw className={`size-4 ${loadingLatest ? 'animate-spin' : ''}`} />
         </Button>
-      </div>
+      </ListingPageHeader>
 
       {!loading && !canEdit && (
         <div className="text-muted-foreground text-sm mb-4">You do not have permission to edit this section.</div>

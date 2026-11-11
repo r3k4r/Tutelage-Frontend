@@ -1,19 +1,9 @@
-import CallToAction from "@/components/CallToAction"
-import AudioGrid from "@/components/esl-resources/audios/AudioGrid"
-import AudioLibraryDescription from "@/components/esl-resources/audios/AudioLibraryDescription"
-import AudioLibraryHero from "@/components/esl-resources/audios/AudioLibraryHero"
+import LibraryPage from '@/components/pages/esl-resources/LibraryPage'
+import { ESL_LIBRARIES } from '@/common/data/eslLibraries'
+import { constructMetadata } from '@/common/utils/seo'
 
+export const metadata = constructMetadata(ESL_LIBRARIES.audios.seo)
 
-
-const Page = () => {
-  return (
-    <div className="relative min-h-screen bg-background pt-4">
-        <AudioLibraryHero />
-        <AudioLibraryDescription />
-        <AudioGrid />
-        <CallToAction />
-    </div>
-  )
+export default function Page() {
+  return <LibraryPage slug="audios" />
 }
-
-export default Page

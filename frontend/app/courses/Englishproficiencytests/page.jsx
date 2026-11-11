@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ChevronRight } from 'lucide-react'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 
 const EnglishProficiencyTestsPage = () => {
   const router = useRouter()
@@ -104,7 +104,7 @@ const EnglishProficiencyTestsPage = () => {
         return
       }
 
-      const response = await fetch(`${BASE_URL}/api/enrollment/proficiency/pricing`, {
+      const response = await fetch(`${API_URL}/api/enrollment/proficiency/pricing`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -159,7 +159,7 @@ const EnglishProficiencyTestsPage = () => {
     <div className="relative min-h-screen bg-background pt-4">
       {/* Header Section */}
       <div className="bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           <div className="flex flex-row items-center justify-between gap-6">
             <div className="flex-1">
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2">
@@ -183,7 +183,7 @@ const EnglishProficiencyTestsPage = () => {
       </div>
 
       {/* Hero Image Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="container-page py-6">
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
           <Image
             src={heroImage}
@@ -198,7 +198,7 @@ const EnglishProficiencyTestsPage = () => {
       </div>
 
       {/* Description Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div className="container-page pb-16">
         <div className="max-w-5xl">
           <p className="text-lg text-muted-foreground leading-relaxed">
             {description}
@@ -207,7 +207,7 @@ const EnglishProficiencyTestsPage = () => {
       </div>
 
       {/* Section Title */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <div className="container-page mb-12">
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Choose Your Test Preparation

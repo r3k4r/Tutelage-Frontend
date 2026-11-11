@@ -1,7 +1,7 @@
 'use client'
-import CallToAction from '@/components/CallToAction'
-import TutelageTestsHero from '@/components/tutelageTests/hero'
-import TestsSection from '@/components/tutelageTests/TestsSection'
+import CallToAction from '@/components/shared/cta/CallToAction'
+import TutelageTestsHero from '@/components/pages/tutelage-tests/hero'
+import TestsSection from '@/components/pages/tutelage-tests/TestsSection'
 
 const TutelageTests = () => {
   return (

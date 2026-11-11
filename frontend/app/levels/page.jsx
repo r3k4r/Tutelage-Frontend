@@ -1,8 +1,8 @@
 'use client'
 
-import LevelsHero from '@/components/levels/LevelsHero'
-import LevelsDescription from '@/components/levels/LevelsDescription'
-import LevelsCards from '@/components/levels/LevelsCards'
+import LevelsHero from '@/components/pages/levels/LevelsHero'
+import LevelsDescription from '@/components/pages/levels/LevelsDescription'
+import LevelsCards from '@/components/pages/levels/LevelsCards'
 
 const LevelsMainPage = () => {
   return (

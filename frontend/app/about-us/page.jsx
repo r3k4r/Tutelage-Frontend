@@ -1,9 +1,9 @@
-import AboutUsContent from '@/components/aboutus/AboutUsContent';
-import AboutUsHero from '@/components/aboutus/AboutUsHero';
-import AchievementsSection from '@/components/aboutus/AchievementsSection';
-import { Foundation } from '@/components/aboutus/Foundation';
-import PartnershipsSection from '@/components/aboutus/PartnershipsSection';
-import TutelageAiAbout from '@/components/aboutus/TutelageAiAbout';
+import AboutUsContent from '@/components/pages/about-us/AboutUsContent';
+import AboutUsHero from '@/components/pages/about-us/AboutUsHero';
+import AchievementsSection from '@/components/pages/about-us/AchievementsSection';
+import { Foundation } from '@/components/pages/about-us/Foundation';
+import PartnershipsSection from '@/components/pages/about-us/PartnershipsSection';
+import TutelageAiAbout from '@/components/pages/about-us/TutelageAiAbout';
 
 const AboutUs = () => {
   return (

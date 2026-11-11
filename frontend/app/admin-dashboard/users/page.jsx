@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 import { Button } from "@/components/ui/button"
-import UserTable from "@/components/admin/users/UserTable"
-import CreateUserForm from "@/components/forms/CreateUserForm"
+import UserTable from "@/components/pages/admin/users/UserTable"
+import CreateUserForm from "@/components/form/CreateUserForm"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Plus } from "lucide-react"
-import BASE_URL from "@/app/config/url"
+import { API_URL } from '@/common/utils/config'
 
 export default function Page() {
   const [users, setUsers] = useState([])
@@ -22,7 +23,7 @@ export default function Page() {
   useEffect(() => {
     async function fetchCurrentUser() {
       try {
-        const res = await fetch(`${BASE_URL}/api/auth/me`, { credentials: "include" })
+        const res = await fetch(`${API_URL}/api/auth/me`, { credentials: "include" })
         const data = await res.json()        
         if (data.success) setCurrentUser(data.user)
       } catch {}
@@ -34,7 +35,7 @@ export default function Page() {
   const fetchUsers = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`${BASE_URL}/api/users`, { credentials: "include" })
+      const res = await fetch(`${API_URL}/api/users`, { credentials: "include" })
       const data = await res.json()
       
       if (data.success) setUsers(data.users)
@@ -66,7 +67,7 @@ export default function Page() {
     if (!deleteUser) return
     setLoading(true)
     try {
-      await fetch(`${BASE_URL}/api/users/${deleteUser.id}`, {
+      await fetch(`${API_URL}/api/users/${deleteUser.id}`, {
         method: "DELETE",
         credentials: "include"
       })
@@ -80,7 +81,7 @@ export default function Page() {
   const handleToggleActive = async (user, activate) => {
     setLoading(true)
     try {
-      const url = `${BASE_URL}/api/users/${user.id}/${activate ? "activate" : "deactivate"}`
+      const url = `${API_URL}/api/users/${user.id}/${activate ? "activate" : "deactivate"}`
       await fetch(url, {
         method: "POST",
         credentials: "include"
@@ -92,16 +93,15 @@ export default function Page() {
   }
 
   return (
-    <div className="mx-auto w-full">
-      <div className="flex flex-row justify-between gap-4 mb-4">
-        <h1 className="text-2xl font-bold text-foreground">Users</h1>
+    <div className="w-full space-y-4">
+      <ListingPageHeader title="Users">
         {currentUser?.role === "ADMIN" && (
-          <Button onClick={() => setShowCreate(true)} className="gap-2 ">
-            <Plus className="h-5 w-5" />
+          <Button onClick={() => setShowCreate(true)}>
+            <Plus className="size-4" />
             Create User
           </Button>
         )}
-      </div>
+      </ListingPageHeader>
       <div className="bg-card rounded-lg shadow border border-border overflow-hidden">
         {loading ? (
           <div className="p-8 text-center text-muted-foreground">Loading users...</div>

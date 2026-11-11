@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import {  Clock, Users, Award, ChevronRight, ArrowRight, Baby } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { useTranslation } from 'react-i18next'
 
 const EnglishCourseForKidsAndTeens = () => {
@@ -211,7 +211,7 @@ const EnglishCourseForKidsAndTeens = () => {
         return
       }
 
-      const response = await fetch(`${BASE_URL}/api/enrollment/pricing`, {
+      const response = await fetch(`${API_URL}/api/enrollment/pricing`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ const EnglishCourseForKidsAndTeens = () => {
     <div className="relative min-h-screen bg-background pt-4" dir="ltr">
        {/* Header Section */}
       <div className="bg-background ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           <div className="flex flex-row items-center justify-between gap-6">
             <div className="flex-1">
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2 text-left">
@@ -292,7 +292,7 @@ const EnglishCourseForKidsAndTeens = () => {
       </div>
 
       {/* Hero Image Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="container-page py-6">
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
           <Image
             src={HeroData.heroImage}
@@ -307,7 +307,7 @@ const EnglishCourseForKidsAndTeens = () => {
       </div>
 
        {/* Description Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div className="container-page pb-16">
         <div className="max-w-5xl">
           <p className="text-lg text-muted-foreground leading-relaxed">
             {HeroData.description}
@@ -317,7 +317,7 @@ const EnglishCourseForKidsAndTeens = () => {
 
       {/* Course Information Cards */}
       <div className="bg-muted/20 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           {/* Course Subtitle Section */}
           <div className="text-center mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -372,7 +372,7 @@ const EnglishCourseForKidsAndTeens = () => {
 
       {/* Why We Are The Best Choice Section */}
       <div className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           <div className="text-center mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
               {t('inglishForKids.whyBest.title')}
@@ -464,7 +464,7 @@ const EnglishCourseForKidsAndTeens = () => {
 
       {/* How to Enroll Section */}
       <div className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           <div className="text-center mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6">
               {t('inglishForKids.howToEnroll.title')}

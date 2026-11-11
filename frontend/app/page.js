@@ -1,11 +1,11 @@
-import GlobalTestMastery from '@/components/landing/GlobalTestMastery '
-import HeroSection from '@/components/landing/Hero'
-import ImproveYourEnglishSkills from '@/components/landing/ImproveYourEnglishSkills'
-import OnlineCourses from '@/components/landing/OnlineCourses'
-import Practice from '@/components/landing/Practice'
-import Resources from '@/components/landing/Resources '
-import Tests from '@/components/landing/Tests'
-import TutelageAi from '@/components/landing/TutelageAi'
+import GlobalTestMastery from '@/components/pages/home/GlobalTestMastery'
+import HeroSection from '@/components/pages/home/Hero'
+import ImproveYourEnglishSkills from '@/components/pages/home/ImproveYourEnglishSkills'
+import OnlineCourses from '@/components/pages/home/OnlineCourses'
+import Practice from '@/components/pages/home/Practice'
+import Resources from '@/components/pages/home/Resources'
+import Tests from '@/components/pages/home/Tests'
+import TutelageAi from '@/components/pages/home/TutelageAi'
 
 
 export default async function Home() {

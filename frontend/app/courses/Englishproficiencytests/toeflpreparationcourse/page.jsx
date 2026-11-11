@@ -1,6 +1,6 @@
 'use client'
 
-import SingleProficiencyTest from '@/components/courses/SingleProficiencyTest'
+import SingleProficiencyTest from '@/components/pages/courses/SingleProficiencyTest'
 
 export default function TOEFLPreparationPage() {
   return (

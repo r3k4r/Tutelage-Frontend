@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { Loader2, Clock, CheckCircle2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -77,7 +77,7 @@ export default function FreePracticeTestPage() {
       try {
         setLoading(true)
         
-        const configRes = await fetch(`${BASE_URL}/api/quiz/config`)
+        const configRes = await fetch(`${API_URL}/api/quiz/config`)
         const configData = await configRes.json()
         if (configData.success) {
           const config = configData.data
@@ -88,12 +88,12 @@ export default function FreePracticeTestPage() {
           return
         }
 
-        const sectionsRes = await fetch(`${BASE_URL}/api/admin/quiz/sections`, {
+        const sectionsRes = await fetch(`${API_URL}/api/admin/quiz/sections`, {
           credentials: 'include'
         })
         const sectionsData = await sectionsRes.json()
 
-        const questionsRes = await fetch(`${BASE_URL}/api/quiz/questions`)
+        const questionsRes = await fetch(`${API_URL}/api/quiz/questions`)
         const questionsData = await questionsRes.json()
         
         if (questionsData.success) {
@@ -259,7 +259,7 @@ export default function FreePracticeTestPage() {
     setLevel(calculatedLevel)
     
     try {
-      const response = await fetch(`${BASE_URL}/api/enrollment/testresult`, {
+      const response = await fetch(`${API_URL}/api/enrollment/testresult`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

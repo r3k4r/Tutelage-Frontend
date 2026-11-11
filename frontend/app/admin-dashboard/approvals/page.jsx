@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -8,7 +9,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Separator } from "@/components/ui/separator"
 import { toast } from "sonner"
 import { ChevronDown, ChevronUp, CheckCircle, XCircle, Clock, User, FileText, Plus, Edit, Trash2, AlertTriangle, Check, X, Loader2 } from "lucide-react"
-import BASE_URL from "@/app/config/url"
+import { API_URL } from '@/common/utils/config'
 
 export default function ApprovalsPage() {
   const [approvals, setApprovals] = useState([])
@@ -21,7 +22,7 @@ export default function ApprovalsPage() {
   const fetchApprovals = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`${BASE_URL}/api/approvals?status=PENDING`, { credentials: "include" })
+      const res = await fetch(`${API_URL}/api/approvals?status=PENDING`, { credentials: "include" })
       const data = await res.json()
 
       if (data.success) {
@@ -66,7 +67,7 @@ export default function ApprovalsPage() {
     setActionLoading(id)
     try {
       const endpoint = action === 'approve' ? 'approve' : 'reject'
-      const res = await fetch(`${BASE_URL}/api/approvals/${id}/${endpoint}`, {
+      const res = await fetch(`${API_URL}/api/approvals/${id}/${endpoint}`, {
         method: 'POST',
         credentials: "include"
       })
@@ -168,14 +169,9 @@ export default function ApprovalsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Approval Requests</h1>
-            <p className="text-muted-foreground mt-1">Review and manage content change requests</p>
-          </div>
+    <div className="w-full">
+      <div className="space-y-4">
+        <ListingPageHeader title="Approval Requests" description="Review and manage content change requests">
           <Badge
             variant="secondary"
             className="w-fit px-3 py-1 text-sm font-medium bg-muted text-muted-foreground"
@@ -183,7 +179,7 @@ export default function ApprovalsPage() {
             <Clock className="h-3 w-3 mr-1" />
             {approvals.length} pending
           </Badge>
-        </div>
+        </ListingPageHeader>
 
         {/* Content */}
         {approvals.length === 0 ? (

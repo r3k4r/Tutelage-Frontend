@@ -8,8 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ExternalLink, GraduationCap, FileText, Target, Info, Search, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import BASE_URL from '@/app/config/url'
-import { BASE_URL_PROD } from '@/app/config/url'
+import { API_URL, TUTELAGE_AI_URL } from '@/common/utils/config'
 import { toast } from 'sonner'
 import Image from 'next/image'
 
@@ -63,7 +62,7 @@ const SearchPage = () => {
         params.append('filter', searchFilter)
       }
 
-      const response = await fetch(`${BASE_URL}/api/search?${params}`)
+      const response = await fetch(`${API_URL}/api/search?${params}`)
       const data = await response.json()
 
       if (response.ok) {
@@ -295,7 +294,7 @@ const SearchPage = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Enhance your learning with intelligent assistance, smart recommendations, and real-time guidance.
                 </p>
-                <Link href={BASE_URL_PROD} target="_blank" rel="noopener noreferrer">
+                <Link href={TUTELAGE_AI_URL} target="_blank" rel="noopener noreferrer">
                   <Button className="w-full">
                     Launch AI Platform
                     <ExternalLink className="h-4 w-4 ml-2" />

@@ -1,18 +1,17 @@
 import { Toaster } from "sonner";
 import "./globals.css";
-import { AuthProvider } from "@/components/AuthContext";
-import RefreshTokenProvider from "@/components/AuthHook";
-import Navbar from "@/components/Navbar";
-import NavbarWrapper from "@/components/NavbarWrapper";
-import FooterWrapper from "@/components/FooterWrapper";
-import ThemeProvider from "@/components/ThemeProvider";
-import { Footer } from "@/components/Footer";
+import AuthProvider from "@/components/providers/AuthProvider";
+import Navbar from "@/components/layouts/site/Navbar";
+import NavbarWrapper from "@/components/layouts/site/NavbarWrapper";
+import FooterWrapper from "@/components/layouts/site/FooterWrapper";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import { Footer } from "@/components/layouts/site/Footer";
 import Script from "next/script";
-import { GA_MEASUREMENT_ID } from "@/lib/gtag";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { GA_MEASUREMENT_ID } from "@/common/utils/gtag";
+import GoogleAnalytics from "@/components/app/GoogleAnalytics";
 import { Suspense } from "react";
-import SnowFallWrapper from './../components/SnowFallWrapper';
-import { constructMetadata } from "../hooks/useSeo";
+import SnowFallWrapper from '@/components/layouts/site/SnowFallWrapper';
+import { constructMetadata } from '@/common/utils/seo';
 
 export const metadata = constructMetadata({
   title: "Tutelage | Online English Learning Platform in Kurdistan",
@@ -36,7 +35,7 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className="mt-0 pt-0">
+    <html lang="en" className="mt-0 pt-0" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <script
@@ -67,26 +66,25 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
-          <ThemeProvider>
-            <RefreshTokenProvider>
-              <AuthProvider>
-                <Suspense fallback={null}>
-                  <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
-                </Suspense>
-                <SnowFallWrapper />
-                <NavbarWrapper>
-                  <Suspense fallback={null}>
-                    <Navbar />
-                  </Suspense>
-                </NavbarWrapper>
-                  <div className="relative z-10">{children}</div>
-                <FooterWrapper>
-                  <Footer />
-                </FooterWrapper>
-                <Toaster />
-              </AuthProvider>
-            </RefreshTokenProvider>
-          </ThemeProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <Suspense fallback={null}>
+              <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
+            </Suspense>
+            <SnowFallWrapper />
+            <NavbarWrapper>
+              <Suspense fallback={null}>
+                <Navbar />
+              </Suspense>
+            </NavbarWrapper>
+            {/* overflow-x-clip: slide-in animations start off-screen and must not widen the page on phones */}
+            <div className="relative z-10 overflow-x-clip">{children}</div>
+            <FooterWrapper>
+              <Footer />
+            </FooterWrapper>
+            <Toaster />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

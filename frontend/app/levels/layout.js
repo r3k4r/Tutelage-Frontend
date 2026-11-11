@@ -1,4 +1,4 @@
-import { constructMetadata } from "@/hooks/useSeo";
+import { constructMetadata } from '@/common/utils/seo';
 import { Suspense } from "react";
 
 export const metadata = constructMetadata({

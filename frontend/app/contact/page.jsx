@@ -13,8 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ExternalLink, GraduationCap, FileText, Target, Info } from 'lucide-react'
 import Link from 'next/link'
-import BASE_URL from '@/app/config/url'
-import { BASE_URL_PROD } from '@/app/config/url'
+import { API_URL, TUTELAGE_AI_URL } from '@/common/utils/config'
 import { toast } from 'sonner'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
@@ -117,7 +116,7 @@ const ContactPage = () => {
   // Form submission handler
   const onSubmit = async (data) => {
     try {     
-      const response = await fetch(`${BASE_URL}/api/enrollment/contact`, {
+      const response = await fetch(`${API_URL}/api/enrollment/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -329,7 +328,7 @@ const ContactPage = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Enhance your learning with intelligent assistance, smart recommendations, and real-time guidance.
                 </p>
-                <Link href={BASE_URL_PROD} target="_blank" rel="noopener noreferrer">
+                <Link href={TUTELAGE_AI_URL} target="_blank" rel="noopener noreferrer">
                   <Button className="w-full">
                     Launch AI Platform
                     <ExternalLink className="h-4 w-4 ml-2" />

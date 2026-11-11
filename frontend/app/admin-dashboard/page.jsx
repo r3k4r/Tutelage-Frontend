@@ -1,13 +1,14 @@
-import DashboardOverview from '@/components/admin/MainPage/DashboardOverview';
-import DashboardUsersTable from '@/components/admin/MainPage/DashboardUsersTable';
-import AnalyticsChart from '@/components/admin/MainPage/AnalyticsChart';
+import DashboardOverview from '@/components/pages/admin/dashboard/DashboardOverview';
+import DashboardUsersTable from '@/components/pages/admin/dashboard/DashboardUsersTable';
+import AnalyticsChart from '@/components/pages/admin/dashboard/AnalyticsChart';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Suspense } from 'react';
+import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 
 const Page = () => {
   return (
-    <div className="space-y-6">
-      <h1 className="text-xl font-semibold md:text-2xl">Dashboard Overview</h1>
+    <div className="space-y-4">
+      <ListingPageHeader title="Dashboard Overview" />
       
       <DashboardOverview />
 

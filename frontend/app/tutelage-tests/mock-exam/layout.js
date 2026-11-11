@@ -1,4 +1,4 @@
-import { constructMetadata } from "@/hooks/useSeo";
+import { constructMetadata } from '@/common/utils/seo';
 
 export const metadata = constructMetadata({
   title: "Mock Exam | Tutelage Tests",

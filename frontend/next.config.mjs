@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: false,
-  // Revert to default `.next` dir; avoids OneDrive lock on `build/trace`
-  distDir: '.next',
+  // NEXT_DIST_DIR lets a verification build run beside `next dev` without clobbering its `.next`
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
     remotePatterns: [
       {

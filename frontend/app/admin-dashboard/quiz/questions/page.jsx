@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { Loader2, Plus, ArrowLeft, RefreshCw } from 'lucide-react'
-import QuestionTable from '@/components/admin/quiz/QuestionTable'
-import QuestionFormModal from '@/components/admin/quiz/QuestionFormModal'
+import QuestionTable from '@/components/pages/admin/quiz/QuestionTable'
+import QuestionFormModal from '@/components/pages/admin/quiz/QuestionFormModal'
 
 export default function QuizQuestionsPage() {
   const router = useRouter()
@@ -29,7 +29,7 @@ export default function QuizQuestionsPage() {
 
   const fetchSections = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/api/admin/quiz/sections`, {
+      const res = await fetch(`${API_URL}/api/admin/quiz/sections`, {
         credentials: 'include'
       })
       const data = await res.json()
@@ -44,7 +44,7 @@ export default function QuizQuestionsPage() {
   const fetchQuestions = async () => {
     try {
       setLoading(true)
-      let url = `${BASE_URL}/api/admin/quiz/questions?limit=100`
+      let url = `${API_URL}/api/admin/quiz/questions?limit=100`
       if (filterSection !== 'all') url += `&sectionId=${filterSection}`
       if (filterLevel !== 'all') url += `&level=${filterLevel}`
 
@@ -82,7 +82,7 @@ export default function QuizQuestionsPage() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${BASE_URL}/api/admin/quiz/questions/${id}`, {
+      const res = await fetch(`${API_URL}/api/admin/quiz/questions/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       })

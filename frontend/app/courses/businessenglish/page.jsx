@@ -12,7 +12,7 @@ import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 
 
 const BusinessEnglishPage = () => {
@@ -242,7 +242,7 @@ const inPersonClass = {
         return
       }
 
-      const response = await fetch(`${BASE_URL}/api/enrollment/pricing`, {
+      const response = await fetch(`${API_URL}/api/enrollment/pricing`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -297,7 +297,7 @@ const inPersonClass = {
       <div className="relative min-h-screen bg-background pt-4" dir="ltr">
         {/* Header Section */}
         <div className="bg-background">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container-page">
             <div className="flex flex-row items-center justify-between gap-6">
               <div className="flex-1">
                 <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-2 text-left">
@@ -324,7 +324,7 @@ const inPersonClass = {
         </div>
 
         {/* Hero Image Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="container-page py-6">
           <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
             <Image
               src={heroImage}
@@ -339,7 +339,7 @@ const inPersonClass = {
         </div>
 
         {/* Description Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="container-page pb-16">
           <div className="max-w-5xl">
             <p className="text-lg text-muted-foreground leading-relaxed">
               {description}
@@ -349,7 +349,7 @@ const inPersonClass = {
 
         {/* Business English Levels Section */}
         <div className="py-10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container-page">
             <div className="text-center mb-16">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Business English Levels
@@ -410,7 +410,7 @@ const inPersonClass = {
 
         {/* course infomation cards ( triple cards ) */}
         <div className="pb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container-page">
             {/* Class Type Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {classTypes.map((classType, index) => (
@@ -422,7 +422,7 @@ const inPersonClass = {
 
         {/* Finish Our Course and You Can Section */}
         <div className="pb-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="container-page">
             {/* Title */}
             <div className="text-center mb-16">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">

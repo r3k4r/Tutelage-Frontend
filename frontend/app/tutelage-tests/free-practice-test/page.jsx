@@ -6,7 +6,7 @@ import Link from "next/link"
 import { CreditCard, HelpCircle, Zap, Clock, ChevronDown } from 'lucide-react' 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import BASE_URL from "@/app/config/url"
+import { API_URL } from '@/common/utils/config'
 
 
 const FreePracticeTest = () => {
@@ -15,17 +15,15 @@ const FreePracticeTest = () => {
     totalQuestions: 0,
     timeLimitMinutes: 0
   })
-  console.log('stats:', stats);
   
 
   const fetchQuizStats = async () => {
     setLoading(true)
     try{
-      const configRes = await fetch(`${BASE_URL}/api/admin/quiz/config`, {
+      const configRes = await fetch(`${API_URL}/api/admin/quiz/config`, {
         credentials: 'include'
       })
       const configData = await configRes.json()
-      console.log('configData:', configData);
       setStats({
         totalQuestions: configData.data.totalQuestions,
         timeLimitMinutes: configData.data.timeLimitMinutes
@@ -58,7 +56,6 @@ export default FreePracticeTest
 
 
 const FreeTestHero = ({ stats }) => {
-  console.log('stats in hero:', stats);
   const title = "Discover Your English Level Online – Free Test"
   const heroImage = "/tutelagetest/freepractice/free_1.avif"
   const description = `Our free ${stats.timeLimitMinutes}-minutes English practice test helps you identify your current level of English proficiency. It assesses grammar, vocabulary, and comprehension to provide an accurate overview of your strengths and areas for development.`
@@ -66,7 +63,7 @@ const FreeTestHero = ({ stats }) => {
     <>
       {/* Header Section */}
       <div className="bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-page">
           <div className="flex flex-row items-center justify-between gap-6 py-6">
             <div className="flex-1">
               <h1 className="text-2xl sm:text-4xl lg:text-5xl flex items-center justify-between font-bold text-foreground mb-2">
@@ -83,7 +80,7 @@ const FreeTestHero = ({ stats }) => {
       </div>
 
       {/* Hero Image Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+      <div className="container-page pb-8">
         <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden shadow-lg">
           <Image
             src={heroImage}
@@ -98,7 +95,7 @@ const FreeTestHero = ({ stats }) => {
       </div>
 
       {/* Description */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+      <div className="container-page pb-12">
         <div className="max-w-5xl">
           <p className="text-lg text-muted-foreground leading-relaxed">{description}</p>
         </div>
@@ -121,7 +118,7 @@ function DiscoverSection({ stats }) {
 
   return (
     <section className="py-12 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-page">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           
           {/* --- MOBILE IMAGE (single big image on top) --- */}
@@ -214,7 +211,7 @@ function TestInstructions({ stats }) {
 
   return (
     <section className="py-12 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-page">
         {/* Two-column layout: left = test overview, right = instructions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left side */}
@@ -364,7 +361,7 @@ function FAQSection({ stats }) {
 const CallToAction = ({ stats }) => {
   return (
     <section className="py-16 bg-primary/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-page">
         <div className="text-left">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
              Ready to boost your English skills?

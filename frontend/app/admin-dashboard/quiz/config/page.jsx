@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { Loader2, Save, ArrowLeft, RefreshCw } from 'lucide-react'
 
 const configSchema = z.object({
@@ -43,7 +43,7 @@ export default function QuizConfigPage() {
   const fetchConfig = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${BASE_URL}/api/admin/quiz/config`, {
+      const res = await fetch(`${API_URL}/api/admin/quiz/config`, {
         credentials: 'include'
       })
       const data = await res.json()
@@ -70,7 +70,7 @@ export default function QuizConfigPage() {
   const onSubmit = async (values) => {
     try {
       setSaving(true)
-      const res = await fetch(`${BASE_URL}/api/admin/quiz/config`, {
+      const res = await fetch(`${API_URL}/api/admin/quiz/config`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

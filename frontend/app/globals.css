@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 
 @font-face {
@@ -46,28 +45,20 @@
 }
 
 * {
-  font-family: 'manrope';
+  font-family: 'manrope', sans-serif;
 }
 
-/* :root{
-  --main : #fec016;
-  --onMain : #ffffff;
-  --secondary : #111111;
-  --onSecondary : #ffffff;
-  --accent : #f59e0b;
-  --onAccent : #ffffff;
-  --muted : #1e1e1e;
-  --onMuted : #a1a1aa;
-  --border : #2c2c2c;
-  --input : #3c3c3c;
-  --ring : #525252;
-} */
 html, body {
   margin: 0;
   padding: 0;
 }
-*{
+html {
   scroll-behavior: smooth;
+}
+
+/* Page content width. Use this instead of re-typing max-w + padding on every section. */
+@utility container-page {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
 
@@ -167,6 +158,23 @@ html, body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Tailwind v4 dropped the pointer cursor on buttons; every clickable control gets it back. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [role="tab"],
+  [role="option"],
+  [role="menuitem"],
+  [role="checkbox"],
+  [role="switch"],
+  label[for],
+  summary,
+  select {
+    cursor: pointer;
+  }
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
   }
 }
 

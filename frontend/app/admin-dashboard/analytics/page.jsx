@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 import { Button } from "@/components/ui/button"
 import { 
   BarChart, 
@@ -20,7 +21,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { jsPDF } from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import BASE_URL from '/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import AnalyticsPageSkeleton from "@/components/skeletons/AnalyticsPageSkeleton"
 
 
@@ -55,14 +56,14 @@ const AnalyticsPage = () => {
         const chartDays = isAllTime ? 365 : Math.min(isRealtime ? 7 : (typeof dateRange === 'number' ? dateRange : 30), 30)
         
         const [statsRes, dailyRes, pagesRes, devicesRes, countriesRes] = await Promise.all([
-          fetch(`${BASE_URL}/api/website-analytics/website-stats?days=${daysParam}`),
-          fetch(`${BASE_URL}/api/website-analytics/daily-stats?days=${chartDays}`),
-          fetch(`${BASE_URL}/api/website-analytics/top-pages?limit=5&days=${daysParam}`),
-          fetch(`${BASE_URL}/api/website-analytics/device-stats?days=${daysParam}`),
-          fetch(`${BASE_URL}/api/website-analytics/country-stats?limit=5&days=${daysParam}`)
+          fetch(`${API_URL}/api/website-analytics/website-stats?days=${daysParam}`),
+          fetch(`${API_URL}/api/website-analytics/daily-stats?days=${chartDays}`),
+          fetch(`${API_URL}/api/website-analytics/top-pages?limit=5&days=${daysParam}`),
+          fetch(`${API_URL}/api/website-analytics/device-stats?days=${daysParam}`),
+          fetch(`${API_URL}/api/website-analytics/country-stats?limit=5&days=${daysParam}`)
         ])
 
-        if (!statsRes.ok) console.log('failed to fetch stats');
+        if (!statsRes.ok) console.error('failed to fetch stats');
         
 
         const [statsData, dailyDataRes, pagesData, devicesData, countriesData] = await Promise.all([
@@ -324,22 +325,10 @@ const AnalyticsPage = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <Link href="/admin-dashboard">
-            <Button variant="outline" size="icon">
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold">Analytics Dashboard</h1>
-            <p className="text-sm text-muted-foreground">
-              Comprehensive website traffic and visitor insights
-            </p>
-          </div>
-        </div>
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <ListingPageHeader title="Analytics Dashboard" description="Comprehensive website traffic and visitor insights" />
         <div className="flex sm:max-md:flex-row lg:flex-row flex-col items-center justify-end sm:max-md:justify-center lg:justify-center gap-2">
           {/* Date Range Picker */}
           <div className="relative">

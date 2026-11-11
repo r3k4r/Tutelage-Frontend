@@ -4,10 +4,10 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import BASE_URL from '@/app/config/url'
+import { API_URL } from '@/common/utils/config'
 import { Loader2, Plus, ArrowLeft, RefreshCw } from 'lucide-react'
-import SectionTable from '@/components/admin/quiz/SectionTable'
-import SectionFormModal from '@/components/admin/quiz/SectionFormModal'
+import SectionTable from '@/components/pages/admin/quiz/SectionTable'
+import SectionFormModal from '@/components/pages/admin/quiz/SectionFormModal'
 
 export default function QuizSectionsPage() {
   const router = useRouter()
@@ -24,7 +24,7 @@ export default function QuizSectionsPage() {
   const fetchSections = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${BASE_URL}/api/admin/quiz/sections`, {
+      const res = await fetch(`${API_URL}/api/admin/quiz/sections`, {
         credentials: 'include'
       })
       const data = await res.json()
@@ -60,7 +60,7 @@ export default function QuizSectionsPage() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${BASE_URL}/api/admin/quiz/sections/${id}`, {
+      const res = await fetch(`${API_URL}/api/admin/quiz/sections/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       })
