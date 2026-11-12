@@ -9,7 +9,7 @@ export default function UserTable({ users, currentUserRole, onEdit, onDelete, on
     <div className="overflow-x-auto w-full">
       <Table>
         <TableHeader>
-          <TableRow className={"hover:bg-white transition-colors"}>
+          <TableRow className="hover:bg-transparent">
             <TableHead className="w-8 text-xs">#</TableHead>
             <TableHead className="text-xs">Name</TableHead>
             <TableHead className="text-xs">Email</TableHead>
@@ -21,7 +21,7 @@ export default function UserTable({ users, currentUserRole, onEdit, onDelete, on
         </TableHeader>
         <TableBody>
           {users.map((user, idx) => (
-            <TableRow key={user.id} className="hover:bg-accent/10 transition-colors">
+            <TableRow key={user.id} className="transition-colors hover:bg-muted/50">
               <TableCell className="py-2 text-xs">{idx + 1}</TableCell>
               <TableCell className="py-2 flex items-center gap-2 text-xs">
                 {user.image && (

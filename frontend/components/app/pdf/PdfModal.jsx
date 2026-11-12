@@ -70,7 +70,7 @@ export default function PdfModal({
                   Open in new tab
                 </a>
                 <button 
-                  className="p-2 hover:bg-accent rounded transition-colors" 
+                  className="rounded p-2 transition-colors hover:bg-primary/10 hover:text-primary" 
                   onClick={onClose}
                   aria-label="Close"
                   type="button"

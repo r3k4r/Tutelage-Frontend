@@ -88,46 +88,27 @@ export default function FreePracticeTestPage() {
           return
         }
 
-        const sectionsRes = await fetch(`${API_URL}/api/admin/quiz/sections`, {
-          credentials: 'include'
-        })
-        const sectionsData = await sectionsRes.json()
-
         const questionsRes = await fetch(`${API_URL}/api/quiz/questions`)
         const questionsData = await questionsRes.json()
-        
+
         if (questionsData.success) {
           const questions = questionsData.data
           setQuizQuestions(questions)
-          
-          if (sectionsData.success && Array.isArray(sectionsData.data)) {
-            let questionOffset = 0
-            const sectionArray = sectionsData.data
-              .filter(s => s.isActive)
-              .sort((a, b) => a.displayOrder - b.displayOrder)
-              .map((s, idx) => {
-                const limit = s.questionCount || 0
-                const section = {
-                  number: idx + 1,
-                  name: s.name,
-                  slug: s.slug,
-                  questionCount: limit,
-                  startIndex: questionOffset,
-                  endIndex: questionOffset + limit - 1,
-                  isCompleted: false
-                }
-                questionOffset += limit
-                return section
-              })
-            
-            setSections(sectionArray)
-            
-            const initialProgress = {}
-            sectionArray.forEach((s, idx) => {
-              initialProgress[idx] = { completed: false }
-            })
-            setSectionProgress(initialProgress)
-          }
+
+          // The API returns questions grouped by section in display order; a section that is
+          // short of questions just gets a shorter range.
+          const sectionArray = []
+          questions.forEach((q, i) => {
+            const last = sectionArray[sectionArray.length - 1]
+            if (last && last.id === q.sectionId) {
+              last.endIndex = i
+              last.questionCount++
+            } else {
+              sectionArray.push({ id: q.sectionId, number: sectionArray.length + 1, name: q.sectionName, questionCount: 1, startIndex: i, endIndex: i, isCompleted: false })
+            }
+          })
+          setSections(sectionArray)
+          setSectionProgress(Object.fromEntries(sectionArray.map((_, idx) => [idx, { completed: false }])))
         } else {
           toast.error('Failed to load quiz questions.')
         }

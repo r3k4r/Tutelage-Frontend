@@ -65,7 +65,7 @@ export const Footer = () => {
 
   return (
     <footer className="bg-black text-white relative overflow-hidden border-t border-border">
-      <div className="container-page relative">
+      <div className="container-wide relative">
         {/* Top Section - Links */}
         <div className="py-14 sm:py-20">
           <div className="flex flex-col xl:flex-row gap-8 xl:gap-12">

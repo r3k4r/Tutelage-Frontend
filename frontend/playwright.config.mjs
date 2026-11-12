@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test'
+﻿import { defineConfig, devices } from '@playwright/test'
 import { existsSync } from 'node:fs'
 
 // Optional local overrides (E2E_ADMIN_EMAIL, E2E_ADMIN_PASSWORD, E2E_BASE_URL, ...)
@@ -12,7 +12,7 @@ export default defineConfig({
   outputDir: './e2e/.results',
   fullyParallel: true,
   // `next dev` compiles each route on first hit; too many parallel cold hits time out
-  workers: process.env.CI ? 2 : 4,
+  workers: 2, // more starves next dev (and the machine) — it compiles each page on first hit
   retries: process.env.CI ? 2 : 0,
   timeout: 60_000,
   expect: { timeout: 15_000 },

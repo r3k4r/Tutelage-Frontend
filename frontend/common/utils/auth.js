@@ -22,6 +22,19 @@ export async function refreshTokens() {
   return res.ok
 }
 
+/** Ends the session server-side and drops the local token copies (even if the request fails). */
+export async function logout() {
+  const res = await api('/api/auth/logout', { method: 'POST' })
+  for (const key of TOKEN_KEYS) {
+    try {
+      localStorage.removeItem(key)
+    } catch {
+      // storage unavailable
+    }
+  }
+  return res
+}
+
 /** Keeps the cookie-less fallback copies of the tokens in localStorage. */
 export function storeTokens(data) {
   for (const key of TOKEN_KEYS) {

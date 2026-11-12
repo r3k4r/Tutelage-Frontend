@@ -95,7 +95,7 @@ const LoginForm = () => {
                       <button
                         type="button"
                         tabIndex={-1}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-500 hover:text-gray-700"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground transition-colors hover:text-foreground"
                         onClick={() => setShowPassword((v) => !v)}
                         aria-label={showPassword ? "Hide password" : "Show password"}
                       >

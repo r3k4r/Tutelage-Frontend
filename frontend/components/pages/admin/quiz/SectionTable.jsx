@@ -39,7 +39,6 @@ export default function SectionTable({ sections, onEdit, onDelete }) {
             <thead className="bg-muted border-b border-border">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Name</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Slug</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Quiz Limit</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Stored Questions</th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-foreground">Display Order</th>
@@ -50,7 +49,7 @@ export default function SectionTable({ sections, onEdit, onDelete }) {
             <tbody className="divide-y divide-border">
               {sections.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="px-4 py-8 text-center text-muted-foreground">
+                  <td colSpan="6"className="px-4 py-8 text-center text-muted-foreground">
                     No sections found. Create your first section to get started.
                   </td>
                 </tr>
@@ -58,8 +57,14 @@ export default function SectionTable({ sections, onEdit, onDelete }) {
                 sections.map((section) => (
                   <tr key={section.id} className="hover:bg-muted/50 transition-colors">
                     <td className="px-4 py-3 text-sm text-foreground font-medium">{section.name}</td>
-                    <td className="px-4 py-3 text-sm text-muted-foreground">{section.slug}</td>
-                    <td className="px-4 py-3 text-sm text-primary font-semibold">{section.questionCount}</td>
+                    <td className="px-4 py-3 text-sm">
+                      <span className="font-semibold text-primary">{section.questionCount}</span>
+                      <span className="block text-xs text-muted-foreground">
+                        {section.levelDistribution
+                          ? Object.entries(section.levelDistribution).sort(([a], [b]) => a.localeCompare(b)).map(([l, n]) => `${n} ${l}`).join(' · ')
+                          : 'Any level'}
+                      </span>
+                    </td>
                     <td className="px-4 py-3 text-sm text-muted-foreground">
                       {section.currentQuestionCount || 0}
                     </td>

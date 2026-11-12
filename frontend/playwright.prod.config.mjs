@@ -1,4 +1,4 @@
-// E2E against a production build on :3100 — stable under parallel load and independent of `next dev`.
+﻿// E2E against a production build on :3100 â€” stable under parallel load and independent of `next dev`.
 // The build goes to .next-e2e so it never touches the dev server's .next.
 import { defineConfig } from '@playwright/test'
 import base from './playwright.config.mjs'
@@ -7,7 +7,7 @@ const URL = 'http://localhost:3100'
 
 export default defineConfig({
   ...base,
-  workers: 6,
+  workers: 3, // 6 browsers + next start pegged the dev machine
   // A card click occasionally fails to commit its navigation under 6 parallel workers (not reproducible
   // alone); one retry keeps the suite usable and the report still lists such tests as "flaky".
   retries: 1,

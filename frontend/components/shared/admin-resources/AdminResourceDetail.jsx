@@ -2,11 +2,12 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft, Edit, Trash2 } from 'lucide-react'
+import { Edit, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import ConfirmDialog from '@/components/app/dialogs/ConfirmDialog'
+import PageHeader from '@/components/layouts/admin/PageHeader'
 import PdfButton from '@/components/app/pdf/PdfButton'
 import PdfModal from '@/components/app/pdf/PdfModal'
 import CompactAudioPlayer from '@/components/app/players/CompactAudioPlayer'
@@ -21,12 +22,12 @@ import { RESOURCES } from '@/common/constants/resources'
  * Admin view of one item of any RESOURCES type, with edit and delete.
  * Sections appear only for the fields the item has, so one view serves every type.
  */
-export default function AdminResourceDetail({ resource, slug, label, Form }) {
+export default function AdminResourceDetail({ resource, slug, title, label }) {
   const { id } = useParams()
   const router = useRouter()
-  const { data: item, loading, notFound, reload } = useResource(RESOURCES[resource].item, id)
-  const { save, remove, busy } = useResourceMutations(resource, label)
-  const [dialog, setDialog] = useState(null) // 'edit' | 'delete' | null
+  const { data: item, loading, notFound } = useResource(RESOURCES[resource].item, id)
+  const { remove, busy } = useResourceMutations(resource, label)
+  const [dialog, setDialog] = useState(null) // 'delete' | null
   const pdf = usePdfModal()
   const listHref = `/admin-dashboard/${slug}`
 
@@ -45,36 +46,24 @@ export default function AdminResourceDetail({ resource, slug, label, Form }) {
   const levels = [].concat(item.level ?? []).filter(Boolean)
   const tasks = item.taskPdfs ?? item.tasks ?? []
 
-  const submit = async (values) => {
-    if (!(await save(values, item.id))) return
-    setDialog(null)
-    reload()
-  }
-
   const confirmDelete = async () => {
     if (await remove(item.id)) router.push(listHref)
   }
 
   return (
     <div className="w-full space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <Button variant="outline" onClick={() => router.push(listHref)}>
-          <ArrowLeft className="size-4" />
-          Back
-        </Button>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setDialog('edit')}>
+      <PageHeader crumbs={[{ label: title, href: listHref }, { label: item.title }]} backHref={listHref}>
+        <Button asChild variant="outline">
+          <Link href={`${listHref}/${item.id}/edit`}>
             <Edit className="size-4" />
             Edit
-          </Button>
-          <Button variant="destructive" onClick={() => setDialog('delete')}>
-            <Trash2 className="size-4" />
-            Delete
-          </Button>
-        </div>
-      </div>
-
-      <h1 className="break-words text-3xl font-bold text-foreground">{item.title}</h1>
+          </Link>
+        </Button>
+        <Button variant="destructive" onClick={() => setDialog('delete')}>
+          <Trash2 className="size-4" />
+          Delete
+        </Button>
+      </PageHeader>
 
       {embed ? (
         <div className="relative aspect-video overflow-hidden rounded-lg">
@@ -153,15 +142,6 @@ export default function AdminResourceDetail({ resource, slug, label, Form }) {
           </dl>
         </Section>
       )}
-
-      <Dialog open={dialog === 'edit'} onOpenChange={(open) => !open && setDialog(null)}>
-        <DialogContent className="max-h-[90dvh] w-full max-w-md overflow-y-auto" aria-describedby={undefined}>
-          <DialogHeader>
-            <DialogTitle>Edit {label}</DialogTitle>
-          </DialogHeader>
-          <Form mode="edit" initialValues={item} onSuccess={submit} onCancel={() => setDialog(null)} />
-        </DialogContent>
-      </Dialog>
 
       <ConfirmDialog
         open={dialog === 'delete'}

@@ -61,8 +61,19 @@ html {
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
+/* Navbar and footer: wider than the page content (1520px vs 1280px), like visa-advisers-uae. */
+@utility container-wide {
+  @apply mx-auto w-full max-w-[95rem] px-4 sm:px-6 lg:px-8;
+}
+
 
 @custom-variant dark (&:is(.dark *));
+
+/* Extra breakpoint for wide dashboards (1680px). In rem so it sorts after Tailwind's own breakpoints:
+   an arbitrary min-[1680px] is emitted before lg: and loses to it. */
+@theme {
+  --breakpoint-3xl: 105rem;
+}
 
 :root {
   /* Updated color palette for Tutelage theme */
@@ -84,7 +95,7 @@ html {
   --destructive-foreground: oklch(100% 0.00011 271.152);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: #f59e0b; /* = primary, so focus rings match in both themes */
   --radius: 0.625rem;
   /* ...existing code... */
 }

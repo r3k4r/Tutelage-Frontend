@@ -49,8 +49,12 @@ Modeled on the sibling `visa-advisers-uae-dashboard` (Vue), adapted to Next — 
 
 - The admin shell is one screen tall (`h-dvh`); the body never scrolls. Content is full width with `p-2 md:p-4` — no `max-w-*` / `mx-auto` wrappers and no extra page padding.
 - Every admin page starts with `ListingPageHeader` (title, optional description, actions on the right).
-- List pages are `flex h-full flex-col gap-4`: header and toolbar `shrink-0`, the grid in a `min-h-0 flex-1 overflow-y-auto` box, `Pagination` last (it right-aligns itself). Admin lists show 6 per page in a 1 / 2 / 3 / 6-column grid so rows are always full.
+- List pages are `flex h-full flex-col gap-4`: header and toolbar `shrink-0`, the grid in a `min-h-0 flex-1 overflow-y-auto` box, `Pagination` last (it right-aligns itself). Admin lists show 6 per page in a 1 / 2 / 3 / 6-column grid (`sm` / `lg` / `3xl` = 1680px, defined in `globals.css`) so rows are always full.
 - Spacing scale: `gap-4` between blocks and grid items, `p-4` inside cards, `rounded-lg border bg-card` for cards, `size-4` icons in buttons. Destructive confirms use `ConfirmDialog`.
+- **Interaction colors (site and admin, per `docs/brand/brand-theme.md`):** hover/focus on anything clickable = `bg-primary/10 text-primary` (icons follow); selected/active = `bg-primary text-primary-foreground`; focus ring = `--ring` (= primary in both themes); table rows = `hover:bg-muted/50`; primary buttons darken with `hover:bg-primary/90`. `accent` is the logo yellow for highlights only — never a hover. No hard-coded `gray-*` / `white` / `yellow-*`; use the tokens (`bg-popover`, `text-muted-foreground`, ...). The shadcn primitives in `components/ui/` already follow this.
+- **Forms:** a form with more than ~4 fields is a page, never a dialog — `<slug>/new` and `<slug>/<id>/edit` share one component. Build it from `components/form/FormLayout.jsx`: `FormPage` (header + scrolling body + sticky `FormActions`), `FormSection` cards (main column `xl:col-span-2`, side column for media/classification/files), `FormField` (label, hint, inline error). An edit page whose record failed to load shows `LoadError`, never an empty form. Content types use the config-driven `ResourceForm` (`common/constants/resource-forms.js`); only that config's fields are submitted, so a field the form lacks is never blanked.
+- **Dialogs** are for confirms and small forms (≤ ~4 fields): `<DialogContent size="sm|md|lg">` (confirm / small form / preview); long content goes in `<DialogBody>` so the header and footer stay visible. No hand-set `max-w-*` on dialogs.
+- **Dates:** `components/app/DateRangePicker.jsx` (presets + react-day-picker range calendar in a Popover); `components/ui/calendar.jsx` is the token-styled calendar to build any other date input on. Never `<input type="date">`.
 - Buttons and other controls get `cursor: pointer` globally (`globals.css`, Tailwind v4 dropped it); don't add `cursor-pointer` per element.
 
 ## Backend calls
@@ -65,7 +69,7 @@ Auth: `components/providers/AuthProvider.jsx` refreshes tokens, then loads `/api
 
 - Public lists: `<ResourceGrid resource=… hrefBase=… level=… />` → `usePaginatedList` → `<Pagination>`. The page lives in the URL (`?page=N`); changing filters resets to page 1. Components using `useSearchParams` must sit in `<Suspense>` (ResourceGrid/AdminResourcePage already wrap themselves).
 - Public detail: `<ResourceDetail resource=… kind="video|audio|text|story" backHref=… />`.
-- Admin: `<AdminResourcePage>` (list + create/edit/delete) and `<AdminResourceDetail>`, both using `useResourceMutations`, which builds multipart bodies with `toResourceFormData` (`pdf`→`pdfFile`, `taskPdfs`, `deletedTaskPdfIds` as JSON).
+- Admin: `<AdminResourcePage>` (list + delete), `<AdminResourceDetail>` and `<AdminResourceFormPage>` (create/edit pages), all using `useResourceMutations`, which builds multipart bodies with `toResourceFormData` (`pdf`→`pdfFile`, `taskPdfs`, `deletedTaskPdfIds` as JSON).
 
 Paginated responses come in two shapes — `{ data: { <key>: [], pagination } }` and, for esl-audios/esl-videos, `{ data: [], pagination }`. `readPage()` in `common/utils/pagination.js` handles both; don't parse lists by hand. Adding a content type = a RESOURCES entry + thin pages.
 
@@ -73,7 +77,11 @@ Skills (`/skills/[skill]/[level]/[id]`) and levels (`/levels/[level]`) are dynam
 
 ## Layout & responsiveness
 
-Wrap page content in `container-page` (defined in `globals.css`: `max-w-7xl` + responsive side padding). Don't re-type `max-w-7xl mx-auto px-…` — header, content and footer must share the same edges (`e2e/layout.spec.js` checks this at 1920px). Only one `h1` per page; the navbar and footer contain none. Every page must not scroll sideways at phone width (checked by `e2e/smoke.spec.js` on the mobile project).
+Wrap page content in `container-page` (defined in `globals.css`: `max-w-7xl` + responsive side padding). Don't re-type `max-w-7xl mx-auto px-…`. The navbar and footer use the wider `container-wide` (95rem = 1520px, as in visa-advisers-uae). `e2e/layout.spec.js` checks both columns at 1920px. Only one `h1` per page; the navbar and footer contain none. Every page must not scroll sideways at phone width (checked by `e2e/smoke.spec.js` on the mobile project).
+
+## Placement quiz
+
+Only sections are ordered (`displayOrder`). Each section has a `questionCount` and an optional `levelDistribution` (`{"A1":3,"A2":3,"B1":4}`). It must add up to `questionCount`; `null` means any level. `GET /api/quiz/questions` picks random questions per level and returns them easy to hard, grouped by section. The public quiz page builds its section ranges from each question's `sectionId`. Split rules live in the backend's `utils/quizLevels.js`.
 
 ## Routing & access control
 

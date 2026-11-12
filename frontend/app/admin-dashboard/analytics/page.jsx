@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
+import DateRangePicker, { rangeDays, rangeLabel } from '@/components/app/DateRangePicker'
 import { Button } from "@/components/ui/button"
 import { 
   BarChart, 
@@ -34,7 +35,6 @@ const AnalyticsPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [dateRange, setDateRange] = useState('realtime') // Default to real-time
-  const [showDateMenu, setShowDateMenu] = useState(false)
 
   const dateRangeOptions = [
     { label: 'Real-time', value: 'realtime' },
@@ -49,18 +49,22 @@ const AnalyticsPage = () => {
     const fetchAllAnalytics = async () => {
       try {
         setLoading(true)
+        setError(null) // a new range retries; don't stay stuck on the last failure
+        const custom = typeof dateRange === 'object'
         const isRealtime = dateRange === 'realtime'
         const isAllTime = dateRange === 'all'
-        const daysParam = isRealtime ? 'realtime' : (isAllTime ? 'all' : dateRange)
+        const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+        const rangeQuery = custom ? `&from=${iso(dateRange.from)}&to=${iso(dateRange.to)}` : ''
+        const daysParam = custom ? rangeDays(dateRange) : isRealtime ? 'realtime' : (isAllTime ? 'all' : dateRange)
         // For 'All Time' fetch 365 days so we can aggregate into 12 monthly bars.
-        const chartDays = isAllTime ? 365 : Math.min(isRealtime ? 7 : (typeof dateRange === 'number' ? dateRange : 30), 30)
+        const chartDays = custom ? rangeDays(dateRange) : isAllTime ? 365 : Math.min(isRealtime ? 7 : (typeof dateRange === 'number' ? dateRange : 30), 30)
         
         const [statsRes, dailyRes, pagesRes, devicesRes, countriesRes] = await Promise.all([
-          fetch(`${API_URL}/api/website-analytics/website-stats?days=${daysParam}`),
-          fetch(`${API_URL}/api/website-analytics/daily-stats?days=${chartDays}`),
-          fetch(`${API_URL}/api/website-analytics/top-pages?limit=5&days=${daysParam}`),
-          fetch(`${API_URL}/api/website-analytics/device-stats?days=${daysParam}`),
-          fetch(`${API_URL}/api/website-analytics/country-stats?limit=5&days=${daysParam}`)
+          fetch(`${API_URL}/api/website-analytics/website-stats?days=${daysParam}${rangeQuery}`),
+          fetch(`${API_URL}/api/website-analytics/daily-stats?days=${chartDays}${rangeQuery}`),
+          fetch(`${API_URL}/api/website-analytics/top-pages?limit=5&days=${daysParam}${rangeQuery}`),
+          fetch(`${API_URL}/api/website-analytics/device-stats?days=${daysParam}${rangeQuery}`),
+          fetch(`${API_URL}/api/website-analytics/country-stats?limit=5&days=${daysParam}${rangeQuery}`)
         ])
 
         if (!statsRes.ok) console.error('failed to fetch stats');
@@ -95,17 +99,17 @@ const AnalyticsPage = () => {
   }
 
   if (error) {
+    // Keep the header and range picker: picking another range retries.
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Card className="p-6 max-w-md">
-          <div className="text-center">
-            <p className="text-lg font-medium mb-2">Unable to load analytics</p>
-            <p className="text-sm text-muted-foreground mb-4">{error}</p>
-            <Link href="/admin-dashboard">
-              <Button variant="outline">Back to Dashboard</Button>
-            </Link>
-          </div>
-        </Card>
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <ListingPageHeader title="Analytics Dashboard" description="Comprehensive website traffic and visitor insights" />
+          <DateRangePicker value={dateRange} onChange={setDateRange} presets={dateRangeOptions} />
+        </div>
+        <div role="alert" className="rounded-lg border border-destructive/40 bg-destructive/5 p-6 text-sm">
+          <p className="font-medium text-destructive">Unable to load analytics</p>
+          <p className="mt-1 text-muted-foreground">{error}. Pick a range to try again.</p>
+        </div>
       </div>
     )
   }
@@ -155,10 +159,11 @@ const AnalyticsPage = () => {
     chartData = months
   } else {
     // Show daily data (pad to requested days: realtime -> 7, otherwise selected number or 30)
-    const daysToShow = dateRange === 'realtime' ? 7 : (typeof dateRange === 'number' ? dateRange : 30)
+    const customRange = typeof dateRange === 'object' ? dateRange : null
+    const daysToShow = customRange ? rangeDays(customRange) : dateRange === 'realtime' ? 7 : (typeof dateRange === 'number' ? dateRange : 30)
     // Build map of existing dailyData by date
     const dailyMap = new Map(dailyData.map(d => [d.date, d]))
-    const today = new Date()
+    const today = customRange ? customRange.to : new Date()
     const padded = []
     for (let i = daysToShow - 1; i >= 0; i--) {
       const d = new Date(today)
@@ -170,7 +175,7 @@ const AnalyticsPage = () => {
       const existing = dailyMap.get(dateStr)
       // For 30 and 90 days, show date (e.g., Nov 15); otherwise, show weekday
       let dayLabel
-      if (dateRange === 30 || dateRange === 90) {
+      if (dateRange === 30 || dateRange === 90 || daysToShow > 14) {
         dayLabel = d.toLocaleDateString('en-US', { day: 'numeric' , month: 'short'})
       } else {
         dayLabel = d.toLocaleDateString('en-US', { weekday: 'short' })
@@ -199,7 +204,7 @@ const AnalyticsPage = () => {
     // Date range
     doc.setFontSize(10)
     doc.setTextColor(100, 100, 100)
-    const selectedRange = dateRangeOptions.find(opt => opt.value === dateRange)?.label || 'Last 30 Days'
+    const selectedRange = rangeLabel(dateRange, dateRangeOptions)
     const rangeText = dateRange === 'realtime' ? 'Real-time (Live Data)' : `Date Range: ${selectedRange}`
     doc.text(rangeText, pageWidth / 2, 28, { align: 'center' })
     doc.text(`Generated: ${new Date().toLocaleDateString()}`, pageWidth / 2, 33, { align: 'center' })
@@ -330,39 +335,8 @@ const AnalyticsPage = () => {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <ListingPageHeader title="Analytics Dashboard" description="Comprehensive website traffic and visitor insights" />
         <div className="flex sm:max-md:flex-row lg:flex-row flex-col items-center justify-end sm:max-md:justify-center lg:justify-center gap-2">
-          {/* Date Range Picker */}
-          <div className="relative">
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => setShowDateMenu(!showDateMenu)}
-            >
-              <Calendar className="h-4 w-4 mr-2" />
-              {dateRangeOptions.find(opt => opt.value === dateRange)?.label }
-            </Button>
-            
-            {showDateMenu && (
-              <Card className="absolute right-0 top-12 z-50 w-48 shadow-lg">
-                <CardContent className="p-2">
-                  {dateRangeOptions.map((option) => (
-                    <button
-                      key={option.value}
-                      onClick={() => {
-                        setDateRange(option.value)
-                        setShowDateMenu(false)
-                      }}
-                      className={`w-full text-left px-3 py-2 rounded-md text-sm hover:bg-accent transition-colors ${
-                        dateRange === option.value ? 'bg-accent font-medium' : ''
-                      }`}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </CardContent>
-              </Card>
-            )}
-          </div>
-          
+          <DateRangePicker value={dateRange} onChange={setDateRange} presets={dateRangeOptions} />
+
           {/* Export Button */}
           <Button 
             variant="outline" 
@@ -386,7 +360,7 @@ const AnalyticsPage = () => {
           <CardContent>
             <div className="text-2xl font-bold">{stats?.totalViews?.toLocaleString() || '0'}</div>
             <p className="text-xs text-muted-foreground">
-              {dateRangeOptions.find(opt => opt.value === dateRange)?.label || 'Selected period'}
+              {rangeLabel(dateRange, dateRangeOptions)}
             </p>
           </CardContent>
         </Card>

@@ -8,7 +8,6 @@ import { toast } from 'sonner'
 import { API_URL } from '@/common/utils/config'
 import { Loader2, Plus, ArrowLeft, RefreshCw } from 'lucide-react'
 import QuestionTable from '@/components/pages/admin/quiz/QuestionTable'
-import QuestionFormModal from '@/components/pages/admin/quiz/QuestionFormModal'
 
 export default function QuizQuestionsPage() {
   const router = useRouter()
@@ -16,8 +15,6 @@ export default function QuizQuestionsPage() {
   const [sections, setSections] = useState([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [editingQuestion, setEditingQuestion] = useState(null)
 
   // Filters
   const [filterSection, setFilterSection] = useState('all')
@@ -70,15 +67,9 @@ export default function QuizQuestionsPage() {
     toast.success('Questions refreshed')
   }
 
-  const handleCreate = () => {
-    setEditingQuestion(null)
-    setModalOpen(true)
-  }
+  const handleCreate = () => router.push('/admin-dashboard/quiz/questions/new')
 
-  const handleEdit = (question) => {
-    setEditingQuestion(question)
-    setModalOpen(true)
-  }
+  const handleEdit = (question) => router.push(`/admin-dashboard/quiz/questions/${question.id}/edit`)
 
   const handleDelete = async (id) => {
     try {
@@ -99,13 +90,9 @@ export default function QuizQuestionsPage() {
     }
   }
 
-  const handleSave = () => {
-    setModalOpen(false)
-    fetchQuestions()
-  }
 
   return (
-    <div className="p-6">
+    <div className="w-full">
       {/* Header with back button, refresh, and add button */}
       <div className="flex items-center justify-between mb-6">
           <div>
@@ -189,14 +176,6 @@ export default function QuizQuestionsPage() {
           onDelete={handleDelete}
         />
       )}
-
-      <QuestionFormModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        question={editingQuestion}
-        sections={sections}
-        onSave={handleSave}
-      />
     </div>
   )
 }

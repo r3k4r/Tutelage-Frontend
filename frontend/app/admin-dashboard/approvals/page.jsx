@@ -247,7 +247,7 @@ export default function ApprovalsPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => toggleExpanded(approval.id)}
-                        className="shrink-0 h-8 w-8 p-0 hover:bg-muted"
+                        className="shrink-0 h-8 w-8 p-0 hover:bg-primary/10 hover:text-primary"
                       >
                         {isExpanded ? (
                           <ChevronUp className="h-4 w-4" />

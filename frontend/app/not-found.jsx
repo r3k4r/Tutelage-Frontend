@@ -11,7 +11,7 @@ export default function NotFound() {
         Sorry, the page you are looking for does not exist or has been moved.
       </p>
       <Link href="/seach" className="inline-block">
-        <button className="px-6 py-3 rounded-md bg-primary text-primary-foreground font-semibold shadow hover:bg-accent transition">
+        <button className="px-6 py-3 rounded-md bg-primary text-primary-foreground font-semibold shadow transition hover:bg-primary/90">
           go to search
         </button>
       </Link>

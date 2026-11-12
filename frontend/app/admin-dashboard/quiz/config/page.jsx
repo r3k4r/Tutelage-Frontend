@@ -100,7 +100,7 @@ export default function QuizConfigPage() {
   }
 
   return (
-    <div className="p-6 max-w-4xl">
+    <div className="w-full">
       {/* Header with back button and refresh */}
         <div className="flex items-start sm:items-center justify-between gap-4 mb-2">
           <div>

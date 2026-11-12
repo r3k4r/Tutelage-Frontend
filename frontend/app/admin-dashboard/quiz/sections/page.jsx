@@ -7,15 +7,12 @@ import { toast } from 'sonner'
 import { API_URL } from '@/common/utils/config'
 import { Loader2, Plus, ArrowLeft, RefreshCw } from 'lucide-react'
 import SectionTable from '@/components/pages/admin/quiz/SectionTable'
-import SectionFormModal from '@/components/pages/admin/quiz/SectionFormModal'
 
 export default function QuizSectionsPage() {
   const router = useRouter()
   const [sections, setSections] = useState([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [editingSection, setEditingSection] = useState(null)
 
   useEffect(() => {
     fetchSections()
@@ -48,15 +45,9 @@ export default function QuizSectionsPage() {
     toast.success('Sections refreshed')
   }
 
-  const handleCreate = () => {
-    setEditingSection(null)
-    setModalOpen(true)
-  }
+  const handleCreate = () => router.push('/admin-dashboard/quiz/sections/new')
 
-  const handleEdit = (section) => {
-    setEditingSection(section)
-    setModalOpen(true)
-  }
+  const handleEdit = (section) => router.push(`/admin-dashboard/quiz/sections/${section.id}/edit`)
 
   const handleDelete = async (id) => {
     try {
@@ -77,10 +68,6 @@ export default function QuizSectionsPage() {
     }
   }
 
-  const handleSave = () => {
-    setModalOpen(false)
-    fetchSections()
-  }
 
   if (loading) {
     return (
@@ -91,7 +78,7 @@ export default function QuizSectionsPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="w-full">
       {/* Header with back button, refresh, and add button */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
@@ -134,13 +121,6 @@ export default function QuizSectionsPage() {
         sections={sections}
         onEdit={handleEdit}
         onDelete={handleDelete}
-      />
-
-      <SectionFormModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        section={editingSection}
-        onSave={handleSave}
       />
     </div>
   )

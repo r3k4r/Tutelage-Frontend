@@ -585,7 +585,7 @@ const EnrollPage = () => {
 
       {/* Success Dialog */}
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent size="sm">
           <DialogHeader>
             <DialogTitle className="text-center text-xl text-green-600 dark:text-green-400">
               {t('enroll.successDialog.title')}

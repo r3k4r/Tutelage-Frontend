@@ -114,7 +114,7 @@ const Language = () => {
     <div className="relative inline-block text-left" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center text-sm font-medium text-gray-700 hover:text-yellow-400 dark:text-white dark:hover:text-gray-200 rounded-md focus:outline-none p-1 ${isRTL ? 'flex-row-reverse' : ''}`}
+        className={`flex items-center text-sm font-medium text-foreground transition-colors hover:text-primary rounded-md focus:outline-none p-1 ${isRTL ? 'flex-row-reverse' : ''}`}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -140,13 +140,13 @@ const Language = () => {
       </button>
       
       {isOpen && (
-        <div className={`z-50 origin-top absolute mt-2 w-32 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 dark:ring-white dark:ring-opacity-10 ${isRTL ? 'left-0' : 'right-0'}`}>
+        <div className={`z-50 origin-top absolute mt-2 w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md ${isRTL ? 'left-0' : 'right-0'}`}>
           <div className="py-1">
             {languages.map((language) => (
               <button
                 key={language.code}
                 onClick={() => changeLanguage(language.code)}
-                className={`flex items-center w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 ${isRTL ? 'text-right flex-row-reverse' : 'text-left'}`}
+                className={`flex items-center w-full px-4 py-2 text-sm text-foreground transition-colors hover:bg-primary/10 hover:text-primary ${isRTL ? 'text-right flex-row-reverse' : 'text-left'}`}
               >
                 <Image src={language.url} alt={language.label} width={20} height={20} className={`inline-block ${isRTL ? 'ml-2' : 'mr-2'}`} />
                 {language.label}

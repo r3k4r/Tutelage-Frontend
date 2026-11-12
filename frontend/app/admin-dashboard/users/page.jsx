@@ -120,7 +120,7 @@ export default function Page() {
       </div>
       {/* Create User Dialog */}
       <Dialog open={showCreate} onOpenChange={setShowCreate}>
-        <DialogContent className="max-w-md w-full">
+        <DialogContent size="md">
           <DialogHeader>
             <DialogTitle>Create User</DialogTitle>
           </DialogHeader>
@@ -129,7 +129,7 @@ export default function Page() {
       </Dialog>
       {/* Edit User Dialog */}
       <Dialog open={showEdit} onOpenChange={(v) => { setShowEdit(v); if (!v) setEditUser(null) }}>
-        <DialogContent className="max-w-md w-full">
+        <DialogContent size="md">
           <DialogHeader>
             <DialogTitle>Edit User</DialogTitle>
           </DialogHeader>
@@ -143,7 +143,7 @@ export default function Page() {
       </Dialog>
       {/* Delete Confirmation Dialog */}
       <Dialog open={showDelete} onOpenChange={(v) => { if (!loading) setShowDelete(v) }}>
-        <DialogContent className="max-w-sm w-full">
+        <DialogContent size="sm">
           <DialogHeader>
             <DialogTitle>Delete User</DialogTitle>
           </DialogHeader>

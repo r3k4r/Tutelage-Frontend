@@ -1,16 +1,22 @@
 import { describe, expect, test } from 'vitest'
-import { ADMIN_SIDEBAR, isActiveItem, sidebarFor } from '@/common/constants/admin-sidebar'
+import { ADMIN_SIDEBAR, isActiveGroup, isActiveItem, sidebarFor } from '@/common/constants/admin-sidebar'
+
+const flatNames = (entries) => entries.flatMap((e) => (e.items ? e.items.map((i) => i.name) : [e.name]))
 
 describe('sidebarFor', () => {
   test('ADMIN sees every entry', () => {
-    expect(sidebarFor('ADMIN')).toHaveLength(ADMIN_SIDEBAR.length)
+    expect(flatNames(sidebarFor('ADMIN'))).toEqual(flatNames(ADMIN_SIDEBAR))
   })
 
   test('MAIN_MANAGER does not see the ADMIN-only pages the middleware blocks', () => {
-    const names = sidebarFor('MAIN_MANAGER').map((i) => i.name)
-    expect(names).not.toEqual(expect.arrayContaining(['Users']))
+    const names = flatNames(sidebarFor('MAIN_MANAGER'))
     for (const hidden of ['Users', 'Approvals', 'Quiz']) expect(names).not.toContain(hidden)
-    expect(names).toContain('Readings')
+    expect(names).toEqual(expect.arrayContaining(['Reading', 'Landing']))
+  })
+
+  test('a group with no visible children is dropped', () => {
+    const managementOnlyAdmin = sidebarFor('MAIN_MANAGER').find((e) => e.key === 'management')
+    expect(managementOnlyAdmin.items.map((i) => i.name)).toEqual(['Landing'])
   })
 })
 
@@ -23,5 +29,11 @@ describe('isActiveItem', () => {
     ['/admin-dashboard/readings', '/admin-dashboard/readingsX', false],
   ])('%s on %s -> %s', (href, pathname, expected) => {
     expect(isActiveItem(href, pathname)).toBe(expected)
+  })
+
+  test('a group is active through its children', () => {
+    const skills = ADMIN_SIDEBAR.find((e) => e.key === 'skills')
+    expect(isActiveGroup(skills, '/admin-dashboard/writings/3')).toBe(true)
+    expect(isActiveGroup(skills, '/admin-dashboard/blogs')).toBe(false)
   })
 })

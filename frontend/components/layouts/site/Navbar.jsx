@@ -117,7 +117,7 @@ export default function Navbar (){
       {/* <SnowFall /> */}
       {/* Top Bar */}
       <div className="flex h-14 items-center bg-background">
-        <div className="container-page flex items-center justify-between">
+        <div className="container-wide flex items-center justify-between">
           {/* Logo */}
           <Link href={"/"} className="flex items-center gap-3">
             <Image src={'/only-logo-black-border-yellow-bg.svg'} className='w-[35px] h-[35px] md:w-[40px] md:h-[40px]' alt='' width={40} height={40} />
@@ -170,7 +170,7 @@ export default function Navbar (){
       </div>
       {/* Bottom Bar: Navigation */}
       <div className="w-full bg-background border-b border-border">
-        <div className="container-page">
+        <div className="container-wide">
           <div className="flex items-center h-16">
             <div className="flex-1 flex items-center justify-center">
               <div className="hidden lg:flex lg:space-x-2 xl:space-x-4">

@@ -1,13 +1,14 @@
 'use client'
 
 import { Suspense, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Plus, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import ConfirmDialog from '@/components/app/dialogs/ConfirmDialog'
 import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
-import AdminResourceCard from '@/components/shared/admin-resources/AdminResourceCard'
+import AdminResourceCard, { AdminResourceCardSkeleton } from '@/components/shared/admin-resources/AdminResourceCard'
 import Pagination from '@/components/app/Pagination'
 import { usePaginatedList } from '@/hooks/usePaginatedList'
 import { useDebouncedValue } from '@/hooks/useDebouncedValue'
@@ -18,10 +19,10 @@ import { RESOURCES } from '@/common/constants/resources'
 const PAGE_SIZE = 6
 
 /**
- * Admin CRUD list for any RESOURCES entry: search, paginated cards, create/edit dialogs and delete confirm.
+ * Admin list for any RESOURCES entry: search, paginated cards and delete confirm. Create and edit are
+ * their own pages (<slug>/new, <slug>/<id>/edit).
  * @param resource  RESOURCES key      @param slug  admin route segment (/admin-dashboard/<slug>/<id>)
  * @param title     page heading        @param label singular label for buttons ("ESL Audio")
- * @param Form      form component taking { mode, initialValues, onSuccess(values), onCancel }
  */
 export default function AdminResourcePage(props) {
   return (
@@ -31,7 +32,8 @@ export default function AdminResourcePage(props) {
   )
 }
 
-function AdminList({ resource, slug, title, label, Form }) {
+function AdminList({ resource, slug, title, label }) {
+  const router = useRouter()
   const { list, listKey } = RESOURCES[resource]
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebouncedValue(search.trim())
@@ -41,16 +43,9 @@ function AdminList({ resource, slug, title, label, Form }) {
     params: { search: debouncedSearch },
   })
 
-  const [editing, setEditing] = useState(null) // null | 'new' | item
   const [deleting, setDeleting] = useState(null)
-  const { save, remove, busy } = useResourceMutations(resource, label)
+  const { remove, busy } = useResourceMutations(resource, label)
   const noun = title.toLowerCase()
-
-  const submit = async (values) => {
-    if (!(await save(values, editing === 'new' ? undefined : editing.id))) return
-    setEditing(null)
-    reload()
-  }
 
   const confirmDelete = async () => {
     if (!(await remove(deleting.id))) return
@@ -64,9 +59,11 @@ function AdminList({ resource, slug, title, label, Form }) {
     // Fills the dashboard's <main>: header and pagination stay put, only the card grid scrolls.
     <div className="flex h-full flex-col gap-4">
       <ListingPageHeader title={title}>
-        <Button onClick={() => setEditing('new')}>
-          <Plus className="size-4" />
-          Create {label}
+        <Button asChild>
+          <Link href={`/admin-dashboard/${slug}/new`}>
+            <Plus className="size-4" />
+            Create {label}
+          </Link>
         </Button>
       </ListingPageHeader>
 
@@ -82,48 +79,37 @@ function AdminList({ resource, slug, title, label, Form }) {
         <Button variant="outline" size="icon" onClick={reload} disabled={loading} aria-label="Refresh">
           <RefreshCw className={loading ? 'size-4 animate-spin' : 'size-4'} />
         </Button>
-        {!loading && <span className="ms-auto text-sm text-muted-foreground">{totalItems} total</span>}
+        {!loading && <span className="ms-auto whitespace-nowrap text-sm text-muted-foreground">{totalItems} total</span>}
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto">
         {error ? (
-          <p role="alert" className="py-12 text-center text-destructive">{error}</p>
-        ) : loading ? (
-          <p className="py-12 text-center text-muted-foreground">Loading {noun}…</p>
-        ) : items.length === 0 ? (
-          <p className="py-12 text-center text-muted-foreground">No {noun} found.</p>
+          <p role="alert" className="rounded-lg border border-destructive/40 bg-destructive/5 p-4 text-sm text-destructive">
+            {error}
+          </p>
+        ) : !loading && items.length === 0 ? (
+          <p className="rounded-lg border border-dashed p-12 text-center text-sm text-muted-foreground">
+            {debouncedSearch ? `No ${noun} match “${debouncedSearch}”.` : `No ${noun} yet.`}
+          </p>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 min-[1680px]:grid-cols-6">
-            {items.map((item) => (
-              <AdminResourceCard
-                key={item.id}
-                item={item}
-                href={`/admin-dashboard/${slug}/${item.id}`}
-                onEdit={setEditing}
-                onDelete={setDeleting}
-              />
-            ))}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-6" aria-busy={loading}>
+            {loading
+              ? Array.from({ length: PAGE_SIZE }, (_, i) => <AdminResourceCardSkeleton key={i} />)
+              : items.map((item) => (
+                  <AdminResourceCard
+                    key={item.id}
+                    item={item}
+                    href={`/admin-dashboard/${slug}/${item.id}`}
+                    onEdit={(item) => router.push(`/admin-dashboard/${slug}/${item.id}/edit`)}
+                    onDelete={setDeleting}
+                  />
+                ))}
           </div>
         )}
       </div>
 
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} disabled={loading} className="shrink-0" />
 
-      <Dialog open={editing !== null} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="max-h-[90dvh] w-full max-w-md overflow-y-auto" aria-describedby={undefined}>
-          <DialogHeader>
-            <DialogTitle>{editing === 'new' ? `Create ${label}` : `Edit ${label}`}</DialogTitle>
-          </DialogHeader>
-          {editing !== null && (
-            <Form
-              mode={editing === 'new' ? 'create' : 'edit'}
-              initialValues={editing === 'new' ? undefined : editing}
-              onSuccess={submit}
-              onCancel={() => setEditing(null)}
-            />
-          )}
-        </DialogContent>
-      </Dialog>
 
       <ConfirmDialog
         open={deleting !== null}
