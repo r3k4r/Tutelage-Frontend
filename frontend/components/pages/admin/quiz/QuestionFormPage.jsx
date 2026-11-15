@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -153,8 +154,21 @@ function QuestionForm({ question, sections, header }) {
         </FormSection>
 
         <FormSection title="Placement">
+          {question?.passage && (
+            <p className="rounded-md bg-muted p-3 text-sm">
+              Part of the reading passage{' '}
+              <Link href={`/admin-dashboard/quiz/passages/${question.passage.id}/edit`} className="font-medium text-primary hover:underline">
+                {question.passage.title}
+              </Link>
+              . Its number and section are set there.
+            </p>
+          )}
           <FormField label="Section" htmlFor="sectionId" required error={err('sectionId')}>
-            <Select value={watch('sectionId')?.toString()} onValueChange={(v) => setValue('sectionId', parseInt(v, 10))}>
+            <Select
+              value={watch('sectionId')?.toString()}
+              onValueChange={(v) => setValue('sectionId', parseInt(v, 10))}
+              disabled={Boolean(question?.passage)}
+            >
               <SelectTrigger id="sectionId" className="w-full" aria-invalid={Boolean(err('sectionId'))}>
                 <SelectValue placeholder="Select section" />
               </SelectTrigger>

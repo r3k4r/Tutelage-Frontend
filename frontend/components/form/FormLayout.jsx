@@ -13,7 +13,8 @@ export function FormPage({ header, actions, onSubmit, formRef, children }) {
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate className="flex h-full flex-col gap-4">
       {header}
-      <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
+      {/* relative: hidden absolute bits (Radix's native <select>) scroll with the form instead of stretching the page */}
+      <div className="relative min-h-0 flex-1 overflow-y-auto">{children}</div>
       {actions}
     </form>
   )

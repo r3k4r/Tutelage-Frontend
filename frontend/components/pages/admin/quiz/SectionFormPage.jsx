@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import PageHeader from '@/components/layouts/admin/PageHeader'
 import { FormActions, FormField, FormPage, FormSection, FormSkeleton, LoadError } from '@/components/form/FormLayout'
+import SectionQuestionMap from '@/components/pages/admin/quiz/SectionQuestionMap'
 import { useResource } from '@/hooks/useResource'
 import { api } from '@/common/utils/api'
 import { cn } from '@/lib/utils'
@@ -152,8 +154,30 @@ function SectionForm({ section, header }) {
         </FormSection>
 
         <LevelSplit register={register} levels={watch('levels')} total={Number(watch('questionCount')) || 0} available={section?.availableByLevel} error={errors.levels?.message} />
+        {section && <SectionPassages section={section} />}
       </div>
     </FormPage>
+  )
+}
+
+/** The saved section's question numbers with its reading passages; click a passage or a free run. */
+function SectionPassages({ section }) {
+  const [passages, setPassages] = useState(null)
+  useEffect(() => {
+    api('/api/admin/quiz/passages', { query: { sectionId: section.id } }).then((res) => setPassages(res.ok ? res.data?.data ?? [] : []))
+  }, [section.id])
+  return (
+    <FormSection
+      title="Reading passages"
+      description="Click a passage to edit it, or a dashed run to put a passage on those numbers. Dashed numbers get random questions."
+      className="xl:col-span-3"
+    >
+      {passages === null ? (
+        <div className="h-14 animate-pulse rounded-md bg-muted" />
+      ) : (
+        <SectionQuestionMap sectionId={section.id} questionCount={section.questionCount} passages={passages} linked />
+      )}
+    </FormSection>
   )
 }
 

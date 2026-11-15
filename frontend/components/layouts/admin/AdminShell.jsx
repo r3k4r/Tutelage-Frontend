@@ -34,7 +34,9 @@ export default function AdminShell({ children }) {
     })
 
   return (
-    <div className="flex h-dvh overflow-hidden bg-background text-foreground">
+    // `relative` makes this the containing block for absolutely positioned descendants (e.g. the
+    // hidden native <select> Radix renders), so overflow-hidden clips them and the body never scrolls.
+    <div className="relative flex h-dvh overflow-hidden bg-background text-foreground">
       <Sidebar
         collapsed={collapsed}
         onToggleCollapsed={toggleCollapsed}

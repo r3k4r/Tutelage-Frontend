@@ -56,8 +56,9 @@ export default function QuestionTable({ questions, onEdit, onDelete }) {
               ) : (
                 questions.map((q) => (
                   <tr key={q.id} className="hover:bg-muted/50 transition-colors">
-                    <td className="px-4 py-3 text-sm text-foreground max-w-md truncate" title={q.text}>
-                      {q.text}
+                    <td className="px-4 py-3 text-sm text-foreground max-w-md" title={q.text}>
+                      <span className="block truncate">{q.text}</span>
+                      {q.passage && <span className="block truncate text-xs text-muted-foreground">Reading: {q.passage.title}</span>}
                     </td>
                     <td className="px-4 py-3 text-sm text-muted-foreground">{q.section?.name || 'N/A'}</td>
                     <td className="px-4 py-3 text-sm text-muted-foreground">{q.level}</td>

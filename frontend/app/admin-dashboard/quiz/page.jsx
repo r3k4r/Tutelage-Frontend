@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import ListingPageHeader from '@/components/layouts/admin/ListingPageHeader'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Settings, FolderTree, FileQuestion, ArrowLeft, Loader2 } from 'lucide-react'
+import { Settings, FolderTree, FileQuestion, BookOpen, ArrowLeft, Loader2 } from 'lucide-react'
 import { API_URL } from '@/common/utils/config'
 import { toast } from 'sonner'
 
@@ -83,6 +83,13 @@ export default function QuizDashboardPage() {
       icon: FileQuestion,
       href: '/admin-dashboard/quiz/questions',
       color: 'text-purple-500'
+    },
+    {
+      title: 'Quiz Passages',
+      description: 'Reading texts the student reads before answering several questions about them',
+      icon: BookOpen,
+      href: '/admin-dashboard/quiz/passages',
+      color: 'text-orange-500'
     }
   ]
 

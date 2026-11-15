@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Progress } from '@/components/ui/progress'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
 import { API_URL } from '@/common/utils/config'
-import { Loader2, Clock, CheckCircle2 } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
+import QuizStage from '@/components/pages/tutelage-tests/quiz/QuizStage'
+import TestIntro from '@/components/pages/tutelage-tests/quiz/TestIntro'
 
 
 // Comprehensive list of world countries
@@ -305,12 +305,6 @@ export default function FreePracticeTestPage() {
     setStage('results')
   }
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins}:${secs.toString().padStart(2, '0')}`
-  }
-
   // Show loading state while fetching quiz data
   if (loading) {
     return (
@@ -326,168 +320,29 @@ export default function FreePracticeTestPage() {
   // INSTRUCTIONS STAGE
   if (stage === 'instructions') {
     return (
-      <div className="min-h-screen md:min-h-[80vh] bg-background flex items-center justify-center p-4">
-        <div className="max-w-2xl w-full bg-card border border-border rounded-lg p-8 shadow-lg">
-          <h1 className="text-3xl font-bold text-foreground mb-6">Test Instructions</h1>
-          <div className="space-y-4 text-muted-foreground mb-8">
-            <p>• Find a quiet place to take the test without distractions</p>
-            <p>• You will have <strong className="text-foreground">{quizConfig?.timeLimitMinutes || 30} minutes</strong> to complete {quizQuestions?.length} questions</p>
-            <p>• Each question has 4 options (A, B, C, D) — choose the best answer</p>
-            <p>• You cannot go back to previous questions</p>
-            <p>• Answer honestly to get an accurate assessment of your level</p>
-            <p>• After finishing, you'll fill out a short form and see your results</p>
-          </div>
-          <Button onClick={handleStartQuiz} size="lg" className="w-full">
-            Start The Test
-          </Button>
-        </div>
-      </div>
+      <TestIntro
+        minutes={quizConfig?.timeLimitMinutes || 30}
+        questionCount={quizQuestions.length}
+        hasReading={quizQuestions.some((q) => q.passage)}
+        onStart={handleStartQuiz}
+      />
     )
   }
 
   // QUIZ STAGE
   if (stage === 'quiz') {
-    const question = quizQuestions[currentQuestionIndex]
-    const userAnswer = answers[currentQuestionIndex]
-
-    const currentQuestion = quizQuestions[currentQuestionIndex]
-    const currentSection = sections[currentSectionIndex]
-    const isLastQuestionInSection = currentSection && currentQuestionIndex === currentSection.endIndex
-    const isSectionCompleted = sectionProgress[currentSectionIndex]?.completed
-    
-    // Calculate progress percentage
-    const totalQuestions = quizQuestions.length
-    const progressPercentage = totalQuestions > 0 
-      ? ((currentQuestionIndex + 1) / totalQuestions) * 100 
-      : 0
-
     return (
-      <div className="min-h-screen bg-background py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-          {/* Top bar: Progress + Timer */}
-          <div className="mb-6 flex items-center justify-between gap-4">
-            {/* Progress */}
-            <div className="flex-1">
-              <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                <span>{currentQuestionIndex + 1}/{quizQuestions.length}</span>
-                <span>{Math.round(progressPercentage)}%</span>
-              </div>
-              <Progress value={progressPercentage} className="h-2" />
-            </div>
-
-            {/* Timer (circular border effect approximated with border + padding) */}
-            <div className="flex items-center gap-2 px-4 py-2 border-2 border-primary rounded-full">
-              <Clock className="w-5 h-5 text-primary" />
-              <span className="font-mono font-bold text-foreground">{formatTime(timeLeft)}</span>
-            </div>
-          </div>
-
-          {/* Section Progress Circles - No Card Wrapper */}
-          <div className="mb-6 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
-            {sections.map((section, idx) => {
-              const isActive = idx === currentSectionIndex
-              const isCompleted = sectionProgress[idx]?.completed
-              
-              return (
-                <div key={idx} className="flex flex-col items-center gap-2">
-                  {/* Circle */}
-                  <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-                      isCompleted
-                        ? 'bg-green-500 border-green-600'
-                        : isActive
-                        ? 'bg-primary border-primary'
-                        : 'bg-background border-border'
-                    }`}
-                  >
-                    {isCompleted ? (
-                      <CheckCircle2 className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-                    ) : (
-                      <span className={`text-lg sm:text-xl font-bold ${
-                        isActive ? 'text-white' : 'text-muted-foreground'
-                      }`}>
-                        {section.number}
-                      </span>
-                    )}
-                  </motion.div>
-                  
-                  {/* Section Name Below Circle */}
-                  <span className={`text-xs sm:text-sm font-medium text-center max-w-[80px] ${
-                    isActive ? 'text-primary font-bold' : 'text-muted-foreground'
-                  }`}>
-                    {section.name}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Instruction text */}
-          <div className="mb-6 text-center">
-            <p className="text-lg text-muted-foreground">
-              Choose the word or phrase that best completes each sentence
-            </p>
-          </div>
-
-          {/* Question card */}
-          <div className="bg-muted border border-border rounded-lg p-6 mt-2 shadow-sm mb-6 max-w-xl mx-auto">
-            <h2 className="text-2xl font-semibold text-foreground mb-6">
-              {question?.text}
-            </h2>
-
-            <div className="space-y-3">
-              {question?.options.map((option, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleSelectAnswer(idx)}
-                  className="w-full flex items-center gap-4 px-6 py-4 text-left transition-all cursor-pointer group bg-background rounded-sm"
-                >
-                  {/* Custom radio indicator */}
-                  <div className={`flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                    userAnswer === idx
-                      ? 'border-primary bg-primary'
-                      : 'border-muted-foreground group-hover:border-primary'
-                  }`}>
-                    {userAnswer === idx && (
-                      <div className="w-2 h-2 bg-white rounded-full" />
-                    )}
-                  </div>
-
-                  {/* Option text */}
-                  <div className={`flex-1 transition-colors ${
-                    userAnswer === idx ? 'text-foreground font-semibold' : 'text-foreground'
-                  }`}>
-                    <span className="font-bold mr-3">{String.fromCharCode(65 + idx)}.</span>
-                    {option}
-                  </div>
-                </button>
-              ))}
-
-              {/* Debug: Show correct answer */}
-              {false && (
-                <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                  <strong>Debug Info:</strong> Correct answer is {String.fromCharCode(65 + question?.correctAnswer)}.
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Next button */}
-          <div className="flex justify-center">
-            <Button
-              onClick={handleNext}
-              disabled={userAnswer === undefined}
-              size="lg"
-              className="px-8 cursor-pointer"
-            >
-              {currentQuestionIndex === quizQuestions.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-          </div>
-        </div>
-      </div>
+      <QuizStage
+        questions={quizQuestions}
+        index={currentQuestionIndex}
+        answer={answers[currentQuestionIndex]}
+        onAnswer={handleSelectAnswer}
+        onNext={handleNext}
+        timeLeft={timeLeft}
+        sections={sections}
+        currentSectionIndex={currentSectionIndex}
+        sectionProgress={sectionProgress}
+      />
     )
   }
 
