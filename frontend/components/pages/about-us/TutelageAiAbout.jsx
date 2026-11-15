@@ -20,8 +20,8 @@ const TutelageAiAbout = () => {
         <div className="container-page mb-12">
           <div className="text-center">
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+              animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
               transition={{ duration: 0.6 }}
               className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4"
             >
@@ -34,15 +34,15 @@ const TutelageAiAbout = () => {
           <div className="flex flex-col-reverse lg:flex-row items-stretch gap-0">
             {/* Left Content */}
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              initial={{ opacity: 0, transform: 'translateX(-50px) translateY(0px) scale(1) rotate(0deg)' }}
+              animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(-50px) translateY(0px) scale(1) rotate(0deg)' }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-full lg:w-1/2 flex items-center px-4 sm:px-6 lg:ml-10"
             >
               <div className="w-full py-10 lg:py-0 lg:pr-12">
                 <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+                  animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4 sm:mb-6"
                 >
@@ -50,8 +50,8 @@ const TutelageAiAbout = () => {
                 </motion.h2>
                 
                 <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+                  animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed mb-6"
                 >
@@ -68,8 +68,8 @@ const TutelageAiAbout = () => {
                   {["Intelligent assistance and smart recommendations", "Real-time guidance for independent study", "Valuable insights for improved efficiency"].map((item, index) => (
                     <motion.li 
                       key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, transform: 'translateX(-20px) translateY(0px) scale(1) rotate(0deg)' }}
+                      animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(-20px) translateY(0px) scale(1) rotate(0deg)' }}
                       transition={{ duration: 0.5, delay: 0.5 + (index * 0.1) }}
                       className="flex items-start"
                     >
@@ -81,8 +81,8 @@ const TutelageAiAbout = () => {
 
                 {/* Explore More Button */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+                  animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
                   transition={{ duration: 0.6, delay: 0.8 }}
                 >
                   <Link href={TUTELAGE_AI_URL} target="_blank" rel="noopener noreferrer">
@@ -99,8 +99,8 @@ const TutelageAiAbout = () => {
     
             {/* Right Image */}
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              initial={{ opacity: 0, transform: 'translateX(50px) translateY(0px) scale(1) rotate(0deg)' }}
+              animate={isInView ? { opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' } : { opacity: 0, transform: 'translateX(50px) translateY(0px) scale(1) rotate(0deg)' }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="w-full lg:w-1/2"
             >

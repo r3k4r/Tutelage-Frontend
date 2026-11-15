@@ -6,8 +6,8 @@ const AboutUsContent = () => (
   <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
     <div className="max-w-5xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, transform: 'translateX(0px) translateY(60px) scale(1) rotate(0deg)' }}
+        whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="mb-16"

@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import Expand from '@/components/app/Expand'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -11,7 +13,6 @@ import { ChevronRight, Phone, HelpCircle, ChevronDown } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { API_URL } from '@/common/utils/config'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
 const EnglishForAdultsPage = () => {
@@ -395,23 +396,13 @@ const EnglishForAdultsPage = () => {
                 </button>
 
                 {/* Answer */}
-                <AnimatePresence initial={false}>
-                  {openFaqIndex === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      style={{ overflow: "hidden" }}
-                    >
+                <Expand open={openFaqIndex === index}>
                       <div className="px-5 pb-5 pt-2">
                         <p className="text-muted-foreground leading-relaxed pl-9">
                           {faq.answer}
                         </p>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                </Expand>
               </div>
             ))}
           </div>

@@ -1,13 +1,14 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
+import Expand from '@/components/app/Expand'
 import { ChevronRight, Briefcase, Users, Phone, Presentation, Rocket, Handshake, MessageCircle, Type, HelpCircle, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -480,23 +481,13 @@ const inPersonClass = {
                   </button>
 
                   {/* Answer */}
-                  <AnimatePresence initial={false}>
-                    {openFaqIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        style={{ overflow: "hidden" }}
-                      >
+                  <Expand open={openFaqIndex === index}>
                         <div className="px-5 pb-5 pt-2">
                           <p className="text-muted-foreground leading-relaxed pl-9">
                             {faq.answer}
                           </p>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  </Expand>
                 </div>
               ))}
             </div>

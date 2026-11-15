@@ -48,9 +48,9 @@ export default function PdfModal({
         >
           <motion.div 
             className="w-[90%] md:w-[80%] lg:w-[70%] bg-background rounded shadow-lg overflow-hidden" 
-            initial={{ y: 20, scale: 0.98, opacity: 0 }} 
-            animate={{ y: 0, scale: 1, opacity: 1 }} 
-            exit={{ y: 20, scale: 0.98, opacity: 0 }} 
+            initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(0.98) rotate(0deg)' }} 
+            animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }} 
+            exit={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(0.98) rotate(0deg)' }} 
             transition={{ duration: animationDuration }}
             onClick={(e) => e.stopPropagation()}
           >

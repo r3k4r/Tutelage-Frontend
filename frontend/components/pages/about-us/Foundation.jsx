@@ -36,8 +36,8 @@ export const Foundation = () => {
       <div className="container-page relative">
         <div className="text-center mb-12 sm:mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, transform: 'translateX(0px) translateY(30px) scale(1) rotate(0deg)' }}
+            whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6"
@@ -45,8 +45,8 @@ export const Foundation = () => {
             Our Foundation
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, transform: 'translateX(0px) translateY(30px) scale(1) rotate(0deg)' }}
+            whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto"
@@ -57,8 +57,8 @@ export const Foundation = () => {
 
         {/* Static Grid of Cards with simple pop-up animation */}
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, transform: 'translateX(0px) translateY(60px) scale(1) rotate(0deg)' }}
+          whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12"

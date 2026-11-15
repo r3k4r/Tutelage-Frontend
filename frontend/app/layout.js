@@ -5,6 +5,7 @@ import Navbar from "@/components/layouts/site/Navbar";
 import NavbarWrapper from "@/components/layouts/site/NavbarWrapper";
 import FooterWrapper from "@/components/layouts/site/FooterWrapper";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import MotionProvider from "@/components/providers/MotionProvider";
 import { Footer } from "@/components/layouts/site/Footer";
 import Script from "next/script";
 import { GA_MEASUREMENT_ID } from "@/common/utils/gtag";
@@ -67,6 +68,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <ThemeProvider>
+          <MotionProvider>
           <AuthProvider>
             <Suspense fallback={null}>
               <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
@@ -84,6 +86,7 @@ export default function RootLayout({ children }) {
             </FooterWrapper>
             <Toaster />
           </AuthProvider>
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

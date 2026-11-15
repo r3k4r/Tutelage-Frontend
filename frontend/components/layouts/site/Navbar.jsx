@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Expand from '@/components/app/Expand'
 import { ChevronDown, Menu, X, Search } from 'lucide-react'
 import Image from 'next/image'
 import ThemeToggle from '@/components/app/ThemeToggle'
@@ -195,10 +196,11 @@ export default function Navbar (){
                       <AnimatePresence>
                         {item.dropdown && activeDropdown === item.name && (
                           <motion.div
-                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            // a literal transform string runs on the compositor; x/y/scale shorthands run per frame in JS
+                            initial={{ opacity: 0, transform: 'translateY(-6px) scale(0.97)' }}
+                            animate={{ opacity: 1, transform: 'translateY(0px) scale(1)' }}
+                            exit={{ opacity: 0, transform: 'translateY(-6px) scale(0.97)' }}
+                            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
                             className="absolute top-full left-0 mt-2 w-56 bg-background border border-border rounded-lg shadow-xl overflow-hidden"
                           >
                             <div className="py-2">
@@ -237,7 +239,7 @@ export default function Navbar (){
               {/* MENU ICON */}
               <div className=''>
                 <motion.button
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ transform: 'translateX(0px) translateY(0px) scale(0.95) rotate(0deg)' }}
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     className="text-foreground hover:text-primary p-2"
                 >
@@ -249,13 +251,10 @@ export default function Navbar (){
         </div>
       </div>
       {/* Mobile Navigation */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-t border-b border-border overflow-y-auto"
+      <div className="lg:hidden">
+        <Expand open={mobileMenuOpen}>
+          <div
+            className={`bg-background overflow-y-auto ${mobileMenuOpen ? 'border-t border-b border-border' : ''}`}
             style={{ maxHeight: 'calc(88dvh - 4rem)' }}
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
@@ -274,15 +273,8 @@ export default function Navbar (){
                         <Link className={`${isActive ? 'text-primary font-bold' : 'text-foreground hover:text-primary'}`} href={item.href} onClick={() => setMobileMenuOpen(false)}>{item.name}</Link>
                         <ChevronDown size={20} onClick={() => toggleMobileDropdown(item.name)} className={`px-4 size-auto cursor-pointer transform transition-transform ${mobileOpenDropdowns[item.name] ? 'rotate-180' : ''}`} />
                       </button>
-                      <AnimatePresence>
-                        {mobileOpenDropdowns[item.name] && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.22 }}
-                            className="ml-4 space-y-1"
-                          >
+                      <Expand open={Boolean(mobileOpenDropdowns[item.name])}>
+                          <div className="ml-4 space-y-1">
                             {item.dropdown.map((dropdownItem) => (
                               <Link
                                 key={dropdownItem.name}
@@ -293,9 +285,8 @@ export default function Navbar (){
                                 {dropdownItem.name}
                               </Link>
                             ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                          </div>
+                      </Expand>
                     </>
                   ) : (
                     <Link
@@ -310,9 +301,9 @@ export default function Navbar (){
                )
               })}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </Expand>
+      </div>
     </nav>
   )
 }

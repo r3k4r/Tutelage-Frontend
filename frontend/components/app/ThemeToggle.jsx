@@ -47,8 +47,8 @@ export default function ThemeToggle() {
         {currentTheme === 'dark' ? (
           <motion.div
             key="moon"
-            initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, transform: 'translateX(0px) translateY(0px) scale(0.5) rotate(-90deg)' }}
+            animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="absolute inset-0"
           >
@@ -57,8 +57,8 @@ export default function ThemeToggle() {
         ) : (
           <motion.div
             key="sun"
-            initial={{ opacity: 0, scale: 0.5, rotate: 90 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, transform: 'translateX(0px) translateY(0px) scale(0.5) rotate(90deg)' }}
+            animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="absolute inset-0"
           >

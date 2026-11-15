@@ -69,23 +69,23 @@ export default function HeroSection() {
         >
           <div className='w-full bg-transparent max-md:h-[58px]'/>
           <motion.h1 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
+          initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+          animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="text-3xl leading-[120%] sm:text-4xl md:text-5xl xl:text-6xl font-bold text-white/90 drop-shadow mb-4 sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl">
             {title}
           </motion.h1>
           <motion.p
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
+          initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+          animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="text-sm sm:text-base md:text-lg text-white/80 font-normal sm:max-w-xl md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto mb-7">
             {subtitle}
           </motion.p>
           <motion.form
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.7 }}
+          initial={{ opacity: 0, transform: 'translateX(0px) translateY(20px) scale(1) rotate(0deg)' }}
+          animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
           onSubmit={handleHeroSearch}
            className="hidden w-full max-w-2xl md:flex flex-col sm:flex-row items-stretch gap-2 sm:gap-0 mx-auto">
             <Input

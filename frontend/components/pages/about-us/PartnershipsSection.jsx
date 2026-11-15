@@ -38,8 +38,8 @@ export default function PartnershipsSection() {
 			<div className="container-page relative">
 				{/* Section Title */}
 				<motion.div
-					initial={{ opacity: 0, y: 60 }}
-					whileInView={{ opacity: 1, y: 0 }}
+					initial={{ opacity: 0, transform: 'translateX(0px) translateY(60px) scale(1) rotate(0deg)' }}
+					whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
 					viewport={{ once: true, amount: 0.5 }}
 					transition={{ duration: 0.7, ease: 'easeOut' }}
 					className="mb-16 text-center"
@@ -58,11 +58,13 @@ export default function PartnershipsSection() {
 				{/* Responsive Solar System Circular Network Design */}
 				<div className="relative flex items-center justify-center min-h-[400px]">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						whileInView={{ opacity: 1, scale: 1 }}
+						// centred by the animated transform itself (a Tailwind -translate class would be overridden)
+						initial={{ opacity: 0, transform: 'translateX(-50%) translateY(-50%) scale(0.8) rotate(0deg)' }}
+						whileInView={{ opacity: 1, transform: 'translateX(-50%) translateY(-50%) scale(1) rotate(0deg)' }}
 						viewport={{ once: true, amount: 0.5 }}
 						transition={{ duration: 0.7, ease: 'easeOut' }}
-						className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:block"
+						className="absolute left-1/2 top-1/2 z-10 hidden lg:block"
+						style={{ transform: 'translateX(-50%) translateY(-50%) scale(0.8) rotate(0deg)' }}
 					>
 						<div className="flex flex-col items-center justify-center">
 							<div className="w-24 h-24 rounded-full bg-primary/80 flex items-center justify-center shadow-lg mb-3">
@@ -78,19 +80,18 @@ export default function PartnershipsSection() {
 					<div className="relative w-full h-[400px] hidden lg:block">
 						{partners.map((partner, idx) => {
 							const Icon = partner.icon
-							const pos = nodePositions[idx]
+							const { transform: centring, ...pos } = nodePositions[idx]
+							// the node's own centring lives inside the animated transform, or the animation would replace it
+							const tx = centring ? '-50%' : '0px'
 							return (
 								<motion.div
 									key={partner.title}
-									initial={{ opacity: 0, scale: 0.8 }}
-									whileInView={{ opacity: 1, scale: 1 }}
+									initial={{ opacity: 0, transform: `translateX(${tx}) translateY(0px) scale(0.8) rotate(0deg)` }}
+									whileInView={{ opacity: 1, transform: `translateX(${tx}) translateY(0px) scale(1) rotate(0deg)` }}
 									viewport={{ once: true, amount: 0.5 }}
 									transition={{ duration: 0.7, delay: 0.1 + idx * 0.15, ease: 'easeOut' }}
 									className="absolute flex flex-col items-center"
-									style={{
-										...pos,
-										transform: pos.transform || undefined,
-									}}
+									style={{ ...pos, transform: `translateX(${tx}) translateY(0px) scale(0.8) rotate(0deg)` }}
 								>
 									<div className={`w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center shadow-md mb-2`}>
 										{React.createElement(Icon, {
@@ -113,8 +114,8 @@ export default function PartnershipsSection() {
 					{/* SM/MD: Stack nodes below center node */}
 					<div className="flex flex-col items-center gap-8 w-full pt-8 lg:hidden">
 						<motion.div
-							initial={{ opacity: 0, y: 40, scale: 0.95 }}
-							whileInView={{ opacity: 1, y: 0, scale: 1 }}
+							initial={{ opacity: 0, transform: 'translateX(0px) translateY(40px) scale(0.95) rotate(0deg)' }}
+							whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
 							viewport={{ once: true, amount: 0.5 }}
 							transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
 							className="flex flex-col items-center"
@@ -130,8 +131,8 @@ export default function PartnershipsSection() {
 							</p>
 						</motion.div>
 						<motion.div
-							initial={{ opacity: 0, y: 40, scale: 0.95 }}
-							whileInView={{ opacity: 1, y: 0, scale: 1 }}
+							initial={{ opacity: 0, transform: 'translateX(0px) translateY(40px) scale(0.95) rotate(0deg)' }}
+							whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
 							viewport={{ once: true, amount: 0.5 }}
 							transition={{ duration: 0.7, delay: 0.25, ease: 'easeOut' }}
 							className="flex flex-col items-center"
@@ -147,8 +148,8 @@ export default function PartnershipsSection() {
 							</p>
 						</motion.div>
 						<motion.div
-							initial={{ opacity: 0, y: 40, scale: 0.95 }}
-							whileInView={{ opacity: 1, y: 0, scale: 1 }}
+							initial={{ opacity: 0, transform: 'translateX(0px) translateY(40px) scale(0.95) rotate(0deg)' }}
+							whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
 							viewport={{ once: true, amount: 0.5 }}
 							transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
 							className="flex flex-col items-center"

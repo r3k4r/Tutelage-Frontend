@@ -35,8 +35,8 @@ const AchievementsSection = () => (
           return (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, transform: 'translateX(0px) translateY(30px) scale(1) rotate(0deg)' }}
+              whileInView={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="flex flex-col items-center px-4 py-2 md:py-6"

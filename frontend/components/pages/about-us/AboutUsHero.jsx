@@ -17,8 +17,8 @@ const AboutUsHero = () => {
       />
       <div className="absolute inset-0 bg-black/60 z-10" />
       <motion.div
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0, transform: 'translateX(0px) translateY(-50px) scale(1) rotate(0deg)' }}
+          animate={{ opacity: 1, transform: 'translateX(0px) translateY(0px) scale(1) rotate(0deg)' }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
            className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 text-center mt-36">
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow mb-4">
