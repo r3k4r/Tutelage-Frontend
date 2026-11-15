@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 import { LEVEL_OPTIONS, RESOURCE_FORMS, levelValueOf } from '@/common/constants/resource-forms'
+import { MAX_TAGS, MAX_TAG_LENGTH, addTags } from '@/common/utils/tags'
 
 const fileName = (url) => decodeURIComponent(String(url).split('/').pop() || 'file.pdf')
 
@@ -159,10 +160,14 @@ function Field({ field, value, onChange, error }) {
 function TagsField({ value, onChange }) {
   const id = useId()
   const [draft, setDraft] = useState('')
+  const [error, setError] = useState(null)
 
   const add = () => {
-    const tags = draft.split(',').map((t) => t.trim()).filter(Boolean)
-    if (tags.length) onChange([...new Set([...value, ...tags])])
+    if (!draft.trim()) return
+    const result = addTags(value, draft)
+    setError(result.error)
+    if (result.error) return // keep the draft so it can be fixed
+    onChange(result.tags)
     setDraft('')
   }
 
@@ -174,7 +179,14 @@ function TagsField({ value, onChange }) {
           id={id}
           value={draft}
           placeholder="Type a tag and press Enter"
-          onChange={(e) => setDraft(e.target.value)}
+          aria-invalid={Boolean(error)}
+          aria-describedby={`${id}-help`}
+          onChange={(e) => {
+            setDraft(e.target.value)
+            setError(null)
+          }}
+          // a tag typed but not confirmed is added when leaving the field, so Save never drops it
+          onBlur={add}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ',') {
               e.preventDefault()
@@ -186,6 +198,9 @@ function TagsField({ value, onChange }) {
           <Plus className="size-4" />
         </Button>
       </div>
+      <p id={`${id}-help`} role={error ? 'alert' : undefined} className={cn('text-xs', error ? 'text-destructive' : 'text-muted-foreground')}>
+        {error ?? `Up to ${MAX_TAGS} tags, ${MAX_TAG_LENGTH} characters each. Separate several with commas.`}
+      </p>
       {value.length > 0 && (
         <ul className="flex flex-wrap gap-1.5">
           {value.map((tag) => (

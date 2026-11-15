@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ExternalLink, GraduationCap, FileText, Target, Info, Search, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ExternalLink, GraduationCap, FileText, Target, Info, Search, SearchX, ChevronLeft, ChevronRight } from 'lucide-react'
+import EmptyState from '@/components/app/EmptyState'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { API_URL, TUTELAGE_AI_URL } from '@/common/utils/config'
@@ -211,18 +212,15 @@ const SearchPage = () => {
 
               {/* Search Results */}
               {!hasSearched ? (
-                <div className="text-center py-12">
-                  <Search className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground text-lg">Ready to search</p>
-                  <p className="text-muted-foreground text-sm mt-2">Enter your search terms above to find courses, blogs, skills, tests, and ESL resources</p>
-                </div>
+                <EmptyState icon={Search} title="What would you like to learn?">
+                  Search courses, blogs, skills, tests and ESL resources.
+                </EmptyState>
               ) : (
                 <div className="space-y-6">
                   {results.length === 0 ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground text-lg">No results found</p>
-                      <p className="text-muted-foreground text-sm mt-2">Try adjusting your search terms or filters</p>
-                    </div>
+                    <EmptyState icon={SearchX} title="No results found">
+                      Try a shorter word, check the spelling, or choose a different filter.
+                    </EmptyState>
                   ) : (
                     <>
                       <div className="space-y-4">

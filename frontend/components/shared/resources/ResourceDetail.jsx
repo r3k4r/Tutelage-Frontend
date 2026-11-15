@@ -3,8 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, FileQuestion } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import EmptyState from '@/components/app/EmptyState'
 import PdfButton from '@/components/app/pdf/PdfButton'
 import PdfModal from '@/components/app/pdf/PdfModal'
 import CompactAudioPlayer from '@/components/app/players/CompactAudioPlayer'
@@ -40,11 +41,19 @@ export default function ResourceDetail({ resource, kind, backHref }) {
 
   if (notFound) {
     return (
-      <div className="container-page flex min-h-[60vh] flex-col items-center justify-center gap-6 text-center">
-        <h1 className="text-2xl font-bold">We couldn&apos;t find that {RESOURCES[resource].noun}.</h1>
-        <Button asChild variant="outline">
-          <Link href={backHref}>Back to the list</Link>
-        </Button>
+      <div className="container-page flex min-h-[60vh] items-center justify-center">
+        <EmptyState
+          as="h1"
+          icon={FileQuestion}
+          title={`We couldn't find that ${RESOURCES[resource].noun}`}
+          action={
+            <Button asChild variant="outline">
+              <Link href={backHref}>Back to the list</Link>
+            </Button>
+          }
+        >
+          It may have been moved or removed. The list has everything that&apos;s available now.
+        </EmptyState>
       </div>
     )
   }

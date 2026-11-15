@@ -129,6 +129,9 @@ const Practice = () => {
 		return text?.slice(0, maxLength) + '...';
 	};
 
+	// nothing featured (or the request failed): leave the section out of the page entirely
+	if (!loading && totalCards === 0) return null;
+
 	return (
 		<section className="py-16 px-4 sm:px-6 lg:px-8 bg-background" ref={sectionRef}>
 			<div className="max-w-7xl mx-auto">
@@ -184,13 +187,17 @@ const Practice = () => {
 										<Link href={item.link || `/esl-resources/blogs/${item.id}`}>
 											<div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full border border-border">
 												{/* Image */}
-												<div className="aspect-video overflow-hidden">
-													<img
-														src={item.imageRef || item.imageUrl}
-														alt={item.title}
-														className="w-full h-full object-cover"
-														draggable="false"
-													/>
+												<div className="aspect-video overflow-hidden bg-muted">
+													{(item.imageRef || item.imageUrl) && (
+														<img
+															src={item.imageRef || item.imageUrl}
+															alt={item.title}
+															className="w-full h-full object-cover"
+															draggable="false"
+															// a dead image link leaves the quiet muted block, not a broken-image icon
+															onError={(e) => { e.currentTarget.style.display = 'none'; }}
+														/>
+													)}
 												</div>
 
 												{/* Content */}

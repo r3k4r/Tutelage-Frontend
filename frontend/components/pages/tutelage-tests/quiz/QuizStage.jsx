@@ -121,9 +121,11 @@ function QuizBar({ index, total, timeLeft, sections, currentSectionIndex, sectio
   const lowTime = timeLeft <= 60
   const current = sections[currentSectionIndex]
   return (
-    <header className="shrink-0 border-b bg-background">
-      <div className="flex items-center gap-4 px-4 py-3 sm:px-6">
-        <nav aria-label="Test sections" className="min-w-0 flex-1">
+    <header className="shrink-0 border-b bg-muted">
+      {/* 3 columns so the stepper sits in the true middle, with the timer on the right */}
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 py-3 sm:px-6">
+        <span aria-hidden />
+        <nav aria-label="Test sections" className="min-w-0">
           {/* phone: just where you are */}
           <p className="truncate text-sm sm:hidden">
             <span className="text-muted-foreground">
@@ -131,23 +133,35 @@ function QuizBar({ index, total, timeLeft, sections, currentSectionIndex, sectio
             </span>
             <span className="font-medium">{current?.name}</span>
           </p>
-          <ol className="hidden items-center gap-1 sm:flex">
+          <ol className="hidden items-start sm:flex">
             {sections.map((section, i) => {
-              const done = sectionProgress[i]?.completed && i !== currentSectionIndex
+              // a section is done once the student has moved past it
+              const done = i < currentSectionIndex || (sectionProgress[i]?.completed && i !== currentSectionIndex)
               const active = i === currentSectionIndex
               return (
-                <li key={section.id} className="flex min-w-0 items-center gap-1">
-                  {i > 0 && <span aria-hidden className="mx-1 h-px w-4 bg-border" />}
-                  <span
-                    aria-current={active ? 'step' : undefined}
-                    className={cn(
-                      'flex min-w-0 items-center gap-1.5 rounded-md px-2 py-1 text-sm',
-                      active ? 'bg-primary/10 font-medium text-foreground' : 'text-muted-foreground',
-                    )}
-                  >
-                    {done ? <Check className="size-3.5 shrink-0 text-primary" aria-label="done" /> : <span className="tabular-nums">{i + 1}</span>}
-                    <span className="truncate">{section.name}</span>
-                  </span>
+                <li key={section.id} className="flex items-start">
+                  {/* connector at the circles' centre line (size-11 → 22px) */}
+                  {i > 0 && <span aria-hidden className={cn('mx-2 mt-[21px] h-0.5 w-12 rounded-full', i <= currentSectionIndex ? 'bg-primary' : 'bg-border')} />}
+                  <div aria-current={active ? 'step' : undefined} className="flex w-28 flex-col items-center gap-2 text-center">
+                    <span
+                      className={cn(
+                        'flex size-11 items-center justify-center rounded-full border-2 text-base font-bold tabular-nums transition-colors',
+                        done && 'border-primary bg-primary text-primary-foreground',
+                        active && 'border-primary bg-primary/15 text-primary ring-4 ring-primary/20',
+                        !active && !done && 'border-border bg-background text-muted-foreground',
+                      )}
+                    >
+                      {done ? <Check className="size-5" strokeWidth={3} aria-label="done" /> : i + 1}
+                    </span>
+                    <span
+                      className={cn(
+                        'line-clamp-2 text-sm leading-tight',
+                        active ? 'font-semibold text-primary' : done ? 'font-medium text-foreground' : 'text-muted-foreground',
+                      )}
+                    >
+                      {section.name}
+                    </span>
+                  </div>
                 </li>
               )
             })}
@@ -155,7 +169,7 @@ function QuizBar({ index, total, timeLeft, sections, currentSectionIndex, sectio
         </nav>
 
         <div
-          className={cn('flex shrink-0 items-center gap-1.5 text-sm tabular-nums', lowTime ? 'font-semibold text-destructive' : 'text-muted-foreground')}
+          className={cn('flex shrink-0 items-center gap-1.5 justify-self-end text-sm tabular-nums', lowTime ? 'font-semibold text-destructive' : 'text-muted-foreground')}
           role="timer"
           aria-label={`${formatTime(timeLeft)} left`}
         >

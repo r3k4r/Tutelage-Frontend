@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from 'sonner'
 import { API_URL } from '@/common/utils/config'
+import { clearAttempt, loadAttempt, saveAttempt, secondsLeft } from '@/common/utils/quizAttempt'
 import { Loader2 } from 'lucide-react'
 import QuizStage from '@/components/pages/tutelage-tests/quiz/QuizStage'
 import TestIntro from '@/components/pages/tutelage-tests/quiz/TestIntro'
@@ -36,6 +37,22 @@ const COUNTRIES = [
   'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City',
   'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe'
 ];
+
+// The API returns questions grouped by section in display order; a section that is short of
+// questions just gets a shorter range.
+function buildSections(questions) {
+  const sectionArray = []
+  questions.forEach((q, i) => {
+    const last = sectionArray[sectionArray.length - 1]
+    if (last && last.id === q.sectionId) {
+      last.endIndex = i
+      last.questionCount++
+    } else {
+      sectionArray.push({ id: q.sectionId, number: sectionArray.length + 1, name: q.sectionName, questionCount: 1, startIndex: i, endIndex: i, isCompleted: false })
+    }
+  })
+  return sectionArray
+}
 
 export default function FreePracticeTestPage() {
   const router = useRouter()
@@ -69,10 +86,34 @@ export default function FreePracticeTestPage() {
   // ✅ Use ref to track if data has been fetched (prevent infinite loop)
   const hasFetchedData = useRef(false)
 
+  // deadline of the running test (ms); the timer counts down to it, so a reload keeps the real time left
+  const [endsAt, setEndsAt] = useState(null)
+
+  const applyQuestions = (questions) => {
+    setQuizQuestions(questions)
+    const sectionArray = buildSections(questions)
+    setSections(sectionArray)
+    setSectionProgress(Object.fromEntries(sectionArray.map((_, idx) => [idx, { completed: false }])))
+  }
+
   // ✅ Fetch quiz data ONCE on mount
   useEffect(() => {
     if (hasFetchedData.current) return // ✅ Prevent refetching
-    
+
+    // A reload mid-test continues the same test instead of starting a new one.
+    const saved = loadAttempt()
+    if (saved) {
+      applyQuestions(saved.questions)
+      setAnswers(saved.answers)
+      setCurrentQuestionIndex(saved.index)
+      setEndsAt(saved.endsAt)
+      setTimeLeft(secondsLeft(saved.endsAt))
+      setStage(saved.stage === 'quiz' && secondsLeft(saved.endsAt) === 0 ? 'form' : saved.stage)
+      hasFetchedData.current = true
+      setLoading(false)
+      return
+    }
+
     const fetchQuizData = async () => {
       try {
         setLoading(true)
@@ -92,23 +133,7 @@ export default function FreePracticeTestPage() {
         const questionsData = await questionsRes.json()
 
         if (questionsData.success) {
-          const questions = questionsData.data
-          setQuizQuestions(questions)
-
-          // The API returns questions grouped by section in display order; a section that is
-          // short of questions just gets a shorter range.
-          const sectionArray = []
-          questions.forEach((q, i) => {
-            const last = sectionArray[sectionArray.length - 1]
-            if (last && last.id === q.sectionId) {
-              last.endIndex = i
-              last.questionCount++
-            } else {
-              sectionArray.push({ id: q.sectionId, number: sectionArray.length + 1, name: q.sectionName, questionCount: 1, startIndex: i, endIndex: i, isCompleted: false })
-            }
-          })
-          setSections(sectionArray)
-          setSectionProgress(Object.fromEntries(sectionArray.map((_, idx) => [idx, { completed: false }])))
+          applyQuestions(questionsData.data)
         } else {
           toast.error('Failed to load quiz questions.')
         }
@@ -125,23 +150,27 @@ export default function FreePracticeTestPage() {
     fetchQuizData()
   }, []) // ✅ Empty dependency array - only run once on mount
 
-  // Timer countdown
+  // Timer: counts down to the saved deadline; at zero the test ends and the details form opens
   useEffect(() => {
-    if (stage !== 'quiz' || timeLeft <= 0) return
-
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(timer)
-          handleQuizComplete()
-          return 0
-        }
-        return prev - 1
-      })
-    }, 1000)
-
+    if (stage !== 'quiz' || !endsAt) return
+    const tick = () => {
+      const left = secondsLeft(endsAt)
+      setTimeLeft(left)
+      if (left === 0) setStage('form')
+    }
+    tick()
+    const timer = setInterval(tick, 1000)
     return () => clearInterval(timer)
-  }, [stage, timeLeft])
+  }, [stage, endsAt])
+
+  // Keep the test in progress across reloads; forget it once the results are shown
+  useEffect(() => {
+    if (stage === 'quiz' || stage === 'form') {
+      saveAttempt({ questions: quizQuestions, answers, index: currentQuestionIndex, stage, endsAt })
+    } else if (stage === 'results') {
+      clearAttempt()
+    }
+  }, [stage, answers, currentQuestionIndex, endsAt, quizQuestions])
 
   // ✅ FIX: Check section completion WITHOUT circular dependencies
   useEffect(() => {
@@ -184,8 +213,10 @@ export default function FreePracticeTestPage() {
   }, [currentQuestionIndex]) // ✅ Removed sections and currentSectionIndex from deps
 
   const handleStartQuiz = () => {
+    const minutes = quizConfig?.timeLimitMinutes || 30
+    setEndsAt(Date.now() + minutes * 60_000)
+    setTimeLeft(minutes * 60)
     setStage('quiz')
-    setTimeLeft(quizConfig?.timeLimitMinutes * 60 || 30 * 60) // reset timer from config
   }
 
   const handleSelectAnswer = (optionIndex) => {

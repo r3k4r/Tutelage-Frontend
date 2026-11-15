@@ -1,8 +1,10 @@
 'use client'
 
 import { Suspense, useRef, useState } from 'react'
-import { Search } from 'lucide-react'
+import { BookOpen, CloudOff, RotateCcw, Search, SearchX } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import EmptyState from '@/components/app/EmptyState'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import ResourceCard from '@/components/shared/resources/ResourceCard'
 import Pagination from '@/components/app/Pagination'
@@ -37,7 +39,7 @@ function Grid({ resource, hrefBase, title, level, limit, searchable = false, cat
   const debouncedSearch = useDebouncedValue(search.trim())
   const sectionRef = useRef(null)
 
-  const { items, page, totalPages, loading, error, setPage } = usePaginatedList(list, {
+  const { items, page, totalPages, loading, error, setPage, reload } = usePaginatedList(list, {
     listKey,
     limit,
     params: { level, search: debouncedSearch, category: category === ALL ? undefined : category },
@@ -86,13 +88,43 @@ function Grid({ resource, hrefBase, title, level, limit, searchable = false, cat
       {loading ? (
         <SkeletonCards count={limit} />
       ) : error ? (
-        <p role="alert" className="col-span-full py-20 text-center text-lg text-destructive">
-          Couldn&apos;t load {noun}s. Please try again later.
-        </p>
+        <EmptyState
+          tone="error"
+          icon={CloudOff}
+          title={`Couldn't load the ${noun}s`}
+          action={
+            <Button variant="outline" onClick={reload}>
+              <RotateCcw className="size-4" />
+              Try again
+            </Button>
+          }
+        >
+          Check your connection, then try again.
+        </EmptyState>
       ) : items.length === 0 ? (
-        <p className="col-span-full py-20 text-center text-lg text-muted-foreground">
-          {emptyText || (debouncedSearch ? `No ${noun}s match “${debouncedSearch}”.` : `No ${noun}s yet. Check back soon!`)}
-        </p>
+        debouncedSearch || category !== ALL ? (
+          <EmptyState
+            icon={SearchX}
+            title={debouncedSearch ? `No ${noun}s match “${debouncedSearch}”` : `No ${noun}s in this category`}
+            action={
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearch('')
+                  setCategory(ALL)
+                }}
+              >
+                Clear search
+              </Button>
+            }
+          >
+            Try a different word or another category.
+          </EmptyState>
+        ) : (
+          <EmptyState icon={BookOpen} title={emptyText || `No ${noun}s here yet`}>
+            New {noun}s are added regularly. Check back soon.
+          </EmptyState>
+        )
       ) : (
         items.map((item) => <ResourceCard key={item.id} href={`${hrefBase}/${item.id}`} item={item} />)
       )}

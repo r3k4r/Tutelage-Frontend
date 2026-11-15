@@ -6,38 +6,21 @@ import Link from "next/link"
 import { CreditCard, HelpCircle, Zap, Clock, ChevronDown } from 'lucide-react' 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { API_URL } from '@/common/utils/config'
+import { api } from '@/common/utils/api'
 
 
 const FreePracticeTest = () => {
-  const [loading, setLoading] = useState(true)
-  const [stats, setStats] = useState({
-    totalQuestions: 0,
-    timeLimitMinutes: 0
-  })
-  
-
-  const fetchQuizStats = async () => {
-    setLoading(true)
-    try{
-      const configRes = await fetch(`${API_URL}/api/admin/quiz/config`, {
-        credentials: 'include'
-      })
-      const configData = await configRes.json()
-      setStats({
-        totalQuestions: configData.data.totalQuestions,
-        timeLimitMinutes: configData.data.timeLimitMinutes
-      })
-    }catch(err){
-      console.error('Error fetching quiz stats:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
+  // the backend's defaults, so the copy never reads "0-minutes" while loading or if the call fails
+  const [stats, setStats] = useState({ totalQuestions: 30, timeLimitMinutes: 20 })
 
   useEffect(() => {
-      fetchQuizStats()
-    }, [])
+    api('/api/quiz/config').then((res) => {
+      const config = res.ok ? res.data?.data : null
+      if (config?.totalQuestions && config?.timeLimitMinutes) {
+        setStats({ totalQuestions: config.totalQuestions, timeLimitMinutes: config.timeLimitMinutes })
+      }
+    })
+  }, [])
 
 
   return (
@@ -304,11 +287,18 @@ function FAQSection({ stats }) {
               question: 'Can I take the test more than once?',
               answer: 'Yes! You can retake the test whenever you like to track your progress.'
             }
-          ].map((faq, index) => {
-            const [open, setOpen] = useState(false)
-            return (
+          ].map((faq, index) => <FaqItem key={index} faq={faq} />)}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/** One FAQ row; its own component so each row keeps its own open state (hooks can't run inside .map). */
+function FaqItem({ faq }) {
+  const [open, setOpen] = useState(false)
+  return (
               <div
-                key={index}
                 className="bg-card border border-border rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md"
               >
                 {/* Question Bar */}
@@ -349,11 +339,6 @@ function FAQSection({ stats }) {
                   )}
                 </AnimatePresence>
               </div>
-            )
-          })}
-        </div>
-      </div>
-    </div>
   )
 }
 
