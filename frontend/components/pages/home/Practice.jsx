@@ -1,252 +1,159 @@
 'use client'
-import { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { API_URL } from '@/common/utils/config'
 
-const Practice = () => {
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const [isDragging, setIsDragging] = useState(false);
-	const [startX, setStartX] = useState(0);
-	const [translateX, setTranslateX] = useState(0);
-	const [isTransitioning, setIsTransitioning] = useState(true);
-	const [cardsPerView, setCardsPerView] = useState(3.5);
-	const sliderRef = useRef(null);
-	const sectionRef = useRef(null);
-	const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+import { useCallback, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion, useInView } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import { useDragScroll } from '@/hooks/useDragScroll'
+import { api } from '@/common/utils/api'
+import { cn } from '@/lib/utils'
 
-	// dynamic articles fetched from backend
-	const [articles, setArticles] = useState([]);
-	const [loading, setLoading] = useState(true); // reuse loading for fetch state
+// cards per view: ~1.2 on phones, 2 on tablets, 3 on laptops, 3.5 on wide screens (gap-4 = 1rem)
+const CARD = 'shrink-0 snap-start basis-[82%] sm:basis-[calc((100%-1rem)/2)] lg:basis-[calc((100%-2rem)/3)] xl:basis-[calc((100%-3rem)/3.5)]'
 
-	// Create infinite loop by duplicating fetched articles
-	const extendedCards = [...articles, ...articles, ...articles];
-	const totalCards = articles.length;
+/**
+ * Home "Practice anytime" carousel of the day's featured resources. A native horizontal
+ * scroller with snap points: touch and trackpads swipe with momentum, a mouse can drag it
+ * (useDragScroll), and the arrows move one card. Hidden when nothing is featured.
+ */
+export default function Practice() {
+  const [items, setItems] = useState(null) // null = loading
+  const [ends, setEnds] = useState({ start: true, end: false })
+  const trackRef = useRef(null)
+  const sectionRef = useRef(null)
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
+  const drag = useDragScroll()
 
-	// Handle responsive cards per view
-	useEffect(() => {
-		const handleResize = () => {
-			if (window.innerWidth >= 1024) {
-				setCardsPerView(3.5);
-			} else {
-				setCardsPerView(2.5);
-			}
-		};
+  useEffect(() => {
+    let mounted = true
+    api('/api/esl-resources/daily-featured').then((res) => {
+      if (mounted) setItems(res.ok && Array.isArray(res.data?.data) ? res.data.data : [])
+    })
+    return () => {
+      mounted = false
+    }
+  }, [])
 
-		handleResize();
-		window.addEventListener('resize', handleResize);
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
+  // which ends are reached, to disable the arrows there (read once per frame while scrolling)
+  const frame = useRef(0)
+  const updateEnds = useCallback(() => {
+    cancelAnimationFrame(frame.current)
+    frame.current = requestAnimationFrame(() => {
+      const el = trackRef.current
+      if (!el) return
+      setEnds({ start: el.scrollLeft <= 2, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 2 })
+    })
+  }, [])
+  useEffect(() => {
+    updateEnds()
+    window.addEventListener('resize', updateEnds)
+    return () => window.removeEventListener('resize', updateEnds)
+  }, [items, updateEnds])
 
-	// Start from middle set to enable infinite scrolling once articles loaded
-	useEffect(() => {
-		if (totalCards > 0) setCurrentIndex(totalCards);
-	}, [totalCards]);
+  // one card (its width plus the gap) per click; the browser's smooth scroll does the animation
+  const step = (direction) => {
+    const el = trackRef.current
+    const card = el?.firstElementChild
+    if (!card) return
+    el.scrollBy({ left: direction * (card.getBoundingClientRect().width + 16), behavior: 'smooth' })
+  }
 
-	// fetch daily featured resources (3 from each: blogs, stories, videos, audios)
-	useEffect(() => {
-		let mounted = true;
-		const fetchArticles = async () => {
-			setLoading(true);
-			try {
-				const res = await fetch(`${API_URL}/api/esl-resources/daily-featured`, { credentials: 'include' });
-				if (!res.ok) {
-					console.error('Failed to fetch daily featured resources', res.status);
-					if (mounted) setArticles([]);
-					return;
-				}
-				const data = await res.json();
-				// Expect data.success && data.data (array of mixed resources)
-				const items = data?.data || [];
-				if (mounted) setArticles(Array.isArray(items) ? items : []);
-			} catch (err) {
-				console.error('Error fetching daily featured resources:', err);
-				if (mounted) setArticles([]);
-			} finally {
-				if (mounted) setLoading(false);
-			}
-		};
-		fetchArticles();
-		return () => { mounted = false; };
-	}, []);
+  // nothing featured (or the request failed): leave the section out of the page entirely
+  if (items && items.length === 0) return null
 
-	const handleNext = () => {
-		setIsTransitioning(true);
-		setCurrentIndex((prev) => prev + 1);
-	};
+  // at an end the arrow stays in place, greyed out and inert
+  const arrow =
+    'absolute top-1/2 z-10 hidden size-12 -translate-y-1/2 rounded-full shadow-lg md:inline-flex disabled:bg-muted disabled:text-muted-foreground disabled:opacity-100 disabled:shadow-none'
 
-	const handlePrev = () => {
-		setIsTransitioning(true);
-		setCurrentIndex((prev) => prev - 1);
-	};
+  return (
+    <section ref={sectionRef} className="bg-background px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12 text-center text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl"
+        >
+          Practice anytime with our free resources
+        </motion.h2>
 
-	// Reset to middle when reaching boundaries (creates infinite loop effect)
-	useEffect(() => {
-		if (currentIndex >= totalCards * 2) {
-			setTimeout(() => {
-				setIsTransitioning(false);
-				setCurrentIndex(totalCards);
-			}, 300);
-		} else if (currentIndex <= 0) {
-			setTimeout(() => {
-				setIsTransitioning(false);
-				setCurrentIndex(totalCards);
-			}, 300);
-		}
-	}, [currentIndex, totalCards]);
+        <div className="relative md:px-16">
+          <Button size="icon" className={cn(arrow, 'left-0')} onClick={() => step(-1)} disabled={ends.start} aria-label="Previous resources">
+            <ChevronLeft className="size-6" />
+          </Button>
 
-	// Touch/Mouse handlers for mobile swipe
-	const handleDragStart = (e) => {
-		setIsDragging(true);
-		setStartX(e.type === 'mousedown' ? e.pageX : e.touches[0].pageX);
-	};
+          <ul
+            ref={trackRef}
+            {...drag}
+            onScroll={updateEnds}
+            aria-label="Free practice resources"
+            className={cn(
+              'flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-4 select-none',
+              '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:cursor-grab',
+              // while a mouse drags: follow the hand exactly (no snapping, no smoothing)
+              'data-[dragging]:cursor-grabbing data-[dragging]:snap-none data-[dragging]:scroll-auto motion-reduce:scroll-auto',
+            )}
+          >
+            {items === null
+              ? Array.from({ length: 4 }, (_, i) => (
+                  <li key={i} className={CARD} aria-hidden>
+                    <div className="overflow-hidden rounded-lg border bg-card">
+                      <div className="aspect-video animate-pulse bg-muted" />
+                      <div className="space-y-2 p-5">
+                        <div className="h-5 w-3/4 animate-pulse rounded bg-muted" />
+                        <div className="h-4 w-full animate-pulse rounded bg-muted" />
+                      </div>
+                    </div>
+                  </li>
+                ))
+              : items.map((item) => (
+                  <li key={`${item.resourceType}-${item.id}`} className={CARD}>
+                    <Link
+                      href={item.link || `/esl-resources/blogs/${item.id}`}
+                      draggable={false}
+                      className="block h-full overflow-hidden rounded-lg border bg-card shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <div className="aspect-video overflow-hidden bg-muted">
+                        {(item.imageRef || item.imageUrl) && (
+                          <img
+                            src={item.imageRef || item.imageUrl}
+                            alt=""
+                            loading="lazy"
+                            draggable={false}
+                            className="size-full object-cover"
+                            // a dead image link leaves the quiet muted block, not a broken-image icon
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none'
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className="p-4 sm:p-5">
+                        <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground sm:text-xl">{item.title}</h3>
+                        {item.description && <p className="line-clamp-2 text-sm text-muted-foreground sm:text-base">{item.description}</p>}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+          </ul>
 
-	const handleDragMove = (e) => {
-		if (!isDragging) return;
-		const currentX = e.type === 'mousemove' ? e.pageX : e.touches[0].pageX;
-		const diff = currentX - startX;
-		setTranslateX(diff);
-	};
+          <Button size="icon" className={cn(arrow, 'right-0')} onClick={() => step(1)} disabled={ends.end} aria-label="Next resources">
+            <ChevronRight className="size-6" />
+          </Button>
+        </div>
 
-	const handleDragEnd = () => {
-		if (!isDragging) return;
-		setIsDragging(false);
-
-		if (translateX > 50) {
-			handlePrev();
-		} else if (translateX < -50) {
-			handleNext();
-		}
-
-		setTranslateX(0);
-	};
-
-	const truncateText = (text, maxLength = 100) => {
-		if (text?.length <= maxLength) return text;
-		return text?.slice(0, maxLength) + '...';
-	};
-
-	// nothing featured (or the request failed): leave the section out of the page entirely
-	if (!loading && totalCards === 0) return null;
-
-	return (
-		<section className="py-16 px-4 sm:px-6 lg:px-8 bg-background" ref={sectionRef}>
-			<div className="max-w-7xl mx-auto">
-				{/* Title */}
-				<motion.h2
-					initial={{ opacity: 0 }}
-					animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-					transition={{ duration: 0.6, delay: 0.3 }}
-					className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 text-foreground"
-				>
-					Practice anytime with our free resources
-				</motion.h2>
-
-				{/* Slider Container */}
-				<div className="relative md:px-16">
-					{/* Left Button */}
-					<Button
-						size="icon"
-						className="absolute max-md:hidden left-2 md:-left-2 top-1/2 -translate-y-1/2 z-10 rounded-full shadow-lg bg-primary/70 md:bg-primary text-primary-foreground w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
-						onClick={handlePrev}
-					>
-						<ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" />
-					</Button>
-
-					{/* Cards Container */}
-					<div
-						ref={sliderRef}
-						className="overflow-hidden  active:cursor-grabbing"
-						onMouseDown={handleDragStart}
-						onMouseMove={handleDragMove}
-						onMouseUp={handleDragEnd}
-						onMouseLeave={handleDragEnd}
-						onTouchStart={handleDragStart}
-						onTouchMove={handleDragMove}
-						onTouchEnd={handleDragEnd}
-					>
-						<div
-							className={`flex ${isTransitioning ? 'transition-transform duration-300 ease-out' : ''}`}
-							style={{
-								transform: `translateX(calc(-${currentIndex * (100 / cardsPerView)}% + ${translateX}px))`,
-							}}
-						>
-							{loading ? (
-								// show skeleton placeholders same count as desired fetch limit
-								Array.from({ length: 6 }).map((_, idx) => (
-									<div key={`skel-${idx}`} className="flex-shrink-0 px-2 sm:px-3" style={{ width: `${100 / cardsPerView}%` }}>
-										<div className="bg-card rounded-lg overflow-hidden shadow-md h-full border border-border animate-pulse" style={{height: '220px'}} />
-									</div>
-								))
-							) : (
-								extendedCards.map((item, index) => (
-									<div key={`${item.id}-${item.resourceType}-${index}`} className="flex-shrink-0 px-2 sm:px-3" style={{ width: `${100 / cardsPerView}%` }}>
-										<Link href={item.link || `/esl-resources/blogs/${item.id}`}>
-											<div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full border border-border">
-												{/* Image */}
-												<div className="aspect-video overflow-hidden bg-muted">
-													{(item.imageRef || item.imageUrl) && (
-														<img
-															src={item.imageRef || item.imageUrl}
-															alt={item.title}
-															className="w-full h-full object-cover"
-															draggable="false"
-															// a dead image link leaves the quiet muted block, not a broken-image icon
-															onError={(e) => { e.currentTarget.style.display = 'none'; }}
-														/>
-													)}
-												</div>
-
-												{/* Content */}
-												<div className="p-4 sm:p-5">
-													<h3 className="text-lg sm:text-xl font-semibold mb-2 text-foreground line-clamp-2">
-														{item.title}
-													</h3>
-													<p className="text-sm sm:text-base text-muted-foreground">
-														{truncateText(item.description, 80)}
-													</p>
-												</div>
-											</div>
-										</Link>
-									</div>
-								))
-							)}
-						</div>
-					</div>
-
-					{/* Right Button */}
-					<Button
-						size="icon"
-						className="absolute max-md:hidden right-2 md:-right-2 top-1/2 -translate-y-1/2 z-10 rounded-full shadow-lg bg-primary/70 md:bg-primary text-primary-foreground w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14"
-						onClick={handleNext}
-					>
-						<ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7" />
-					</Button>
-				</div>
-
-				{/* All Resources Button */}
-				<div className="flex justify-center mt-12">
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-						transition={{ duration: 0.6, delay: 0.2 }}
-					>
-						<Link href="/esl-resources">
-							<Button
-								size="lg"
-								className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-base sm:text-lg font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
-							>
-								All Resources
-							</Button>
-						</Link>
-					</motion.div>
-				</div>
-			</div>
-		</section>
-	);
-};
-
-export default Practice;
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-12 flex justify-center"
+        >
+          <Button asChild size="lg" className="px-8 py-6 text-base font-semibold shadow-md sm:text-lg">
+            <Link href="/esl-resources">All Resources</Link>
+          </Button>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
